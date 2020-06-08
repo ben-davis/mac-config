@@ -3,14 +3,28 @@ if ! [ -x "$(command -v brew)" ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
+echo "--------- Installing brew packages"
+brew bundle install
+
+if [ ! -d "~/dev/git" ] 
+then
+  echo "--------- Making ~/dev/git"
+  mkdir -p ~/dev/git
+fi
+
+if [ ! -d "~/dev/git/mac-config" ] 
+then
+  echo "--------- Cloning mac-config"
+  git clone "git@github.com:ben-davis/mac-config.git" ~/dev/git/mac-config
+fi
+
+cd ~/dev/git/mac-config
+
 if [ ! -d "~/.config" ] 
 then
   echo "--------- Making ~/.config"
   mkdir ~/.config
 fi
-
-echo "--------- Installing brew packages"
-brew bundle install
 
 if [ ! -f "~/.tmux/plugins/tpm" ] 
 then
