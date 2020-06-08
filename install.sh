@@ -3,9 +3,6 @@ if ! [ -x "$(command -v brew)" ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
-echo "--------- Installing brew packages"
-brew bundle install
-
 if [ ! -d "~/dev/git" ] 
 then
   echo "--------- Making ~/dev/git"
@@ -19,6 +16,9 @@ then
 fi
 
 cd ~/dev/git/mac-config
+
+echo "--------- Installing brew packages"
+brew bundle install
 
 if [ ! -d "~/.config" ] 
 then
@@ -67,7 +67,11 @@ echo "System Preferences > Keyboard: set fast key repeat"
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 echo "System Preferences > Trackpad: tap to click"
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+
+echo "System Preferences > Trackpad: speed"
+defaults write -g com.apple.trackpad.scaling -float 1.5
 
 echo "System Preferences > Accessibility > Mouse & Trackpad: three finger drag"
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
