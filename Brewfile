@@ -1,7 +1,6 @@
 tap "adoptopenjdk/openjdk"
 tap "github/gh"
 tap "heroku/brew"
-tap "homebrew/apache"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
