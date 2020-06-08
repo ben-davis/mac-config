@@ -38,29 +38,29 @@ fi
 if [ ! -f "~/.zshrc" ] 
 then
   echo "--------- Symlinking zshrc"
-  ln -s ~/Users/ben/git/mac-config/zshrc ~/.zshrc
+  ln -s /Users/ben/git/mac-config/zshrc ~/.zshrc
 fi
 
 if [ ! -f "~/.tmux.conf" ] 
 then
   echo "--------- Symlinking tmux.config"
-  ln -s ~/Users/ben/git/mac-config/tmux.conf ~/.tmux.conf
+  ln -s /Users/ben/git/mac-config/tmux.conf ~/.tmux.conf
 fi
 
 if [ ! -d "~/.config" ] 
 then
   echo "--------- Symlinking nvim config"
-  ln -s ~/Users/ben/git/mac-config/nvim ~/.config/
+  ln -s /Users/ben/git/mac-config/nvim ~/.config/nvim
 fi
 
 if [ ! -d "~/.gitconfig" ] 
 then
   echo "--------- Symlinking git config"
-  ln -s ~/Users/ben/git/mac-config/gitconfig ~/.gitconfig
+  ln -s /Users/ben/git/mac-config/gitconfig ~/.gitconfig
 fi
 
 echo "--------- Symlinking iTerm2 config"
-ln -s ~/Users/ben/git/mac-config/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+ln -s /Users/ben/git/mac-config/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
 echo "--------- Configuring macOS defaults"
 echo "System Preferences > Dock: autohide dock"
