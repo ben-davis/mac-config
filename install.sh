@@ -38,25 +38,25 @@ then
 fi
 
 echo "--------- Symlinking tmux.config"
-ln -s ~/dev/git/mac-config/tmux.conf ~/.tmux.conf
+ln -s -f ~/dev/git/mac-config/tmux.conf ~/.tmux.conf
 
 echo "--------- Symlinking nvim config"
-ln -s ~/dev/git/mac-config/nvim ~/.config/nvim
+ln -s -f ~/dev/git/mac-config/nvim ~/.config/nvim
 
 echo "--------- Symlinking tmuxinator config"
-ln -s ~/dev/git/mac-config/tmuxinator ~/.config/tmuxinator
+ln -s -f ~/dev/git/mac-config/tmuxinator ~/.config/tmuxinator
 
 echo "--------- Symlinking git config"
-ln -s ~/dev/git/mac-config/gitconfig ~/.gitconfig
+ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
 
 echo "--------- Symlinking iTerm2 config"
-ln -s ~/dev/git/mac-config/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+ln -s -f ~/dev/git/mac-config/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
 echo "--------- Install oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 echo "--------- Symlinking zshrc"
-ln -s ~/dev/git/mac-config/zshrc ~/.zshrc
+ln -s -f ~/dev/git/mac-config/zshrc ~/.zshrc
 
 echo "--------- Configuring macOS defaults"
 echo "System Preferences > Dock: autohide dock"
