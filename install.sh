@@ -62,6 +62,9 @@ fi
 echo "--------- Symlinking iTerm2 config"
 ln -s /Users/ben/dev/git/mac-config/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
+echo "--------- Install oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 echo "--------- Configuring macOS defaults"
 echo "System Preferences > Dock: autohide dock"
 defaults write com.apple.dock autohide -bool true
