@@ -47,10 +47,16 @@ then
   ln -s /Users/ben/dev/git/mac-config/tmux.conf ~/.tmux.conf
 fi
 
-if [ ! -d "~/.config" ] 
+if [ ! -d "~/.config/nvim" ] 
 then
   echo "--------- Symlinking nvim config"
   ln -s /Users/ben/dev/git/mac-config/nvim ~/.config/nvim
+fi
+
+if [ ! -d "~/.config/tmuxinator" ] 
+then
+  echo "--------- Symlinking tmuxinator config"
+  ln -s /Users/ben/dev/git/mac-config/tmuxinator ~/.config/tmuxinator
 fi
 
 if [ ! -d "~/.gitconfig" ] 
