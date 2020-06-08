@@ -44,10 +44,16 @@ then
   ln -s ~/Users/ben/git/mac-config/tmux.conf ~/.tmux.conf
 fi
 
-if [ ! -d "~/." ] 
+if [ ! -d "~/.config" ] 
 then
   echo "--------- Symlinking nvim config"
   ln -s ~/Users/ben/git/mac-config/nvim ~/.config/
+fi
+
+if [ ! -d "~/.gitconfig" ] 
+then
+  echo "--------- Symlinking git config"
+  ln -s ~/Users/ben/git/mac-config/gitconfig ~/.gitconfig
 fi
 
 echo "--------- Symlinking iTerm2 config"
