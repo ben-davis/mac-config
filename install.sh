@@ -20,6 +20,9 @@ cd ~/dev/git/mac-config
 echo "--------- Installing brew packages"
 brew bundle install
 
+echo "--------- Setting default shell to zsh"
+chsh -s /bin/zsh
+
 if [ ! -d "~/.config" ] 
 then
   echo "--------- Making ~/.config"
