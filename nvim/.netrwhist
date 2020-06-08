@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/Users/ben/dev/git/junto-api'
+let g:netrw_dirhist_9='/Users/ben/dev/git/junto-mobile'
+let g:netrw_dirhist_8='/'
+let g:netrw_dirhist_7='/Users/ben/dev/git/junto-mobile'
+let g:netrw_dirhist_6='/Users/ben/dev/git/junto-mobile/.git'
+let g:netrw_dirhist_5='/Users/ben/dev/git/junto-mobile'
+let g:netrw_dirhist_4='/Users/ben/dev/git/junto-api'
+let g:netrw_dirhist_3='/Users/ben/dev/git'
+let g:netrw_dirhist_2='/Users/ben/dev/git/backend'
+let g:netrw_dirhist_1='/Users/ben/dev/git'

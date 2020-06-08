@@ -1,0 +1,47 @@
+{
+    "python.jediEnabled": false,
+    "python.linting.pylintEnabled": false,
+    "python.linting.mypyEnabled": true,
+    "python.linting.prospectorEnabled": true,
+    "python.formatting.provider": "black",
+    "coc.preferences.formatOnSaveFiletypes": ["python", "typescript", "typescriptreact", "rust", "javascript", "xml"],
+    "list.source.files.excludePatterns": [
+	    "**/__pycache__/*",
+	    "**/media/*",
+	    "**/.cache/*",
+	    "**/.git/*",
+	    "**/.pytest_cache/*",
+	    "**/.mypy_cache/*",
+	    "**/node_modules/*",
+	    "**/node_modules/**",
+	    "**/node_modules/**/.*",
+	    "**/node_modules/**/.*/**",
+	    "**/.git/*",
+	    "**/.git/**",
+	    "**/.git/**/.*",
+	    "**/.git/**/.*/**"
+    ],
+    "suggest.triggerAfterInsertEnter": true,
+    "suggest.noselect": false,
+    "coc.source.around.enable": false,
+    "coc.source.buffer.enable": false,
+    "list.source.files.args": ["--hidden", "--files"],
+    "typescript.format.enabled": false,
+    "javascript.format.enabled": false,
+    "explorer.icon.enableNerdfont": true,
+    "diagnostic.checkCurrentLine": true,
+    "list.insertMappings": {
+      "<C-j>": "normal:j",
+      "<C-k>": "normal:k",
+      "<C-n>": "normal:j"
+    },
+    "list.normalMappings": {
+      "<C-j>": "normal:j",
+      "<C-k>": "normal:k",
+      "<C-n>": "normal:j"
+    },
+    "list.nextKeymap": "<C-n>",
+    "list.previousKeymap": "<C-p>",
+    "xml.java.home": "/usr/bin/java"
+}
+
