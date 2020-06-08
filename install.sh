@@ -20,8 +20,10 @@ cd ~/dev/git/mac-config
 echo "--------- Installing brew packages"
 brew bundle install
 
-echo "--------- Setting default shell to zsh"
-chsh -s /bin/zsh
+if ! [ -x "$(echo $ZSH_NAME)" ]; then
+  echo "--------- Setting default shell to zsh"
+  chsh -s /bin/zsh
+fi
 
 if [ ! -d "~/.config" ] 
 then
@@ -35,41 +37,26 @@ then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-if [ ! -f "~/.zshrc" ] 
-then
-  echo "--------- Symlinking zshrc"
-  Ln -s ~/dev/git/mac-config/zshrc ~/.zshrc
-fi
+echo "--------- Symlinking tmux.config"
+ln -s ~/dev/git/mac-config/tmux.conf ~/.tmux.conf
 
-if [ ! -f "~/.tmux.conf" ] 
-then
-  echo "--------- Symlinking tmux.config"
-  ln -s ~/dev/git/mac-config/tmux.conf ~/.tmux.conf
-fi
+echo "--------- Symlinking nvim config"
+ln -s ~/dev/git/mac-config/nvim ~/.config/nvim
 
-if [ ! -d "~/.config/nvim" ] 
-then
-  echo "--------- Symlinking nvim config"
-  ln -s ~/dev/git/mac-config/nvim ~/.config/nvim
-fi
+echo "--------- Symlinking tmuxinator config"
+ln -s ~/dev/git/mac-config/tmuxinator ~/.config/tmuxinator
 
-if [ ! -d "~/.config/tmuxinator" ] 
-then
-  echo "--------- Symlinking tmuxinator config"
-  ln -s ~/dev/git/mac-config/tmuxinator ~/.config/tmuxinator
-fi
-
-if [ ! -d "~/.gitconfig" ] 
-then
-  echo "--------- Symlinking git config"
-  ln -s ~/dev/git/mac-config/gitconfig ~/.gitconfig
-fi
+echo "--------- Symlinking git config"
+ln -s ~/dev/git/mac-config/gitconfig ~/.gitconfig
 
 echo "--------- Symlinking iTerm2 config"
 ln -s ~/dev/git/mac-config/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
 echo "--------- Install oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+echo "--------- Symlinking zshrc"
+ln -s ~/dev/git/mac-config/zshrc ~/.zshrc
 
 echo "--------- Configuring macOS defaults"
 echo "System Preferences > Dock: autohide dock"
