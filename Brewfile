@@ -51,6 +51,7 @@ brew "watch"
 brew "watchman"
 brew "yarn", link: false
 brew "zsh"
+brew "zsh-syntax-highlighting"
 brew "github/gh/gh"
 brew "jesseduffield/lazygit/lazygit"
 brew "shopify/shopify/themekit"

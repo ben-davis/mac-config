@@ -25,6 +25,9 @@ if ! [ -x "$(echo $ZSH_NAME)" ]; then
   chsh -s /bin/zsh
 fi
 
+pip install virtualenv
+pip3 install virtualenvwrapper
+
 if [ ! -d "~/.config" ] 
 then
   echo "--------- Making ~/.config"
@@ -40,11 +43,17 @@ fi
 echo "--------- Symlinking tmux.config"
 ln -s -f ~/dev/git/mac-config/tmux.conf ~/.tmux.conf
 
-echo "--------- Symlinking nvim config"
-ln -s -f ~/dev/git/mac-config/nvim ~/.config/nvim
+if [ ! -d "~/.config/nvim" ] 
+then
+  echo "--------- Symlinking nvim config"
+  ln -s -f ~/dev/git/mac-config/nvim ~/.config
+fi
 
-echo "--------- Symlinking tmuxinator config"
-ln -s -f ~/dev/git/mac-config/tmuxinator ~/.config/tmuxinator
+if [ ! -d "~/.config/tmuxinator" ] 
+then
+  echo "--------- Symlinking tmuxinator config"
+  ln -s -f ~/dev/git/mac-config/tmuxinator ~/.config
+fi
 
 echo "--------- Symlinking git config"
 ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
@@ -57,6 +66,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 echo "--------- Symlinking zshrc"
 ln -s -f ~/dev/git/mac-config/zshrc ~/.zshrc
+
+echo "--------- Symlinking bencd oh-my-zsh theme"
+ln -s -f ~/dev/git/mac-config/bencd.zsh-theme ~/.oh-my-zsh/themes/bencd.zsh-theme
 
 echo "--------- Configuring macOS defaults"
 echo "System Preferences > Dock: autohide dock"
