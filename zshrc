@@ -17,7 +17,6 @@ plugins=(
     vi-mode 
     kubectl 
     helm 
-    zsh-syntax-highlighting
     django
     encode64
     arcanist
@@ -27,7 +26,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # Use homebrew installed bin
-export PATH=/usr/local/bin:$HOME/local/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/local/bin:$PATH
 # Rust bin
 export PATH=$HOME/.cargo/bin:$PATH
 # Replaces BSD coreutils with GNU alternatives
@@ -56,7 +55,7 @@ export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 
 # Python virtual env
 export WORKON_HOME=~/dev/.venvs
-export VIRTUALENVWRAPPER_PYTHON=python3
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python@3.8/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
 
 export EDITOR=nvim
@@ -65,3 +64,5 @@ export EDITOR=nvim
 alias terminal-notifier='reattach-to-user-namespace terminal-notifier'
 alias lg='lazygit'
 alias vim='nvim'
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

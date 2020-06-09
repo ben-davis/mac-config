@@ -3,39 +3,35 @@ if ! [ -x "$(command -v brew)" ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
-if [ ! -d "~/dev/git" ] 
-then
+if [ ! -d ~/dev/git ]; then
   echo "--------- Making ~/dev/git"
   mkdir -p ~/dev/git
 fi
 
-if [ ! -d "~/dev/git/mac-config" ] 
-then
+if [ ! -d ~/dev/git/mac-config ]; then
   echo "--------- Cloning mac-config"
   git clone "git@github.com:ben-davis/mac-config.git" ~/dev/git/mac-config
 fi
 
 cd ~/dev/git/mac-config
 
-echo "--------- Installing brew packages"
+echo --------- Installing brew packages
 brew bundle install
 
-if ! [ -x "$(echo $ZSH_NAME)" ]; then
+if ! [ -z "${ZSH_NAME}" ]; then
   echo "--------- Setting default shell to zsh"
-  chsh -s /bin/zsh
+  chsh -s /usr/local/bin/zsh
 fi
 
-pip install virtualenv
+pip3 install virtualenv
 pip3 install virtualenvwrapper
 
-if [ ! -d "~/.config" ] 
-then
+if [ ! -d ~/.config ]; then
   echo "--------- Making ~/.config"
   mkdir ~/.config
 fi
 
-if [ ! -f "~/.tmux/plugins/tpm" ] 
-then
+if [ ! -d ~/.tmux/plugins/tpm ]; then
   echo "--------- Installing tmux plugin manager"
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
@@ -43,14 +39,12 @@ fi
 echo "--------- Symlinking tmux.config"
 ln -s -f ~/dev/git/mac-config/tmux.conf ~/.tmux.conf
 
-if [ ! -d "~/.config/nvim" ] 
-then
+if [ ! -d ~/.config/nvim ]; then
   echo "--------- Symlinking nvim config"
   ln -s -f ~/dev/git/mac-config/nvim ~/.config
 fi
 
-if [ ! -d "~/.config/tmuxinator" ] 
-then
+if [ ! -d ~/.config/tmuxinator ]; then
   echo "--------- Symlinking tmuxinator config"
   ln -s -f ~/dev/git/mac-config/tmuxinator ~/.config
 fi
@@ -62,7 +56,9 @@ echo "--------- Symlinking iTerm2 config"
 ln -s -f ~/dev/git/mac-config/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
 echo "--------- Install oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if [ ! -d ~/.oh-my-zsh ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 echo "--------- Symlinking zshrc"
 ln -s -f ~/dev/git/mac-config/zshrc ~/.zshrc
@@ -105,6 +101,9 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 echo "Finder > View: Show Path Bar"
 defaults write com.apple.finder ShowPathbar -bool true
+
+echo "Finder: Disable finder"
+defaults write com.apple.finder CreateDesktop -bool false
 
 # Kill affected apps
 for app in "Dock" "Finder"; do

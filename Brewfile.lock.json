@@ -14,19 +14,19 @@
         "revision": "f8c270884e685d24bd85439786a360de3be58f1d"
       },
       "homebrew/cask": {
-        "revision": "e3fd0618a59e8a965ab7a64ab6e94e8aea26442c"
+        "revision": "fa7a9020c8b8d777bf2831c978d7d3a30ca78d53"
       },
       "homebrew/cask-fonts": {
         "revision": "1970439d05c66d4a1946314cd78f0641d64be337"
       },
       "homebrew/core": {
-        "revision": "4c69b483b365a63ce79cacbe801c03edc8ad50b3"
+        "revision": "1cf3f00233b95127ef4337dc389457a6f8339805"
       },
       "jesseduffield/lazygit": {
         "revision": "e9a3e10cecbdd4b6eee161d48550239f457db153"
       },
       "koekeishiya/formulae": {
-        "revision": "ce9500d41c245f43802edd60e09bd74aa6b6b380"
+        "revision": "7f77756a435e691c141f682202980ac3e2e30aa7"
       },
       "microsoft/mssql-preview": {
         "revision": "b77adf11da9e8e347837d587bc8e4d3cd4fa8ea9"
@@ -901,10 +901,7 @@
       },
       "yarn": {
         "version": "1.22.4",
-        "bottle": false,
-        "options": {
-          "link": false
-        }
+        "bottle": false
       },
       "zsh": {
         "version": "5.8",
@@ -1080,6 +1077,12 @@
         "options": {
           "full_name": "vlc"
         }
+      },
+      "docker": {
+        "version": "2.3.0.3,45519",
+        "options": {
+          "full_name": "docker"
+        }
       }
     },
     "mas": {
@@ -1130,7 +1133,7 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.3.0",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "4c69b483b365a63ce79cacbe801c03edc8ad50b3",
+        "Homebrew/homebrew-core": "1cf3f00233b95127ef4337dc389457a6f8339805",
         "CLT": "11.5.0.0.1.1588476445",
         "Xcode": "11.5",
         "macOS": "10.15.2"

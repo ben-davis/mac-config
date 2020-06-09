@@ -49,7 +49,7 @@ brew "tmuxinator"
 brew "tree"
 brew "watch"
 brew "watchman"
-brew "yarn", link: false
+brew "yarn"
 brew "zsh"
 brew "zsh-syntax-highlighting"
 brew "github/gh/gh"
@@ -76,6 +76,7 @@ cask "reactotron"
 cask "slack"
 cask "transmission"
 cask "vlc"
+cask "docker"
 mas "Keynote", id: 409183694
 mas "Logic Pro X", id: 634148309
 mas "Magnet", id: 441258766
