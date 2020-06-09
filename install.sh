@@ -15,8 +15,13 @@ fi
 
 cd ~/dev/git/mac-config
 
-echo --------- Installing brew packages
+echo "--------- Installing brew packages"
 brew bundle install
+
+if [ ! -x "$(command -v pod)" ]; then
+  echo "--------- Installing cocoapods"
+  sudo gem install cocoapods
+fi
 
 if ! [ -z "${ZSH_NAME}" ]; then
   echo "--------- Setting default shell to zsh"
