@@ -1,3 +1,13 @@
+function! InstallCocExtensionsFun()
+  let extensions = ["yank", "snippets", "prettier", "post", "marketplace", "lists", "jest", "git", "explorer", "eslint", "actions", "tsserver", "rust-analyzer", "python", "markdownlint", "json", "html", "css"]
+
+  for extension in extensions
+    execute 'CocInstall coc-' . extension
+  endfor
+endfunction
+
+command! InstallCocExtensions :call InstallCocExtensionsFun()
+
 " if hidden is not set, TextEdit might fail.
 set hidden
 

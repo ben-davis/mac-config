@@ -78,6 +78,8 @@ augroup filetypes
         autocmd Filetype liquid setlocal ts=2 sw=2
         autocmd Filetype json setlocal ts=2 sw=2
         autocmd Filetype xml setlocal ts=2 sw=2
+        autocmd Filetype sh setlocal ts=2 sw=2
+        autocmd Filetype vim setlocal ts=2 sw=2
 
         autocmd FileType markdown setlocal wrap tw=79
 
