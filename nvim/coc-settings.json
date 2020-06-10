@@ -41,7 +41,6 @@
       "<C-n>": "normal:j"
     },
     "list.nextKeymap": "<C-n>",
-    "list.previousKeymap": "<C-p>",
-    "xml.java.home": "/usr/bin/java"
+    "list.previousKeymap": "<C-p>"
 }
 

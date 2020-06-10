@@ -21,6 +21,7 @@ brew "coreutils"
 brew "ctags", link: false
 brew "python"
 brew "findutils"
+brew "fzf"
 brew "fzy"
 brew "git"
 brew "git-delta"
@@ -77,6 +78,7 @@ cask "slack"
 cask "transmission"
 cask "vlc"
 cask "docker"
+cask "netnewswire"
 mas "Keynote", id: 409183694
 mas "Logic Pro X", id: 634148309
 mas "Magnet", id: 441258766

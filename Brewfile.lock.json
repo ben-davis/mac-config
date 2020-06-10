@@ -11,16 +11,16 @@
         "revision": "2fbdd513b72119e373505ef0c9047a8090cae7d6"
       },
       "homebrew/bundle": {
-        "revision": "f8c270884e685d24bd85439786a360de3be58f1d"
+        "revision": "f559b9c1c0ac921d62f7e19faa4c4b33ea138a96"
       },
       "homebrew/cask": {
-        "revision": "fa7a9020c8b8d777bf2831c978d7d3a30ca78d53"
+        "revision": "2f6b111ed13f4db93bce0dfb9291ea4e78a43d92"
       },
       "homebrew/cask-fonts": {
-        "revision": "1970439d05c66d4a1946314cd78f0641d64be337"
+        "revision": "7d5b45b7dd120d9eaf163653273fddeb5bf129ea"
       },
       "homebrew/core": {
-        "revision": "1cf3f00233b95127ef4337dc389457a6f8339805"
+        "revision": "1b9271c44b1f2db2930ef1ca854855feb65e166d"
       },
       "jesseduffield/lazygit": {
         "revision": "e9a3e10cecbdd4b6eee161d48550239f457db153"
@@ -399,22 +399,22 @@
         }
       },
       "imagemagick": {
-        "version": "7.0.10-17",
+        "version": "7.0.10-18",
         "bottle": {
           "cellar": "/usr/local/Cellar",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/imagemagick-7.0.10-17.catalina.bottle.tar.gz",
-              "sha256": "b14337c3172e82b95ae4fe465c0b9059eca66381c3192c9cf26c65c22ac5a9da"
+              "url": "https://homebrew.bintray.com/bottles/imagemagick-7.0.10-18.catalina.bottle.tar.gz",
+              "sha256": "73a3636096128850971dea141ab332e7e0cb25235c40cbc7501a5b1b926c8ecb"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/imagemagick-7.0.10-17.mojave.bottle.tar.gz",
-              "sha256": "137cb374979e65d54c4863abd5c6c62946ea6b0ca4296e759204dd9c3bfa00ee"
+              "url": "https://homebrew.bintray.com/bottles/imagemagick-7.0.10-18.mojave.bottle.tar.gz",
+              "sha256": "0bc6a783f4beb42b8496c1a34a9f95d1f368ade0a38bd864e8e4ac8ef8cd8dec"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/imagemagick-7.0.10-17.high_sierra.bottle.tar.gz",
-              "sha256": "3a49d52dceb8bd13bd4fc6ccfb338b7710e9a9218e83a6631683d7db91deb4b0"
+              "url": "https://homebrew.bintray.com/bottles/imagemagick-7.0.10-18.high_sierra.bottle.tar.gz",
+              "sha256": "82b52deab93d99a86c9b9949b209441034a05622279acf24c0839a2bc1d2b6db"
             }
           }
         }
@@ -955,6 +955,27 @@
             }
           }
         }
+      },
+      "fzf": {
+        "version": "0.21.1",
+        "bottle": {
+          "cellar": ":any_skip_relocation",
+          "prefix": "/usr/local",
+          "files": {
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/fzf-0.21.1.catalina.bottle.tar.gz",
+              "sha256": "733f79496c3246979ca05eeb5677a5fd9e8ec532e69e8b2012102cacddba8ae6"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/fzf-0.21.1.mojave.bottle.tar.gz",
+              "sha256": "3c03bb9715be153a0f776d06cf4acd436ad4faa4266f7bd875a0d37594291516"
+            },
+            "high_sierra": {
+              "url": "https://homebrew.bintray.com/bottles/fzf-0.21.1.high_sierra.bottle.tar.gz",
+              "sha256": "d15a616156eb92071f1cfc50f10366532af92ca1635d309162141ad67f785865"
+            }
+          }
+        }
       }
     },
     "cask": {
@@ -1083,6 +1104,12 @@
         "options": {
           "full_name": "docker"
         }
+      },
+      "netnewswire": {
+        "version": "5.0.3",
+        "options": {
+          "full_name": "netnewswire"
+        }
       }
     },
     "mas": {
@@ -1133,10 +1160,10 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.3.0",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "1cf3f00233b95127ef4337dc389457a6f8339805",
-        "CLT": "11.5.0.0.1.1588476445",
+        "Homebrew/homebrew-core": "1b9271c44b1f2db2930ef1ca854855feb65e166d",
+        "CLT": "1103.0.32.62",
         "Xcode": "11.5",
-        "macOS": "10.15.2"
+        "macOS": "10.15.5"
       }
     }
   }

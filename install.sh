@@ -28,6 +28,11 @@ if ! [ -z "${ZSH_NAME}" ]; then
   chsh -s /usr/local/bin/zsh
 fi
 
+if ! [ -f ~/.fzf.zsh ]; then
+  echo "--------- Install fzf key bindings and fuzzy completion"
+  $(brew --prefix)/opt/fzf/install
+fi
+
 pip3 install virtualenv
 pip3 install virtualenvwrapper
 
@@ -60,9 +65,14 @@ ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
 echo "--------- Symlinking iTerm2 config"
 ln -s -f ~/dev/git/mac-config/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
-echo "--------- Install oh-my-zsh"
 if [ ! -d ~/.oh-my-zsh ]; then
+  echo "--------- Install oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
+  echo "--------- Install oh-my-zsh plugin: zsh-autosuggestions"
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
 echo "--------- Symlinking zshrc"

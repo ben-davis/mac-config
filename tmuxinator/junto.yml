@@ -49,15 +49,12 @@ windows:
       # synchronize: after
       panes:
         - nvim .
-        - make test-watch
-        - #empty
   - mobile:
       layout: 59af,238x78,0,0{157x78,0,0,2,80x78,158,0[80x9,158,0,8,80x34,158,10,10,80x33,158,45,11]} 
       root: ~/dev/git/junto-mobile
       panes:
         - nvim .
         - yarn start
-        - #empty
   - monitoring:
       layout: main-vertical
       root: ~

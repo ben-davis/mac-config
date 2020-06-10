@@ -41,6 +41,9 @@ Plug 'junegunn/fzf'
 " For LSP sidebar
 Plug 'liuchengxu/vista.vim'
 
+" Nice floating terminals
+Plug 'voldikss/vim-floaterm'
+
 
 call plug#end()
 
@@ -80,6 +83,7 @@ augroup filetypes
         autocmd Filetype xml setlocal ts=2 sw=2
         autocmd Filetype sh setlocal ts=2 sw=2
         autocmd Filetype vim setlocal ts=2 sw=2
+        autocmd Filetype java setlocal ts=4 sw=4
 
         autocmd FileType markdown setlocal wrap tw=79
 
@@ -153,3 +157,6 @@ nnoremap <silent> <leader>ts :TestSuite<CR>
 "   \ 'nearest': '--watch',
 "   \ 'file':    '--watch'
 " \}
+"
+command! Ft :FloatermNew
+command! Lg :FloatermNew lazygit
