@@ -39,7 +39,12 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 # Make python3.8 default python3
-export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+export PATH="/usr/local/opt/python@3.9/bin:$PATH"
+# Make node 12 the default
+export PATH="/usr/local/opt/node@12/bin:$PATH"
+# Poetry likes to install itself separately
+export PATH="$HOME/.poetry/bin:$PATH"
+
 # Yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # Open ssl
@@ -54,6 +59,10 @@ source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.z
 #export CPPFLAGS="-I/usr/local/opt/openssl/include"
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 
+# For pillow to work
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include"
+
 # Python virtual env
 export WORKON_HOME=~/dev/.venvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python@3.8/bin/python3
@@ -65,7 +74,12 @@ export EDITOR=nvim
 alias terminal-notifier='reattach-to-user-namespace terminal-notifier'
 alias lg='lazygit'
 alias vim='nvim'
+alias ll='exa -l'
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Created by `userpath` on 2020-11-16 23:04:15
+export PATH="$PATH:/Users/ben/.local/bin"
+

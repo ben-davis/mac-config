@@ -1,6 +1,6 @@
-# /Users/ben/.config/tmuxinator/junto.yml
+# /Users/ben/.config/tmuxinator/rupa.yml
 
-name: junto
+name: rupa
 root: ~/
 
 # Optional tmux socket
@@ -10,14 +10,19 @@ root: ~/
 # project hooks.
 
 # Project hooks
+
 # Runs on project start, always
-# on_project_start: docker-compose up
+# on_project_start: command
+
 # Run on project start, the first time
 # on_project_first_start: command
+
 # Run on project start, after the first time
 # on_project_restart: command
+
 # Run on project exit ( detaching from tmux session )
 # on_project_exit: command
+
 # Run on project stop
 # on_project_stop: command
 
@@ -40,29 +45,19 @@ root: ~/
 # attach: false
 
 windows:
-  - api:
-      pre_window: docker-compose up -d
-      layout: 11a0,238x78,0,0{157x78,0,0,0,80x78,158,0[80x38,158,0,4,80x39,158,39,5]}
-      root: ~/dev/git/junto-api
+  - API:
+      layout: main-vertical
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
+      root: ~/dev/git/rupalabs/server
       panes:
-        - nvim .
-  - mobile:
-      layout: 59af,238x78,0,0{157x78,0,0,2,80x78,158,0[80x9,158,0,8,80x34,158,10,10,80x33,158,45,11]} 
-      root: ~/dev/git/junto-mobile
-      panes:
-        - nvim .
-        - yarn start
-  - builder:
-      layout: 59af,238x78,0,0{157x78,0,0,2,80x78,158,0[80x9,158,0,8,80x34,158,10,10,80x33,158,45,11]} 
-      root: ~/dev/git/junto-builder
-      panes:
-        - nvim .
-        - yarn start
-  - monitoring:
+        - vim .
+  - App:
       layout: main-vertical
-      root: ~
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
+      root: ~/dev/git/rupalabs
       panes:
-        - watch kubectl get pods
+        - vim .

@@ -1,10 +1,18 @@
 {
     "python.jediEnabled": false,
     "python.linting.pylintEnabled": false,
-    "python.linting.mypyEnabled": true,
-    "python.linting.prospectorEnabled": true,
     "python.formatting.provider": "black",
-    "coc.preferences.formatOnSaveFiletypes": ["python", "typescript", "typescriptreact", "rust", "javascript", "xml"],
+    "python.venvFolders": [
+      ".venv"
+    ],
+    "coc.preferences.formatOnSaveFiletypes": ["python", "typescript", "typescriptreact", "rust", "xml", "javascript", "javascriptreact"],
+    "coc.preferences.rootPatterns": [
+      "manage.py",
+      ".git",
+      ".hg",
+      ".projections.json"
+    ],
+    "eslint.autoFixOnSave": true,
     "list.source.files.excludePatterns": [
 	    "**/__pycache__/*",
 	    "**/media/*",
@@ -16,6 +24,10 @@
 	    "**/node_modules/**",
 	    "**/node_modules/**/.*",
 	    "**/node_modules/**/.*/**",
+	    "**/.venv/*",
+	    "**/.venv/**",
+	    "**/.venv/**/.*",
+	    "**/.venv/**/.*/**",
 	    "**/.git/*",
 	    "**/.git/**",
 	    "**/.git/**/.*",
@@ -27,8 +39,25 @@
     "coc.source.buffer.enable": false,
     "list.source.files.args": ["--hidden", "--files"],
     "typescript.format.enabled": false,
+    "typescript.suggest.completeFunctionCalls": false,
     "javascript.format.enabled": false,
     "explorer.icon.enableNerdfont": true,
+    "explorer.file.hiddenRules": {
+      "extensions": [
+        "o",
+        "a",
+        "obj",
+        "pyc"
+      ],
+      "filenames": [],
+      "patternMatches": [
+        "^\\.",
+        "lib",
+        "node_modules",
+        "^build\/",
+        "__pycache__"
+      ]
+    },
     "diagnostic.checkCurrentLine": true,
     "list.insertMappings": {
       "<C-j>": "normal:j",

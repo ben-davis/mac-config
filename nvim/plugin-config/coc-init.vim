@@ -31,6 +31,7 @@ set signcolumn=yes
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
@@ -119,22 +120,33 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
+
+" Adds FZF commands as coc-fzf
+call coc_fzf#common#add_list_source('files', 'display files', 'FzfPreviewFromResources buffer project_mru project')
+call coc_fzf#common#add_list_source('grep', 'grep files using ripgrep', 'Rg')
+call coc_fzf#common#add_list_source('lines', 'search lines in current buffer', 'FzfPreviewLines --add-fzf-arg=--no-preview --add-fzf-arg=--no-sort')
+call coc_fzf#common#add_list_source('history', 'search commit history of current file', 'FzfPreviewGitCurrentLogs')
+call coc_fzf#common#add_list_source('mru', 'search recent files', 'FzfPreviewFromResources buffer mru')
+call coc_fzf#common#add_list_source('git', 'show git actions', 'FzfPreviewGitActions')
+call coc_fzf#common#add_list_source('buffers', 'show buffers', 'FzfPreviewAllBuffers')
+call coc_fzf#common#add_list_source('quickfix', 'show quickfix', 'FzfPreviewQuickFix')
+
 " Show all diagnostics
-nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>d  :<C-u>CocFzfList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>e  :<C-u>CocFzfList extensions<cr>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>c  :<C-u>CocFzfList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>o  :<C-u>CocFzfList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>s  :<C-u>CocFzfList symbols<cr>
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>r  :<C-u>CocListResume<CR>
+nnoremap <silent> <space>r  :<C-u>CocFzfListResume<CR>
 
 " ======= Custom Ben Config ==============
 
@@ -142,11 +154,16 @@ nnoremap <silent> <space>r  :<C-u>CocListResume<CR>
 inoremap <expr> <C-j>     pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k>       pumvisible() ? "\<C-p>" : "\<C-k>"
 
-nnoremap <silent> <space>f  :<C-u>CocList files<CR>
-nnoremap <silent> <space>m  :<C-u>CocList mru<CR>
-nnoremap <silent> <space>g  :<C-u>CocList grep<CR>
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-nnoremap <silent> <space>l  :<C-u>CocList<CR>
+nnoremap <silent> <space>p  :<C-u>CocFzfList files<CR>
+nnoremap <silent> <space>f  :<C-u>CocFzfList grep<CR>
+nnoremap <silent> <space>g  :<C-u>CocFzfList git<CR>
+nnoremap <silent> <space>m  :<C-u>CocFzfList mru<CR>
+nnoremap <silent> <space>y  :<C-u>CocFzfList yank<cr>
+nnoremap <silent> <space>l  :<C-u>CocFzfList<CR>
+nnoremap <silent> <space>b  :<C-u>CocFzfList buffers<CR>
+nnoremap <silent> <space>/  :<C-u>CocFzfList lines<CR>
+nnoremap <silent> <space>h  :<C-u>CocFzfList history<CR>
+nnoremap <silent> <space>q  :<C-u>CocFzfList quickfix<CR>
 
 nmap <silent> <leader>d :CocCommand explorer<CR>
 
@@ -158,3 +175,4 @@ function! s:select_current_word()
   endif
   return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
 endfunc
+

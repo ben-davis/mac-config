@@ -23,6 +23,11 @@ if [ ! -x "$(command -v pod)" ]; then
   sudo gem install cocoapods
 fi
 
+if [ ! -x "$(command -v yarn)" ]; then
+  echo "--------- Installing yarn"
+  npm install -g yarn
+fi
+
 if ! [ -z "${ZSH_NAME}" ]; then
   echo "--------- Setting default shell to zsh"
   chsh -s /usr/local/bin/zsh

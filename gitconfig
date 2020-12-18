@@ -3,8 +3,13 @@
 	email = bendavis381@gmail.com
 [core]
         pager = delta
+
 [interactive]
         diffFilter = delta
+
+[delta]
+        syntax-theme = GitHub
+
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
