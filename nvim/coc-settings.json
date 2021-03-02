@@ -1,10 +1,9 @@
 {
-    "python.jediEnabled": false,
-    "python.linting.pylintEnabled": false,
     "python.formatting.provider": "black",
-    "python.venvFolders": [
-      ".venv"
-    ],
+    "python.linting.mypyEnabled": true,
+    "diagnostic.virtualText": true,
+    "diagnostic.virtualTextCurrentLineOnly": false,
+    "python.linting.flake8Enabled": true,
     "coc.preferences.formatOnSaveFiletypes": ["python", "typescript", "typescriptreact", "rust", "xml", "javascript", "javascriptreact"],
     "coc.preferences.rootPatterns": [
       "manage.py",

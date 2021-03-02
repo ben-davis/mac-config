@@ -122,7 +122,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Using CocList
 
 " Adds FZF commands as coc-fzf
-call coc_fzf#common#add_list_source('files', 'display files', 'FzfPreviewFromResources buffer project_mru project')
+call coc_fzf#common#add_list_source('files', 'display files', 'FzfPreviewFromResources project_mru project')
 call coc_fzf#common#add_list_source('grep', 'grep files using ripgrep', 'Rg')
 call coc_fzf#common#add_list_source('lines', 'search lines in current buffer', 'FzfPreviewLines --add-fzf-arg=--no-preview --add-fzf-arg=--no-sort')
 call coc_fzf#common#add_list_source('history', 'search commit history of current file', 'FzfPreviewGitCurrentLogs')
@@ -132,7 +132,8 @@ call coc_fzf#common#add_list_source('buffers', 'show buffers', 'FzfPreviewAllBuf
 call coc_fzf#common#add_list_source('quickfix', 'show quickfix', 'FzfPreviewQuickFix')
 
 " Show all diagnostics
-nnoremap <silent> <space>d  :<C-u>CocFzfList diagnostics<cr>
+nnoremap <silent> <space>d  :<C-u>CocCommand fzf-preview.CocCurrentDiagnostics<cr>
+nnoremap <silent> <space>D  :<C-u>CocFzfList diagnostics<cr>
 " Manage extensions
 nnoremap <silent> <space>e  :<C-u>CocFzfList extensions<cr>
 " Show commands
@@ -165,7 +166,6 @@ nnoremap <silent> <space>/  :<C-u>CocFzfList lines<CR>
 nnoremap <silent> <space>h  :<C-u>CocFzfList history<CR>
 nnoremap <silent> <space>q  :<C-u>CocFzfList quickfix<CR>
 
-nmap <silent> <leader>d :CocCommand explorer<CR>
 
 " VSCode like multiple cursors
 nmap <expr> <silent> <C-d> <SID>select_current_word()
@@ -176,3 +176,50 @@ function! s:select_current_word()
   return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
 endfunc
 
+let g:coc_explorer_global_presets = {
+\   '.vim': {
+\     'root-uri': '~/.vim',
+\   },
+\   'cocConfig': {
+\      'root-uri': '~/.config/coc',
+\   },
+\   'tab': {
+\     'position': 'tab',
+\     'quit-on-open': v:true,
+\   },
+\   'floating': {
+\     'position': 'floating',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingTop': {
+\     'position': 'floating',
+\     'floating-position': 'center-top',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingLeftside': {
+\     'position': 'floating',
+\     'floating-position': 'left-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingRightside': {
+\     'position': 'floating',
+\     'floating-position': 'right-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'simplify': {
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   },
+\   'buffer': {
+\     'sources': [{'name': 'buffer', 'expand': v:true}]
+\   },
+\ }
+
+nmap <silent> <leader>d :CocCommand explorer --preset floating<CR>
+
+" Auto sort python on save
+augroup autosave
+  autocmd!
+  autocmd BufWritePre *.py :CocCommand python.sortImports
+augroup END

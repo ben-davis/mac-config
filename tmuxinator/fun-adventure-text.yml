@@ -1,8 +1,12 @@
 # /Users/ben/.config/tmuxinator/fun-adventure-text.yml
 
 name: fun-adventure-text
-root: ~/dev/git/adventure-text
 windows:
   - editor:
+      root: ~/dev/git/adventure-text-api
+      panes:
+        - vim
+  - deployment:
+      root: ~/dev/git/adventure-text-deployment
       panes:
         - vim

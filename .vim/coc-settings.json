@@ -1,3 +1,4 @@
 {
-  "eslint.autoFix": false
+  "eslint.autoFix": false,
+  "python.pythonPath": "/Users/ben/dev/.venvs/server-iwTf5wu_/bin/python"
 }

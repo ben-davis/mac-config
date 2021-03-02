@@ -68,13 +68,6 @@ export WORKON_HOME=~/dev/.venvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python@3.8/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
 
-export EDITOR=nvim
-
-# Aliases
-alias terminal-notifier='reattach-to-user-namespace terminal-notifier'
-alias lg='lazygit'
-alias vim='nvim'
-alias ll='exa -l'
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -83,3 +76,29 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Created by `userpath` on 2020-11-16 23:04:15
 export PATH="$PATH:/Users/ben/.local/bin"
 
+
+source /Users/ben/.config/broot/launcher/bash/br
+
+export EDITOR=nvim
+export VISUAL=nvim
+
+# Support neovim-remote to allow plugins to control neovim. Using it for lazygit inside neovim.
+# NOTE: Not working atm, assuming because nvim5 isn't respecting server name configuration
+# export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+
+# if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+#     alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
+#     export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+#     export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+# else
+#     export EDITOR=nvim
+#     export VISUAL=nvim
+# fi
+
+
+# Aliases
+alias terminal-notifier='reattach-to-user-namespace terminal-notifier'
+alias lg='lazygit'
+alias vim='nvim'
+alias ll='exa -l'
+alias dc='docker-compose'
