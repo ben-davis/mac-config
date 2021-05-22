@@ -1,6 +1,6 @@
 # /Users/ben/.config/tmuxinator/ben.yml
 
-name: ben
+name: bencdavis.com
 root: ~/
 
 # Optional tmux socket

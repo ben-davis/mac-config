@@ -1,99 +1,20 @@
-call plug#begin('~/.config/nvim/plugged')
+source ~/.config/nvim/plugins.vim
 
-" For LSP support
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Status line
-Plug 'ben-davis/eleline.vim'
-set laststatus=2
-let g:eleline_powerline_fonts = 1
-
-" Theme
-Plug 'ayu-theme/ayu-vim'
-
-" Git support
-Plug 'tpope/vim-fugitive'
-Plug 'rbong/vim-flog'
-Plug 'rhysd/git-messenger.vim'
-Plug 'tpope/vim-rhubarb'
-Plug 'lambdalisue/gina.vim'
-
-" Testing
-Plug 'janko/vim-test'
-
-
-" Lots of language syntax support
-Plug 'sheerun/vim-polyglot'
-
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-unimpaired'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-eunuch'
-
-" DB access
-Plug 'tpope/vim-dadbod'
-Plug 'kristijanhusak/vim-dadbod-ui'
-
-" For seamless vim and tmux movement
-Plug 'christoomey/vim-tmux-navigator'
-
-Plug 'rhysd/devdocs.vim'
-
-Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
-Plug 'junegunn/fzf.vim'
-
-" Non-node coc plugins
-Plug 'antoinemadec/coc-fzf'
-" Alternative coc integration for fzf
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
-
-" For LSP sidebar
-Plug 'liuchengxu/vista.vim'
-
-" Nice floating terminals
-Plug 'voldikss/vim-floaterm'
-
-" Reusable terminals
-Plug 'kassio/neoterm'
-
-" Base64
-Plug 'christianrondeau/vim-base64'
-
-" Make it easy to use lazygit inside of vim
-Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
-" Doesn't work until neovim remote works
-" let g:lazygit_use_neovim_remote = 1
-
-" Yanking
-Plug 'LeafCage/yankround.vim'
-
-" Easymotion with ;
-Plug 'easymotion/vim-easymotion'
-
-" Allow buffer deletion without closing windows that had that buffer
-Plug 'moll/vim-bbye'
-
-" Shortcuts for todo list management inside markdown file
-Plug 'aserebryakov/vim-todo-lists'
-
-" Dasht
-Plug 'sunaku/vim-dasht'
-
-call plug#end()
-
-" Source coc-nvim config
-source ~/.config/nvim/plugin-config/coc-init.vim
+" LSP Config
+:luafile ~/.config/nvim/lsp.lua
 
 set termguicolors
+set background=dark
 let ayucolor="dark" 
 colorscheme ayu
 
 function! ToggleDarkModeFun()
     if g:ayucolor == 'dark'
+        set background=light
         let g:ayucolor="light" 
         colorscheme ayu
     else
+        set background=dark
         let g:ayucolor="dark" 
         colorscheme ayu
     endif
@@ -101,6 +22,7 @@ endfunction
 
 command! ToggleDarkMode :call ToggleDarkModeFun()
 
+" Support mouse
 set mouse=a
 
 " Spaces over tabs
@@ -128,9 +50,17 @@ augroup filetypes
         autocmd VimResized * wincmd =
 augroup END
 
-let NERDTreeMinimalUI=1
-
+" Show line numbers always
 set number
+
+" Wrapped lines are indented
+set breakindent
+
+" Persist undo between sessions
+set undofile
+
+" Decrease updatetime (time to save to swap file)
+set updatetime=250
 
 " Clear highlighting on escape in normal mode
 nnoremap <silent> <esc> :noh<return><esc>
@@ -210,20 +140,9 @@ let g:dasht_results_window = 'vnew'
 " nnoremap <silent> <C-j> :cnext<CR>	
 " nnoremap <silent> <C-k> :cprev<CR>	
 
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-let g:floaterm_width = 0.9
-let g:floaterm_height = 0.6
-
 " Hybrid numbers
 set relativenumber
 set nu rnu
-
-" Toggled between relative and absolute when switching from normal to insert
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * if &buftype != "terminal" | set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * if &buftype != "terminal" | set norelativenumber
-augroup END
 
 " Test configuration
 let test#strategy = "neoterm"
@@ -243,6 +162,8 @@ nnoremap <silent> <leader>l :LazyGit<CR>
 " Delete buffer
 nnoremap <silent> <leader>q :Bdelete<CR>
 
+" Y yank until the end of line
+nnoremap <silent> Y y$
 
 " Auto scroll terminals
 let g:neoterm_autoscroll = 1
@@ -289,6 +210,37 @@ endfunction
 "   let $GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
 " endif
 
-" Make V behave like C and D
-nmap V v$
-nmap vv ^v$
+" Autosave fountain
+let g:auto_save = 0
+augroup autosave_fountain
+  au!
+  au FileType fountain let b:auto_save = 1
+augroup END
+
+" Without this, files will jump the the right when there are signs
+set signcolumn=yes:1
+
+" Causes unsaved buffers to be hidden rather than closed
+set hidden
+
+" Neovim live substitution
+set inccommand="nosplit"
+
+" Highlight on yank
+augroup YankHighlight
+  autocmd!
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+augroup end
+
+" Support project-local .nvimrc
+set exrc
+
+" Open explorer
+noremap <Leader>d :NvimTreeToggle<CR>
+
+" nvim-tree
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.mypy_cache' ]
+let g:nvim_tree_follow = 1
+let g:nvim_tree_auto_close = 1
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_lsp_diagnostics = 1

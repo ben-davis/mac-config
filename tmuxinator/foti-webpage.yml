@@ -1,0 +1,10 @@
+# /Users/ben/.config/tmuxinator/foti-webpage.yml
+
+name: foti-webpage
+root: ~/dev/git/foti-webpage
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - vim

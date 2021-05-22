@@ -1,6 +1,6 @@
 # /Users/ben/.config/tmuxinator/fun-adventure-text.yml
 
-name: fun-adventure-text
+name: foti-adventure-text
 windows:
   - editor:
       root: ~/dev/git/adventure-text-api

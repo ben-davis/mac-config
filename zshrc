@@ -40,6 +40,7 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 # Make python3.8 default python3
 export PATH="/usr/local/opt/python@3.9/bin:$PATH"
+export PATH="/Users/ben/Library/Python/3.9/bin:$PATH"
 # Make node 12 the default
 export PATH="/usr/local/opt/node@12/bin:$PATH"
 # Poetry likes to install itself separately
