@@ -80,21 +80,17 @@ export PATH="$PATH:/Users/ben/.local/bin"
 
 source /Users/ben/.config/broot/launcher/bash/br
 
-export EDITOR=nvim
-export VISUAL=nvim
-
 # Support neovim-remote to allow plugins to control neovim. Using it for lazygit inside neovim.
 # NOTE: Not working atm, assuming because nvim5 isn't respecting server name configuration
-# export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
-# if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-#     alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
-#     export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
-#     export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
-# else
-#     export EDITOR=nvim
-#     export VISUAL=nvim
-# fi
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+    alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
+    export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+else
+    export EDITOR=nvim
+    export VISUAL=nvim
+fi
 
 
 # Aliases

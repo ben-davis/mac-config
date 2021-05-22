@@ -1,7 +1,7 @@
 source ~/.config/nvim/plugins.vim
 
-" LSP Config
-:luafile ~/.config/nvim/lsp.lua
+:lua require('lsp')
+:lua require('status-line')
 
 set termguicolors
 set background=dark
@@ -13,10 +13,12 @@ function! ToggleDarkModeFun()
         set background=light
         let g:ayucolor="light" 
         colorscheme ayu
+        :lua require'status-line'.setup("ayu_light")
     else
         set background=dark
         let g:ayucolor="dark" 
         colorscheme ayu
+        :lua require'status-line'.setup("ayu_dark")
     endif
 endfunction
 
@@ -158,6 +160,7 @@ nnoremap <silent> <leader>ts :TestSuite<CR>
 " \}
 "
 nnoremap <silent> <leader>l :LazyGit<CR>
+let g:lazygit_floating_window_use_plenary = 1
 
 " Delete buffer
 nnoremap <silent> <leader>q :Bdelete<CR>
@@ -206,9 +209,9 @@ endfunction
 " Configure neovim-remote
 " NOTE: This is currently not working. Assuming because nvim 5 isn't setting
 " server name correctly.
-" if has('nvim') && executable('nvr')
-"   let $GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
-" endif
+if has('nvim') && executable('nvr')
+  let $GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+endif
 
 " Autosave fountain
 let g:auto_save = 0

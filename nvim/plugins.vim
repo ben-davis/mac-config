@@ -102,5 +102,8 @@ Plug 'chrisbra/DistractFree'
 let g:distractfree_width = '60%'
 let g:distractfree_height= '100%'
 
+" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'hoob3rt/lualine.nvim'
+
 call plug#end()
 
