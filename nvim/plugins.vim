@@ -6,12 +6,25 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
 " LSP-supported autocomplete
 Plug 'hrsh7th/nvim-compe'
+" Highlight symbols under cursor
+" Dsiabled as it feels weird on insert mode
+" Plug 'RRethy/vim-illuminate'
+" Status line
+Plug 'nvim-lua/lsp-status.nvim'
+" Outline
+Plug 'simrat39/symbols-outline.nvim'
+
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Telescope for lsp popup lists
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-github.nvim'
+
+" Search and replace
+Plug 'windwp/nvim-spectre'
 
 " Dev icons
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
@@ -22,6 +35,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Looks abandoned
 " Plug 'ayu-theme/ayu-vim'
 Plug 'Luxed/ayu-vim'
+Plug 'folke/tokyonight.nvim'
 
 " Git support
 Plug 'tpope/vim-fugitive'
@@ -29,6 +43,9 @@ Plug 'rbong/vim-flog'
 Plug 'rhysd/git-messenger.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'lambdalisue/gina.vim'
+
+" Git signs
+Plug 'lewis6991/gitsigns.nvim'
 
 " Testing
 Plug 'janko/vim-test'
@@ -79,8 +96,8 @@ let g:lazygit_floating_window_scaling_factor = 1
 " Yanking
 Plug 'LeafCage/yankround.vim'
 
-" Easymotion with ;
-Plug 'easymotion/vim-easymotion'
+" Neovim easymotion
+Plug 'phaazon/hop.nvim'
 
 " Allow buffer deletion without closing windows that had that buffer
 Plug 'moll/vim-bbye'
@@ -102,8 +119,17 @@ Plug 'chrisbra/DistractFree'
 let g:distractfree_width = '60%'
 let g:distractfree_height= '100%'
 
+" Another distract free
+Plug 'junegunn/goyo.vim'
+
 " Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'hoob3rt/lualine.nvim'
+
+" Github integration
+Plug 'pwntester/octo.nvim'
+
+" Color highlighting
+Plug 'norcalli/nvim-colorizer.lua'
 
 call plug#end()
 

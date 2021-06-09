@@ -5,20 +5,31 @@ source ~/.config/nvim/plugins.vim
 
 set termguicolors
 set background=dark
-let ayucolor="dark" 
-colorscheme ayu
+" let ayucolor="dark" 
+" colorscheme ayu
+let g:tokyonight_style = "night"
+colorscheme tokyonight
 
 function! ToggleDarkModeFun()
-    if g:ayucolor == 'dark'
-        set background=light
-        let g:ayucolor="light" 
-        colorscheme ayu
-        :lua require'status-line'.setup("ayu_light")
-    else
+    " if g:ayucolor == 'dark'
+    if g:tokyonight_style == "day"
+        " set background=light
+        " let g:ayucolor="light" 
+        " colorscheme ayu
+        " :lua require'status-line'.setup("ayu_light")
+        let g:tokyonight_style = "night"
         set background=dark
-        let g:ayucolor="dark" 
-        colorscheme ayu
-        :lua require'status-line'.setup("ayu_dark")
+        :lua require'status-line'.setup("tokyonight")
+        colorscheme tokyonight
+    else
+        " set background=dark
+        " let g:ayucolor="dark" 
+        " colorscheme ayu
+        " :lua require'status-line'.setup("ayu_dark")
+        let g:tokyonight_style = "day"
+        set background=light
+        :lua require'status-line'.setup("tokyonight")
+        colorscheme tokyonight
     endif
 endfunction
 
@@ -46,8 +57,6 @@ augroup filetypes
         autocmd Filetype sh setlocal ts=2 sw=2
         autocmd Filetype vim setlocal ts=2 sw=2
         autocmd Filetype java setlocal ts=4 sw=4
-
-        autocmd FileType markdown setlocal wrap tw=79
 
         autocmd VimResized * wincmd =
 augroup END
@@ -239,7 +248,10 @@ augroup end
 set exrc
 
 " Open explorer
-noremap <Leader>d :NvimTreeToggle<CR>
+noremap <silent> <Leader>d :NvimTreeToggle<CR>
+
+" Open outline
+noremap <silent> <Leader>o :SymbolsOutline<CR>
 
 " nvim-tree
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.mypy_cache' ]
@@ -247,3 +259,34 @@ let g:nvim_tree_follow = 1
 let g:nvim_tree_auto_close = 1
 let g:nvim_tree_git_hl = 1
 let g:nvim_tree_lsp_diagnostics = 1
+
+
+" Easymotion-replacement
+nmap $ :lua require'hop'.hint_words()<CR>
+nmap # :HopChar1<CR>
+
+" Search and replace
+nnoremap <leader>S :lua require('spectre').open()<CR>
+
+" Initialize color highlighter
+:lua require'colorizer'.setup()
+
+" Treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+}
+EOF
+
+" Git signs
+:lua require('gitsigns').setup()
+
+" Neovide
+" let g:neovide_cursor_antialiasing=v:true
+" let g:neovide_fullscreen=v:true
+" set guifont=Fira\ Code\ Retina\ Nerd\ Font\ Complete\ Mono:h12
+let g:neovide_cursor_animation_length=0
+let g:neovide_window_floating_blur = 0

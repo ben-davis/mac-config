@@ -1,20 +1,11 @@
--- local colors = require('galaxyline.colors')
+local lsp_symbol = function() 
+  if #vim.lsp.buf_get_clients() > 0 then
+    return vim.b.lsp_current_function
+  end
 
--- require('galaxyline').section.left[1]= {
---   FileSize = {
---     provider = 'GetLspClient',
---     condition = function()
---       if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
---         return true
---       end
---       return false
---       end,
---     icon = '   ',
---     highlight = {colors.green,colors.purple},
---     separator = '',
---     separator_highlight = {colors.purple,colors.darkblue},
---   }
--- }
+  return ''
+end
+
 local setup = function(theme)
   require'lualine'.setup {
     options = {
@@ -29,7 +20,7 @@ local setup = function(theme)
       lualine_b = {'branch'},
       lualine_c = {'filename'},
       lualine_x = {},
-      lualine_y = {},
+      lualine_y = {lsp_symbol},
       lualine_z = {'location'}
     },
     inactive_sections = {
