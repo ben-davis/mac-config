@@ -276,7 +276,7 @@ vim.api.nvim_set_keymap("n", "<space>q", "<cmd>lua require('telescope.builtin').
 vim.api.nvim_exec([[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.py lua vim.lsp.buf.formatting_sync()
+  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.py lua vim.lsp.buf.formatting_sync(nil, 3000)
 augroup END
 ]], true)
 
