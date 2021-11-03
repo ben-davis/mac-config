@@ -71,104 +71,6 @@ local lua_settings = {
   }
 }
 
-local diagnosticls_settings = {
-  filetypes = {
-    "python",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "css"
-  },
-  root_dir = function(fname)
-      return util.root_pattern(".git")(fname)
-    end,
-  init_options = {
-    linters = {
-      eslint = {
-        command = 'eslint_d',
-        rootPatterns = { 'package.json' },
-        debounce = 100,
-        args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
-        sourceName = 'eslint',
-        parseJson = {
-          errorsRoot = '[0].messages',
-          line = 'line',
-          column = 'column',
-          endLine = 'endLine',
-          endColumn = 'endColumn',
-          message = '[eslint] ${message} [${ruleId}]',
-          security = 'severity'
-        },
-        securities = {
-          [2] = 'error',
-          [1] = 'warning'
-        }
-      },
-      flake8 = {
-        debounce = 100,
-        sourceName = "flake8",
-        command = "flake8",
-        args = {
-          "--format",
-          "%(row)d:%(col)d:%(code)s:%(code)s: %(text)s",
-          "%file",
-        },
-        formatPattern = {
-          "^(\\d+):(\\d+):(\\w+):(\\w).+: (.*)$",
-          {
-              line = 1,
-              column = 2,
-              message = {"[", 3, "] ", 5},
-              security = 4
-          }
-        },
-        securities = {
-          E = "error",
-          W = "warning",
-          F = "info",
-          B = "hint",
-        },
-      },
-    },
-    filetypes = {
-      python = 'flake8',
-      javascript = 'eslint',
-      javascriptreact = 'eslint',
-      typescript = 'eslint',
-      typescriptreact = 'eslint',
-    },
-    formatters = {
-      black = {
-        command = "blackd-client",
-      },
-      -- black = {
-      --   command = "black",
-      --   args = {"--quiet", "-"}
-      -- },
-      isort = {
-        command = "isort",
-        args = {"--quiet", "-"}
-      },
-      prettier = {
-        command = 'prettierd',
-        rootPatterns = { 'package.json' },
-        args = { '%filename' }
-      }
-    },
-    formatFiletypes = {
-      python = {"isort", "black"},
-      css = {"prettier"},
-      javascript = {"prettier"},
-      javascriptreact = {"prettier"},
-      typescript = {"prettier"},
-      typescriptreact = {"prettier"},
-      json = {"prettier"},
-    }
-  }
-}
-
 local eslint = {
     lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT} --cache",
     lintIgnoreExitCode = true,
@@ -234,10 +136,6 @@ lsp_installer.on_server_ready(function(server)
   -- language specific config
   if server.name == "lua" then
     config.settings = lua_settings
-  end
-
-  if server.name == "diagnosticls" then
-    config = diagnosticls_settings
   end
 
   if server.name == "efm" then
