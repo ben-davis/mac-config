@@ -64,6 +64,11 @@ export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 export LDFLAGS="-L/usr/local/opt/zlib/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include"
 
+# For nvui
+export LDFLAGS="-L/usr/local/opt/node@12/lib"
+export CPPFLAGS="-I/usr/local/opt/node@12/include"
+
+
 # Python virtual env
 export WORKON_HOME=~/dev/.venvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python@3.8/bin/python3

@@ -2,13 +2,17 @@ source ~/.config/nvim/plugins.vim
 
 :lua require('lsp')
 :lua require('status-line')
+:lua require('dap-config')
 
 set termguicolors
 set background=dark
 " let ayucolor="dark" 
+"
 " colorscheme ayu
-let g:tokyonight_style = "night"
+let g:tokyonight_style = "storm"
 colorscheme tokyonight
+let g:tokyonight_lualine_bold = 1
+let g:tokyonight_hide_inactive_statusline = 1
 
 function! ToggleDarkModeFun()
     " if g:ayucolor == 'dark'
@@ -99,9 +103,14 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
-" Terminal mode
-" tnoremap <Esc> <C-\><C-n>
 
+" Normal/insert mode movement
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+" Terminal mode movement
 tnoremap <C-h> <C-\><C-N><C-w>h
 tnoremap <C-j> <C-\><C-N><C-w>j
 tnoremap <C-k> <C-\><C-N><C-w>k
@@ -111,31 +120,33 @@ tnoremap <C-l> <C-\><C-N><C-w>l
 augroup terminallinenumbers
   autocmd!
   autocmd TermOpen * setlocal nonumber norelativenumber
-  au BufEnter,BufWinEnter,WinEnter term://* startinsert
-  au BufLeave term://* stopinsert
+  " NOTE: I'm not enjoying the auto-insert on enter, so disabling for now.
+  " au BufEnter,BufWinEnter,WinEnter term://* startinsert
+  " au BufLeave term://* stopinsert
 augroup END
 
 " Devdocs (disabled in favour of dasht)
-" nmap <leader>k <Plug>(devdocs-under-cursor)
+nmap <silent> <leader>k :DevDocsUnderCursor<CR>
+nmap <silent> <leader>K :DevDocsAllUnderCursor<CR>
 
-" Dasht
-" search related docsets
-nnoremap <Leader>k :Dasht<Space>
+" Dasht (disabled in favor of Devdocs as w3m is too complicated / no syntax)
+" " search related docsets
+" nnoremap <Leader>k :Dasht<Space>
 
-" search ALL the docsets
-nnoremap <Leader><Leader>k :Dasht!<Space>
+" " search ALL the docsets
+" nnoremap <Leader><Leader>k :Dasht!<Space>
 
-" search related docsets
-nnoremap <silent> <Leader>K :call Dasht(dasht#cursor_search_terms())<Return>
+" " search related docsets
+" nnoremap <silent> <Leader>K :call Dasht(dasht#cursor_search_terms())<Return>
 
-" search ALL the docsets
-nnoremap <silent> <Leader><Leader>K :call Dasht(dasht#cursor_search_terms(), '!')<Return>
+" " search ALL the docsets
+" nnoremap <silent> <Leader><Leader>K :call Dasht(dasht#cursor_search_terms(), '!')<Return>
 
-" search related docsets
-vnoremap <silent> <Leader>K y:<C-U>call Dasht(getreg(0))<Return>
+" " search related docsets
+" vnoremap <silent> <Leader>K y:<C-U>call Dasht(getreg(0))<Return>
 
-" search ALL the docsets
-vnoremap <silent> <Leader><Leader>K y:<C-U>call Dasht(getreg(0), '!')<Return>
+" " search ALL the docsets
+" vnoremap <silent> <Leader><Leader>K y:<C-U>call Dasht(getreg(0), '!')<Return>
 
 let g:dasht_filetype_docsets = {}
 " When in Python, also search Django
@@ -162,6 +173,37 @@ nnoremap <silent> <leader>tn :TestNearest<CR>
 nnoremap <silent> <leader>tf :TestFile<CR>
 nnoremap <silent> <leader>tl :TestLast<CR>
 nnoremap <silent> <leader>ts :TestSuite<CR>
+
+:lua require('dap').set_log_level('TRACE')
+
+lua << EOF
+function _G.dapLaunchDocker(cmd)
+    local dap = require"dap"
+    adapter = {
+        type = "executable",
+        command = "docker-compose",
+        args = {"run", "--rm", "--service-ports", "test", "python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "--wait-for-client", "-m", "pytest", cmd:gsub("pytest server/", "")}
+    }
+
+    config = {
+        request = 'attach',
+        name = "Rupa",
+        pathMappings = {
+            {
+              localRoot = "/Users/ben/dev/git/rupalabs/server",
+              remoteRoot = "/app",
+            }
+        },
+    }
+
+		dap.launch(adapter, config)
+end
+EOF
+
+let DockerStrategy = luaeval('dapLaunchDocker')
+
+let g:test#custom_strategies = {'docker': DockerStrategy}
+let g:test#strategy = 'docker'
 
 " let test#javascript#jest#options = {
 "   \ 'nearest': '--watch',
@@ -192,28 +234,6 @@ let g:python3_host_prog = "/usr/local/bin/python3"
 " Use smart case when searching
 set ignorecase
 set smartcase
-
-" Custom mapper for todo lists (changes <space> map as we use that for
-" coc-nvim)
-let g:VimTodoListsCustomKeyMapper = 'VimTodoListsCustomMappings'
-
-function! VimTodoListsCustomMappings()
-  nnoremap <buffer><silent> o :VimTodoListsCreateNewItemBelow<CR>
-  nnoremap <buffer><silent> O :VimTodoListsCreateNewItemAbove<CR>
-  nnoremap <buffer><silent> j :VimTodoListsGoToNextItem<CR>
-  nnoremap <buffer><silent> k :VimTodoListsGoToPreviousItem<CR>
-  nnoremap <buffer><silent> s :VimTodoListsToggleItem<CR>
-  vnoremap <buffer><silent> s :VimTodoListsToggleItem<CR>
-  inoremap <buffer><silent> <CR> <ESC>:call VimTodoListsAppendDate()<CR>:silent call VimTodoListsCreateNewItemBelow()<CR>
-  inoremap <buffer><silent> <kEnter> <ESC>:call VimTodoListsAppendDate()<CR>A<CR><ESC>:VimTodoListsCreateNewItem<CR>
-  noremap <buffer><silent> <leader>e :silent call VimTodoListsSetNormalMode()<CR>
-  nnoremap <buffer><silent> <Tab> :VimTodoListsIncreaseIndent<CR>
-  nnoremap <buffer><silent> <S-Tab> :VimTodoListsDecreaseIndent<CR>
-  vnoremap <buffer><silent> <Tab> :VimTodoListsIncreaseIndent<CR>
-  vnoremap <buffer><silent> <S-Tab> :VimTodoListsDecreaseIndent<CR>
-  inoremap <buffer><silent> <Tab> <ESC>:VimTodoListsIncreaseIndent<CR>A
-  inoremap <buffer><silent> <S-Tab> <ESC>:VimTodoListsDecreaseIndent<CR>A
-endfunction
 
 " Configure neovim-remote
 " NOTE: This is currently not working. Assuming because nvim 5 isn't setting
@@ -248,45 +268,99 @@ augroup end
 set exrc
 
 " Open explorer
-noremap <silent> <Leader>d :NvimTreeToggle<CR>
+
+" Explorer
+let g:symbols_outline = {
+    \ "highlight_hovered_item": v:false,
+    \ "show_guides": v:true,
+    \ "position": 'right',
+    \ "auto_preview": v:false,
+    \ "show_numbers": v:true,
+    \ "show_relative_numbers": v:false,
+    \ "show_symbol_details": v:true,
+    \ "keymaps": {
+        \ "close": "<Esc>",
+        \ "goto_location": "<Cr>",
+        \ "focus_location": "o",
+        \ "hover_symbol": "<C-space>",
+        \ "rename_symbol": "r",
+        \ "code_actions": "a",
+    \ },
+    \ "lsp_blacklist": [],
+\ }
 
 " Open outline
-noremap <silent> <Leader>o :SymbolsOutline<CR>
+noremap <silent> <Leader>s :SymbolsOutline<CR>
 
 " nvim-tree
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.mypy_cache' ]
-let g:nvim_tree_follow = 1
-let g:nvim_tree_auto_close = 1
 let g:nvim_tree_git_hl = 1
-let g:nvim_tree_lsp_diagnostics = 1
+let g:nvim_tree_highlight_opened_files = 1
 
+lua <<EOF
+require'nvim-tree'.setup({
+    auto_close = true,
+    update_focused_file = {
+        enable = true
+    },
+    hijack_cursor = true,
+    view = {
+        width = 40
+    },
+    filters = {
+        custom = { '.git', 'node_modules', '.cache', '.mypy_cache', '.pytest_cache', '__pycache__', '.DS_STORE' }
+    }
+})
+EOF
 
-" Easymotion-replacement
-nmap $ :lua require'hop'.hint_words()<CR>
-nmap # :HopChar1<CR>
+noremap <silent> <Leader>e :NvimTreeToggle<CR>
+noremap <silent> <Leader>E :NvimTreeFindFile<CR>
 
 " Search and replace
 nnoremap <leader>S :lua require('spectre').open()<CR>
 
-" Initialize color highlighter
-:lua require'colorizer'.setup()
-
 " Treesitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-  },
-}
-EOF
+" NOTE: Still breaks all the time (2021-09-26)
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   ensure_installed = "maintained",
+"   highlight = {
+"     enable = true,
+"   },
+" }
+" EOF
 
 " Git signs
 :lua require('gitsigns').setup()
 
 " Neovide
-" let g:neovide_cursor_antialiasing=v:true
-" let g:neovide_fullscreen=v:true
-" set guifont=Fira\ Code\ Retina\ Nerd\ Font\ Complete\ Mono:h12
+" Only set the font if
+if &guifont == ""
+    " set guifont=MonoLisa:h14
+    " set guifont=Fira\ Code:h14
+    set guifont=FiraCode\ Nerd\ Font:h14
+    " set guifont=Apercu\ Pro\ Mono:h14
+endif
 let g:neovide_cursor_animation_length=0
-let g:neovide_window_floating_blur = 0
+" let g:neovide_refresh_rate=140
+" let neovide_remember_window_size = v:true
+let g:neovide_floating_blur = 0
+" let g:neovide_window_floating_opacity = 1
+" let g:neovide_remember_window_size = v:true
+" let g:neovide_transparency = 1
+
+" Set the fancy notification tool as the default one in vim
+:lua vim.notify = require("notify")
+
+" Easier window movement
+lua << EOF
+require('nvim-window').setup({
+  -- The characters available for hinting windows.
+  chars = {
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+    'j', 'k', 'l', 'm', 'n', 'o',
+  },
+})
+EOF
+
+map <silent> <leader>w :lua require('nvim-window').pick()<CR>

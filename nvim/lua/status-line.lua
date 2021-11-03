@@ -10,9 +10,9 @@ local setup = function(theme)
   require'lualine'.setup {
     options = {
       icons_enabled = true,
-      theme = theme,
-      component_separators = {'|', '|'},
-      section_separators = {'', ''},
+      theme = 'tokyonight',
+      component_separators = { left = '|', right = '|'},
+      section_separators = { left = '', right = ''},
       disabled_filetypes = {'NvimTree'}
     },
     sections = {
@@ -36,6 +36,6 @@ local setup = function(theme)
   }
 end
 
-setup("ayu_dark")
+setup("auto")
 
 return {setup = setup}

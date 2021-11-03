@@ -3,25 +3,41 @@ call plug#begin('~/.config/nvim/plugged')
 " Easier LSP configuration
 Plug 'neovim/nvim-lspconfig'
 " Handles automatically installing language servers locally
-Plug 'kabouzeid/nvim-lspinstall'
+Plug 'williamboman/nvim-lsp-installer'
 " LSP-supported autocomplete
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/nvim-cmp'
+" LSP-icons in autocomplet
+Plug 'onsails/lspkind-nvim'
+
+" Snippets
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
 " Highlight symbols under cursor
 " Dsiabled as it feels weird on insert mode
 " Plug 'RRethy/vim-illuminate'
 " Status line
 Plug 'nvim-lua/lsp-status.nvim'
+
 " Outline
+" NOTE: Don't use
 Plug 'simrat39/symbols-outline.nvim'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 " Telescope for lsp popup lists
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-github.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
+" Reload nvim without restarting
+Plug 'famiu/nvim-reload'
 
 " Search and replace
 Plug 'windwp/nvim-spectre'
@@ -39,10 +55,7 @@ Plug 'folke/tokyonight.nvim'
 
 " Git support
 Plug 'tpope/vim-fugitive'
-Plug 'rbong/vim-flog'
-Plug 'rhysd/git-messenger.vim'
 Plug 'tpope/vim-rhubarb'
-Plug 'lambdalisue/gina.vim'
 
 " Git signs
 Plug 'lewis6991/gitsigns.nvim'
@@ -50,63 +63,38 @@ Plug 'lewis6991/gitsigns.nvim'
 " Testing
 Plug 'janko/vim-test'
 
-" Debugging
-Plug 'puremourning/vimspector'
-" Default mappings
-let g:vimspector_enable_mappings = 'HUMAN'
-
 " Lots of language syntax support
 Plug 'sheerun/vim-polyglot'
 
+" For easy commenting out 
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-unimpaired'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'terryma/vim-multiple-cursors'
+
+" Useful commands for common tasks
 Plug 'tpope/vim-eunuch'
+
+" Multiple cursors
+Plug 'mg979/vim-visual-multi'
 
 " DB access
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
 
-" For seamless vim and tmux movement
-Plug 'christoomey/vim-tmux-navigator'
-
-Plug 'rhysd/devdocs.vim'
-
-Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
-Plug 'junegunn/fzf.vim'
-
-" Non-node coc plugins
-" Plug 'antoinemadec/coc-fzf'
-" Alternative coc integration for fzf
-" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
-
-" Reusable terminals
-Plug 'kassio/neoterm'
-
-" Base64
-Plug 'christianrondeau/vim-base64'
-
 " Make it easy to use lazygit inside of vim
-Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
+Plug 'kdheepak/lazygit.nvim'
+
 " Doesn't work until neovim remote works
 " let g:lazygit_use_neovim_remote = 1
 let g:lazygit_floating_window_scaling_factor = 1
 
-" Yanking
-Plug 'LeafCage/yankround.vim'
-
-" Neovim easymotion
-Plug 'phaazon/hop.nvim'
+" Neovim easymotion-like thing
+Plug 'ggandor/lightspeed.nvim'
 
 " Allow buffer deletion without closing windows that had that buffer
 Plug 'moll/vim-bbye'
 
-" Shortcuts for todo list management inside markdown file
-Plug 'aserebryakov/vim-todo-lists'
-
 " Dasht
 Plug 'sunaku/vim-dasht'
+Plug 'rhysd/devdocs.vim'
 
 " Script writing
 Plug 'kblin/vim-fountain'
@@ -114,22 +102,18 @@ Plug 'kblin/vim-fountain'
 " Autosave
 Plug '907th/vim-auto-save'
 
-" Distraction free coding/writing
-Plug 'chrisbra/DistractFree'
-let g:distractfree_width = '60%'
-let g:distractfree_height= '100%'
+" Status line
+Plug 'nvim-lualine/lualine.nvim'
 
-" Another distract free
-Plug 'junegunn/goyo.vim'
+" Notificiations
+Plug 'rcarriga/nvim-notify'
 
-" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
-Plug 'hoob3rt/lualine.nvim'
+" DAP
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
 
-" Github integration
-Plug 'pwntester/octo.nvim'
-
-" Color highlighting
-Plug 'norcalli/nvim-colorizer.lua'
+" Select window based on letter
+Plug 'https://gitlab.com/yorickpeterse/nvim-window.git'
 
 call plug#end()
 

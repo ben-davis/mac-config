@@ -16,7 +16,7 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   local opts = { noremap=true, silent=true }
 
-  if (client.name == 'typescript') then
+  if (client.name == 'tsserver') then
     client.resolved_capabilities.document_formatting = false
   end
 
@@ -31,7 +31,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", opts)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  -- buf_set_keymap('n', '<C-K>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -44,7 +44,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>d", "<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<CR>", opts)
   buf_set_keymap("n", "<space>D", "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<CR>", opts)
 end
@@ -141,17 +141,24 @@ local diagnosticls_settings = {
     },
     formatters = {
       black = {
-        command = "black",
+        command = "blackd-client",
+      },
+      -- black = {
+      --   command = "black",
+      --   args = {"--quiet", "-"}
+      -- },
+      isort = {
+        command = "isort",
         args = {"--quiet", "-"}
       },
       prettier = {
-        command = './node_modules/.bin/prettier',
+        command = 'prettierd',
         rootPatterns = { 'package.json' },
-        args = { '--stdin-filepath', '%filename' }
+        args = { '%filename' }
       }
     },
     formatFiletypes = {
-      python = {"black"},
+      python = {"isort", "black"},
       css = {"prettier"},
       javascript = {"prettier"},
       javascriptreact = {"prettier"},
@@ -162,19 +169,53 @@ local diagnosticls_settings = {
   }
 }
 
--- config that activates keymaps and enables snippet support
-local function make_config()
-  local capabilities = lsp_status.capabilities
+local eslint = {
+    lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT} --cache",
+    lintIgnoreExitCode = true,
+    lintStdin = true,
+    lintFormats = {"%f:%l:%c: %m"},
+}
+local isort = {formatCommand = 'isort --quiet -', formatStdin = true}
+local prettier = {
+  formatCommand = 'prettierd "${INPUT}"',
+  formatStdin = true,
+}
+local black = { formatCommand = 'blackd-client', formatStdin = true }
 
-  -- Autocomplete (autoimport) & snippet support
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      'documentation',
-      'detail',
-      'additionalTextEdits',
-    }
+local efm_config = {
+  init_options = {documentFormatting = true, codeAction = true},
+  rootdir = vim.loop.cwd,
+  filetypes = {
+    "python", "css", "javascript", "javascriptreact", "typescript",
+    "typescriptreact", "json", "html",
+  },
+  settings = {
+      rootMarkers = {".git/"},
+      languages = {
+          python = {isort, black},
+          javascript = {prettier, eslint},
+          javascriptreact = {prettier, eslint},
+          typescriptreact = {prettier, eslint},
+          ["javascript.jsx"] = {prettier, eslint},
+          typescript = {prettier, eslint},
+          ["typescript.tsx"] = {prettier, eslint},
+          css = {prettier},
+          html = {prettier},
+          json = {prettier, eslint}
+      }
   }
+}
+
+-- config that activates keymaps and enables snippet support
+local function make_lsp_config()
+  -- Start with lsp's default config
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+  -- Update it with cmp lsp
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+  -- Update it with lsp_status
+  capabilities = vim.tbl_extend('keep', capabilities, lsp_status.capabilities)
 
   return {
     -- enable snippet support
@@ -185,82 +226,119 @@ local function make_config()
 end
 
 -- Sets up all supported servers
-local function setup_servers()
-  require'lspinstall'.setup()
-  local servers = require'lspinstall'.installed_servers()
-  for _, server in pairs(servers) do
-    local config = make_config()
+local lsp_installer = require("nvim-lsp-installer")
 
-    -- language specific config
-    if server == "lua" then
-      config.settings = lua_settings
-    end
+lsp_installer.on_server_ready(function(server)
+  local config = make_lsp_config()
 
-    if server == "diagnosticls" then
-      config = diagnosticls_settings
-    end
+  -- language specific config
+  if server.name == "lua" then
+    config.settings = lua_settings
+  end
 
-    if server == "typescript" then
-      config.capabilities.document_formatting = false
-    end
+  if server.name == "diagnosticls" then
+    config = diagnosticls_settings
+  end
 
-    if server == "yaml" then
-      config.filetypes = {
-        'yaml',
-        'yaml.docker-compose',
-      }
-      config.settings = {
-        yaml = {
-          schemas = {
-            ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*.{yml,yaml}',
-            ['http://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
-            ['http://json.schemastore.org/prettierrc'] = '.prettierrc.{yml,yaml}',
-            ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] = {
-              '*.stack.{yml,yaml}',
-              'docker-compose.*.{yml,yaml}',
-              'docker-compose.{yml,yaml}',
-            }
+  if server.name == "efm" then
+    config = efm_config
+  end
+
+  if server.name == "yaml" then
+    config.filetypes = {
+      'yaml',
+      'yaml.docker-compose',
+    }
+    config.settings = {
+      yaml = {
+        schemas = {
+          ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*.{yml,yaml}',
+          ['http://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
+          ['http://json.schemastore.org/prettierrc'] = '.prettierrc.{yml,yaml}',
+          ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] = {
+            '*.stack.{yml,yaml}',
+            'docker-compose.*.{yml,yaml}',
+            'docker-compose.{yml,yaml}',
           }
         }
       }
-    end
-
-    require'lspconfig'[server].setup(config)
+    }
   end
-end
 
--- Setup on startup
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
+  server:setup(config)
+end)
 
  -- Autocomplete
- require'compe'.setup {
-   enabled = true;
-   autocomplete = true;
-   debug = false;
-   min_length = 1;
-   preselect = 'enable';
-   throttle_time = 80;
-   source_timeout = 200;
-   incomplete_delay = 400;
-   max_abbr_width = 100;
-   max_kind_width = 100;
-   max_menu_width = 100;
-   documentation = true;
+ -- require'compe'.setup {
+ --   enabled = true;
+ --   autocomplete = true;
+ --   debug = false;
+ --   min_length = 1;
+ --   preselect = 'enable';
+ --   throttle_time = 80;
+ --   source_timeout = 200;
+ --   incomplete_delay = 400;
+ --   max_abbr_width = 100;
+ --   max_kind_width = 100;
+ --   max_menu_width = 100;
+ --   documentation = true;
 
-   source = {
-     path = true;
-     nvim_lsp = true;
-   };
- }
- vim.o.completeopt = "menuone,noselect"
- vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {expr = true, silent = true})
- vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", {expr = true, silent = true})
+ --   source = {
+ --     path = true;
+ --     nvim_lsp = true;
+ --     orgmode = true;
+ --   };
+ -- }
+ -- vim.o.completeopt = "menuone,noselect"
+ -- vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {expr = true, silent = true})
+ -- vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", {expr = true, silent = true})
+ --
+ --
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+	snippet = {
+		expand = function(args)
+			vim.fn["vsnip#anonymous"](args.body)
+		end,
+	},
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+      else
+        fallback()
+      end
+    end,
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }
+  },
+  formatting = {
+    format = require('lspkind').cmp_format({with_text = true, maxwidth = 50})
+  }
+}
 
 -- VIM Lists
 vim.api.nvim_set_keymap("n", "<space>p", "<cmd>lua require('telescope.builtin').find_files()<CR>", {silent = true})
@@ -271,6 +349,7 @@ vim.api.nvim_set_keymap("n", "<space>b", "<cmd>lua require('telescope.builtin').
 vim.api.nvim_set_keymap("n", "<space>/", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", {silent = true})
 vim.api.nvim_set_keymap("n", "<space>h", "<cmd>lua require('telescope.builtin').git_bcommits()<CR>", {silent = true})
 vim.api.nvim_set_keymap("n", "<space>q", "<cmd>lua require('telescope.builtin').quickfix()<CR>", {silent = true})
+vim.api.nvim_set_keymap("n", "<space>r", "<cmd>lua require('telescope.builtin').resume()<CR>", {silent = true})
 
 -- Autoformat
 vim.api.nvim_exec([[
@@ -284,17 +363,50 @@ augroup END
 local actions = require('telescope.actions')
 require('telescope').setup{
   defaults = {
+    preview = false,
     mappings = {
       i = {
         -- Make escape exit in insert mode as well
         ["<esc>"] = actions.close,
       },
     },
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true, -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+    }
   }
 }
+
+require('telescope').load_extension('fzf')
 
 -- Symbol highlighting
 -- vim.api.nvim_command [[ hi def link LspReferenceText CursorLine ]]
 -- vim.api.nvim_command [[ hi def link LspReferenceWrite CursorLine ]]
 -- vim.api.nvim_command [[ hi def link LspReferenceRead CursorLine ]]
+
+-- TreeSitter objects
+require'nvim-treesitter.configs'.setup {
+  textobjects = {
+    select = {
+      enable = true,
+
+      -- Automatically jump forward to textobj, similar to targets.vim
+      lookahead = true,
+
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        ["ab"] = "@block.outer",
+        ["ib"] = "@block.inner",
+      },
+    },
+  },
+}
 
