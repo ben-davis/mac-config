@@ -2,6 +2,14 @@ local gps = require('nvim-gps')
 
 gps.setup()
 
+local symbol = function()
+  if gps.is_available() then
+    return gps.get_location()
+  end
+
+  return ''
+end
+
 local setup = function()
   require'lualine'.setup {
     options = {
@@ -16,7 +24,7 @@ local setup = function()
       lualine_b = {'branch'},
       lualine_c = {'filename'},
       lualine_x = {},
-      lualine_y = {gps.get_location, cond = gps.is_available},
+      lualine_y = {symbol},
       lualine_z = {'location'}
     },
     inactive_sections = {
