@@ -77,6 +77,8 @@ local eslint = {
     lintStdin = true,
     lintFormats = {"%f:%l:%c: %m"},
 }
+
+-- NOTE: isort makes formatting not instant. blackd-client is instant on its own.
 local isort = {formatCommand = 'isort --quiet -', formatStdin = true}
 local prettier = {
   formatCommand = 'prettierd "${INPUT}"',
@@ -86,7 +88,7 @@ local black = { formatCommand = 'blackd-client', formatStdin = true }
 
 local efm_config = {
   init_options = {documentFormatting = true, codeAction = true},
-  rootdir = vim.loop.cwd,
+  rootMarkers = {".git/"},
   filetypes = {
     "python", "css", "javascript", "javascriptreact", "typescript",
     "typescriptreact", "json", "html",
@@ -142,7 +144,7 @@ lsp_installer.on_server_ready(function(server)
     config = efm_config
   end
 
-  if server.name == "yaml" then
+  if server.name == "yamlls" then
     config.filetypes = {
       'yaml',
       'yaml.docker-compose',
