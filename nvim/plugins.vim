@@ -20,6 +20,8 @@ Plug 'hrsh7th/vim-vsnip'
 " Plug 'RRethy/vim-illuminate'
 " Status line
 Plug 'nvim-lua/lsp-status.nvim'
+" Provides context for the symbol under the cursor
+Plug 'SmiteshP/nvim-gps'
 
 " Outline
 " NOTE: Don't use

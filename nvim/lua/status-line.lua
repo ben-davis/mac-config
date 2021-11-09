@@ -1,12 +1,8 @@
-local lsp_symbol = function() 
-  if #vim.lsp.buf_get_clients() > 0 then
-    return vim.b.lsp_current_function
-  end
+local gps = require('nvim-gps')
 
-  return ''
-end
+gps.setup()
 
-local setup = function(theme)
+local setup = function()
   require'lualine'.setup {
     options = {
       icons_enabled = true,
@@ -20,7 +16,7 @@ local setup = function(theme)
       lualine_b = {'branch'},
       lualine_c = {'filename'},
       lualine_x = {},
-      lualine_y = {lsp_symbol},
+      lualine_y = {gps.get_location, cond = gps.is_available},
       lualine_z = {'location'}
     },
     inactive_sections = {
@@ -36,6 +32,6 @@ local setup = function(theme)
   }
 end
 
-setup("auto")
+setup()
 
 return {setup = setup}
