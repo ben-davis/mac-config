@@ -8,8 +8,12 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
-" LSP-icons in autocomplet
+" LSP Signature help
+Plug 'ray-x/lsp_signature.nvim'
+" LSP-icons in autocomplete
 Plug 'onsails/lspkind-nvim'
+" Adds support for schemastore to yaml/json LSP
+Plug 'b0o/SchemaStore.nvim'
 
 " Snippets
 Plug 'hrsh7th/cmp-vsnip'
@@ -37,6 +41,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-github.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope-project.nvim'
 
 " Reload nvim without restarting
 Plug 'famiu/nvim-reload'
@@ -107,6 +112,9 @@ Plug '907th/vim-auto-save'
 " Status line
 Plug 'nvim-lualine/lualine.nvim'
 
+" Tab line
+Plug 'alvarosevilla95/luatab.nvim'
+
 " Notificiations
 Plug 'rcarriga/nvim-notify'
 
@@ -116,6 +124,9 @@ Plug 'rcarriga/nvim-dap-ui'
 
 " Select window based on letter
 Plug 'https://gitlab.com/yorickpeterse/nvim-window.git'
+
+" Autopairs
+Plug 'windwp/nvim-autopairs'
 
 call plug#end()
 

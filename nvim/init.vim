@@ -2,7 +2,9 @@ source ~/.config/nvim/plugins.vim
 
 :lua require('lsp')
 :lua require('status-line')
+:lua require('tab-line')
 :lua require('dap-config')
+:lua require('projects')
 
 set termguicolors
 set background=dark
@@ -13,6 +15,8 @@ let g:tokyonight_style = "storm"
 colorscheme tokyonight
 let g:tokyonight_lualine_bold = 1
 let g:tokyonight_hide_inactive_statusline = 1
+let g:tokyonight_italic_functions = 1
+let g:tokyonight_italic_keywords = 1
 
 function! ToggleDarkModeFun()
     " if g:ayucolor == 'dark'
@@ -90,6 +94,9 @@ inoremap <S-CR> <esc>O
 
 " Change visual paste to not yank the deleted characters
 vnoremap p "_dP
+
+" Allows window zooming by creating it in a new tab split
+nnoremap <silent> <leader>z :tab split<CR>
 
 " " Copy to clipboard
 vnoremap  <leader>y  "+y
@@ -211,7 +218,7 @@ let g:test#strategy = 'docker'
 " \}
 "
 nnoremap <silent> <leader>l :LazyGit<CR>
-let g:lazygit_floating_window_use_plenary = 1
+" let g:lazygit_floating_window_use_plenary = 1
 
 " Delete buffer
 nnoremap <silent> <leader>q :Bdelete<CR>
@@ -308,7 +315,8 @@ require'nvim-tree'.setup({
     },
     filters = {
         custom = { '.git', 'node_modules', '.cache', '.mypy_cache', '.pytest_cache', '__pycache__', '.DS_STORE' }
-    }
+    },
+    update_cwd = true
 })
 EOF
 
@@ -344,9 +352,9 @@ let g:neovide_cursor_animation_length=0
 " let g:neovide_refresh_rate=140
 " let neovide_remember_window_size = v:true
 let g:neovide_floating_blur = 0
-" let g:neovide_window_floating_opacity = 1
+let g:neovide_window_floating_opacity = 0
 " let g:neovide_remember_window_size = v:true
-" let g:neovide_transparency = 1
+let g:neovide_transparency = 0
 
 " Set the fancy notification tool as the default one in vim
 :lua vim.notify = require("notify")
@@ -364,3 +372,10 @@ require('nvim-window').setup({
 EOF
 
 map <silent> <leader>w :lua require('nvim-window').pick()<CR>
+
+" Setup autopairs
+lua << EOF
+require('nvim-autopairs').setup({
+    enable_check_bracket_line = false
+})
+EOF
