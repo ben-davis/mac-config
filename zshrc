@@ -22,6 +22,7 @@ plugins=(
     arcanist
     autojump
     zsh-autosuggestions
+    poetry
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -38,13 +39,15 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
-# Make python3.8 default python3
-export PATH="/usr/local/opt/python@3.9/bin:$PATH"
-export PATH="/Users/ben/Library/Python/3.9/bin:$PATH"
+# Make brew python default
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+# TEMP: Use 3.10 by default (until brew python default is upgraded to 3.10)
+export PATH="/usr/local/opt/python@3.10/bin:$PATH"
+# Contains symlinks for `python` (above has links for `python3`)
+export PATH="/usr/local/opt/python@3.10/libexec/bin:$PATH"
 # Make node 12 the default
 export PATH="/usr/local/opt/node@12/bin:$PATH"
 # Poetry likes to install itself separately
-export PATH="$HOME/.poetry/bin:$PATH"
 
 # Yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
@@ -104,3 +107,5 @@ alias lg='lazygit'
 alias vim='nvim'
 alias ll='exa -l'
 alias dc='docker-compose'
+
+export PATH="$HOME/.poetry/bin:$PATH"
