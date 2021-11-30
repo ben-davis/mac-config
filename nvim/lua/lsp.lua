@@ -48,29 +48,18 @@ local on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = false
     end
 
-    -- if (client.name == "tsserver") then
-    --     client.resolved_capabilities.document_formatting = false
-    -- end
-
     if client.resolved_capabilities.document_formatting then
-        vim.cmd [[
-					augroup Format
-						au! * <buffer>
-						au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 3000)
-					augroup END
-				]]
+        -- Autoformat
+        vim.api.nvim_exec(
+            [[
+              augroup Format
+                au! * <buffer>
+                au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 3000)
+              augroup END
+            ]],
+            true
+        )
     end
-
-    -- Autoformat
-    vim.api.nvim_exec(
-        [[
-  augroup FormatAutogroup
-    autocmd!
-    autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 3000)
-  augroup END
-  ]],
-        true
-    )
 
     -- Highlights
     -- require 'illuminate'.on_attach(client, bufnr)
@@ -162,11 +151,10 @@ local prettier = {
 local black = {formatCommand = "blackd-client", formatStdin = true}
 local clangFormat = {formatCommand = "clang-format", formatStdin = true}
 
-local efm_config = {
-    init_options = {documentFormatting = true, codeAction = true},
-    rootMarkers = {".git/"},
-    logFile = "~/efm.log",
-    filetypes = {
+local function make_efm_config(config)
+    config.init_options = {documentFormatting = true, codeAction = true}
+    config.rootMarkers = {".git/"}
+    config.filetypes = {
         "python",
         "css",
         "javascript",
@@ -178,8 +166,8 @@ local efm_config = {
         "lua",
         "c",
         "markdown"
-    },
-    settings = {
+    }
+    config.settings = {
         rootMarkers = {".git/"},
         languages = {
             python = {isort, black},
@@ -197,7 +185,9 @@ local efm_config = {
             markdown = {prettier}
         }
     }
-}
+
+    return config
+end
 
 local function on_init(client, result)
     if client.name == "pyright" then
@@ -250,7 +240,7 @@ lsp_installer.on_server_ready(
         end
 
         if server.name == "efm" then
-            config = efm_config
+            config = make_efm_config(config)
         end
 
         if server.name == "json" then
@@ -399,8 +389,9 @@ cmp.setup {
     },
     sources = {
         {name = "nvim_lsp"},
-        {name = "vsnip"},
-        {name = "buffer"}
+        {name = "vsnip"}
+        -- Disabled as the constant popups are slow
+        -- {name = "buffer"}
     },
     formatting = {
         format = require("lspkind").cmp_format({with_text = true, maxwidth = 50})
@@ -495,3 +486,13 @@ require "nvim-treesitter.configs".setup {
         }
     }
 }
+
+-- Autoformat
+-- Doing this here rather than per-buffer as there were issues with formatting
+-- being disconnected when configured per-buffer.
+-- vim.api.nvim_exec([[
+-- augroup FormatAutogroup
+--   autocmd!
+--   autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.py,*.lua,*.html,*.json,*.css,*.c,*.md lua vim.lsp.buf.formatting_sync(nil, 3000)
+-- augroup END
+-- ]], true)
