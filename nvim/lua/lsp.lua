@@ -506,3 +506,6 @@ require "nvim-treesitter.configs".setup {
 --   autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.py,*.lua,*.html,*.json,*.css,*.c,*.md lua vim.lsp.buf.formatting_sync(nil, 3000)
 -- augroup END
 -- ]], true)
+
+-- ZK
+-- require'lspconfig'.zk.setup{}

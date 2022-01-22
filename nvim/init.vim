@@ -98,8 +98,6 @@ inoremap <S-CR> <esc>O
 " Change visual paste to not yank the deleted characters
 vnoremap p "_dP
 
-" Allows window zooming by creating it in a new tab split
-nnoremap <silent> <leader>z :tab split<CR>
 
 " " Copy to clipboard
 vnoremap  <leader>y  "+y
@@ -411,3 +409,11 @@ EOF
 lua << EOF
 require"octo".setup()
 EOF
+
+lua << EOF
+require("zen-mode").setup()
+EOF
+
+" Allows window zooming by creating it in a new tab split
+" nnoremap <silent> <leader>z :tab split<CR>
+nnoremap <silent> <leader>z :ZenMode

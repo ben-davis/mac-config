@@ -132,5 +132,8 @@ Plug 'https://gitlab.com/yorickpeterse/nvim-window.git'
 " Autopairs
 Plug 'windwp/nvim-autopairs'
 
+" Zenmode, mostly for markdown editing
+Plug 'folke/zen-mode.nvim'
+
 call plug#end()
 
