@@ -65,6 +65,9 @@ augroup filetypes
         autocmd Filetype sh setlocal ts=2 sw=2
         autocmd Filetype vim setlocal ts=2 sw=2
         autocmd Filetype java setlocal ts=4 sw=4
+        autocmd Filetype scheme setlocal ts=2 sw=2
+        autocmd Filetype c setlocal ts=2 sw=2
+        autocmd Filetype lua setlocal ts=2 sw=2
 
         autocmd VimResized * wincmd =
 augroup END
@@ -123,6 +126,9 @@ tnoremap <C-j> <C-\><C-N><C-w>j
 tnoremap <C-k> <C-\><C-N><C-w>k
 tnoremap <C-l> <C-\><C-N><C-w>l
 
+" Use gx to open URLs.
+nmap <silent> gx :!open <cWORD><cr>
+
 " No line numbers in terminal
 augroup terminallinenumbers
   autocmd!
@@ -133,8 +139,8 @@ augroup terminallinenumbers
 augroup END
 
 " Devdocs (disabled in favour of dasht)
-nmap <silent> <leader>k :DevDocsUnderCursor<CR>
-nmap <silent> <leader>K :DevDocsAllUnderCursor<CR>
+" nmap <silent> <leader>k :DevDocsUnderCursor<CR>
+" nmap <silent> <leader>K :DevDocsAllUnderCursor<CR>
 
 " Dasht (disabled in favor of Devdocs as w3m is too complicated / no syntax)
 " " search related docsets
@@ -154,6 +160,9 @@ nmap <silent> <leader>K :DevDocsAllUnderCursor<CR>
 
 " " search ALL the docsets
 " vnoremap <silent> <Leader><Leader>K y:<C-U>call Dasht(getreg(0), '!')<Return>
+"
+nmap <silent> <leader>k :DashWord<CR>
+nmap <silent> <space>k :Dash<CR>
 
 let g:dasht_filetype_docsets = {}
 " When in Python, also search Django
@@ -327,15 +336,14 @@ noremap <silent> <Leader>E :NvimTreeFindFile<CR>
 nnoremap <leader>S :lua require('spectre').open()<CR>
 
 " Treesitter
-" NOTE: Still breaks all the time (2021-09-26)
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-"   ensure_installed = "maintained",
-"   highlight = {
-"     enable = true,
-"   },
-" }
-" EOF
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+}
+EOF
 
 " Git signs
 :lua require('gitsigns').setup()
@@ -378,4 +386,16 @@ lua << EOF
 require('nvim-autopairs').setup({
     enable_check_bracket_line = false
 })
+EOF
+
+
+" vsnip NOTE: for some reason when this is enabled I can't type repeated "
+" imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+" smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+" imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+" smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" " Github
+lua << EOF
+require"octo".setup()
 EOF
