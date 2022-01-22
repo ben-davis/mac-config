@@ -164,6 +164,18 @@ augroup END
 nmap <silent> <leader>k :DashWord<CR>
 nmap <silent> <space>k :Dash<CR>
 
+lua << EOF
+require('telescope').setup({
+  extensions = {
+    dash = {
+      file_type_keywords = {
+        python = 'python3'
+      }
+    }
+  }
+})
+EOF
+
 let g:dasht_filetype_docsets = {}
 " When in Python, also search Django
 let g:dasht_filetype_docsets['python'] = ['Django']
