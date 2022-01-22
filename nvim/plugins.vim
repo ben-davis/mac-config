@@ -81,6 +81,10 @@ Plug 'tpope/vim-commentary'
 
 " Useful commands for common tasks
 Plug 'tpope/vim-eunuch'
+" Easily surround objects
+Plug 'tpope/vim-surround'
+" Repeat non-native commands
+Plug 'tpope/vim-repeat'
 
 " Multiple cursors
 Plug 'mg979/vim-visual-multi'
