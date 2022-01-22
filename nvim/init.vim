@@ -416,4 +416,4 @@ EOF
 
 " Allows window zooming by creating it in a new tab split
 " nnoremap <silent> <leader>z :tab split<CR>
-nnoremap <silent> <leader>z :ZenMode
+nnoremap <silent> <leader>z :ZenMode<CR>
