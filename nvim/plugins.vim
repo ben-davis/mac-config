@@ -63,6 +63,8 @@ Plug 'folke/tokyonight.nvim'
 " Git support
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+" Plug 'pwntester/octo.nvim'
+Plug '~/dev/git/octo.nvim'
 
 " Git signs
 Plug 'lewis6991/gitsigns.nvim'
@@ -71,7 +73,8 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'janko/vim-test'
 
 " Lots of language syntax support
-Plug 'sheerun/vim-polyglot'
+" NOTE: Disabled as we're using treesitter
+" Plug 'sheerun/vim-polyglot'
 
 " For easy commenting out 
 Plug 'tpope/vim-commentary'
@@ -102,6 +105,7 @@ Plug 'moll/vim-bbye'
 " Dasht
 Plug 'sunaku/vim-dasht'
 Plug 'rhysd/devdocs.vim'
+Plug 'mrjones2014/dash.nvim', { 'do': 'make install' }
 
 " Script writing
 Plug 'kblin/vim-fountain'
