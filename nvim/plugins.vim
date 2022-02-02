@@ -42,6 +42,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-github.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-project.nvim'
+Plug 'TC72/telescope-tele-tabby.nvim'
 
 " Reload nvim without restarting
 Plug 'famiu/nvim-reload'
@@ -119,6 +120,8 @@ Plug '907th/vim-auto-save'
 
 " Status line
 Plug 'nvim-lualine/lualine.nvim'
+" Tab renaming
+Plug 'gcmt/taboo.vim'
 
 " Tab line
 Plug 'alvarosevilla95/luatab.nvim'
