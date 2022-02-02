@@ -142,5 +142,8 @@ Plug 'windwp/nvim-autopairs'
 " Zenmode, mostly for markdown editing
 Plug 'folke/zen-mode.nvim'
 
+" Email, because why not
+Plug 'soywod/himalaya', {'rtp': 'vim'}
+
 call plug#end()
 
