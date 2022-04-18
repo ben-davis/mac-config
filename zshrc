@@ -78,7 +78,7 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python@3.8/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
 
 # Disable brew autoupdating every time you run install
-HOMEBREW_NO_AUTO_UPDATE=1
+HOMEBREW_NO_AUTO_UPDATE=0
 
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

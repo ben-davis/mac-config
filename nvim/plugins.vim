@@ -15,6 +15,11 @@ Plug 'onsails/lspkind-nvim'
 " Adds support for schemastore to yaml/json LSP
 Plug 'b0o/SchemaStore.nvim'
 
+" Spell check
+" Disabled as building lua-nuspell didn't work
+" Plug 'f3fora/lua-nuspell'
+" Plug 'f3fora/cmp-nuspell'
+
 " Snippets
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
@@ -43,6 +48,7 @@ Plug 'nvim-telescope/telescope-github.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-project.nvim'
 Plug 'TC72/telescope-tele-tabby.nvim'
+Plug 'nvim-telescope/telescope-dap.nvim'
 
 " Reload nvim without restarting
 Plug 'famiu/nvim-reload'
@@ -64,8 +70,8 @@ Plug 'folke/tokyonight.nvim'
 " Git support
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-" Plug 'pwntester/octo.nvim'
-Plug '~/dev/git/octo.nvim'
+Plug 'pwntester/octo.nvim'
+" Plug '~/dev/git/octo.nvim'
 
 " Git signs
 Plug 'lewis6991/gitsigns.nvim'
@@ -118,6 +124,9 @@ Plug 'kblin/vim-fountain'
 " Autosave
 Plug '907th/vim-auto-save'
 
+
+" " Copy to clipboard
+vnoremap  <leader>y OSCYank<CR>
 " Status line
 Plug 'nvim-lualine/lualine.nvim'
 " Tab renaming
@@ -132,6 +141,7 @@ Plug 'rcarriga/nvim-notify'
 " DAP
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
+Plug 'theHamsta/nvim-dap-virtual-text'
 
 " Select window based on letter
 Plug 'https://gitlab.com/yorickpeterse/nvim-window.git'
@@ -141,9 +151,14 @@ Plug 'windwp/nvim-autopairs'
 
 " Zenmode, mostly for markdown editing
 Plug 'folke/zen-mode.nvim'
+Plug 'ellisonleao/glow.nvim'
 
 " Email, because why not
 Plug 'soywod/himalaya', {'rtp': 'vim'}
 
+" Notes via zettl
+Plug 'oberblastmeister/neuron.nvim'
+
+Plug 'ojroques/vim-oscyank'
 call plug#end()
 

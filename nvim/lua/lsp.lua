@@ -48,7 +48,7 @@ local on_attach = function(client, bufnr)
 			[[
               augroup Format
                 au! * <buffer>
-                au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 3000)
+                au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 5000)
               augroup END
             ]],
 			true
@@ -193,6 +193,8 @@ local function on_init(client, result)
 		elseif project_name == "fastapi-rest-framework" then
 			client.config.settings.python.pythonPath =
 				"/Users/ben/Library/Caches/pypoetry/virtualenvs/fastapi-rest-framework-rZAynlgp-py3.10/bin/python"
+		else
+			client.config.settings.python.pythonPath = "/usr/local/opt/python@3.10/libexec/bin/python"
 		end
 
 		client.notify("workspace/didChangeConfiguration")
@@ -387,6 +389,8 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "vsnip" },
+		-- Disabled as it required building lua-nuspell which didn't work
+		-- { name = "nuspell" },
 		-- Disabled as the constant popups are slow
 		-- {name = "buffer"}
 	},
@@ -412,8 +416,21 @@ cmp.setup({
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 
+local utils = require("telescope.utils")
+local builtin = require("telescope.builtin")
+
+-- Falls back to regular if not git directory
+_G.project_files = function()
+	local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
+	if ret == 0 then
+		builtin.git_files()
+	else
+		builtin.find_files()
+	end
+end
+
 -- VIM Lists
-vim.api.nvim_set_keymap("n", "<space>p", "<cmd>lua require('telescope.builtin').git_files()<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<space>p", "<cmd>lua project_files()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<space>f", "<cmd>lua require('telescope.builtin').live_grep()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<space>m", "<cmd>lua require('telescope.builtin').oldfiles()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<space>l", "<cmd>lua require('telescope.builtin').builtin()<CR>", { silent = true })
@@ -465,6 +482,7 @@ require("telescope").setup({
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("project")
 require("telescope").load_extension("tele_tabby")
+require("telescope").load_extension("dap")
 
 -- Symbol highlighting
 -- vim.api.nvim_command [[ hi def link LspReferenceText CursorLine ]]

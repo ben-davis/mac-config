@@ -6,7 +6,7 @@ source ~/.config/nvim/plugins.vim
 :lua require('dap-config')
 :lua require('projects')
 
-set termguicolors
+" set termguicolors
 set background=dark
 " let ayucolor="dark" 
 "
@@ -17,6 +17,8 @@ let g:tokyonight_lualine_bold = 1
 let g:tokyonight_hide_inactive_statusline = 1
 let g:tokyonight_italic_functions = 1
 let g:tokyonight_italic_keywords = 1
+let g:tokyonight_dark_sidebar = "false"
+let g:tokyonight_transparent_sidebar = 1
 
 function! ToggleDarkModeFun()
     " if g:ayucolor == 'dark'
@@ -49,6 +51,9 @@ set mouse=a
 " Spaces over tabs
 set expandtab
 
+" Splits should open to the right
+set splitright
+
 augroup filetypes
         autocmd!
         autocmd Filetype python setlocal ts=4 sw=4
@@ -68,6 +73,7 @@ augroup filetypes
         autocmd Filetype scheme setlocal ts=2 sw=2
         autocmd Filetype c setlocal ts=2 sw=2
         autocmd Filetype lua setlocal ts=2 sw=2
+        autocmd Filetype markdown setlocal ts=2 sw=2 wrap linebreak
 
         autocmd VimResized * wincmd =
 augroup END
@@ -100,7 +106,8 @@ vnoremap p "_dP
 
 
 " " Copy to clipboard
-vnoremap  <leader>y  "+y
+vnoremap  <leader>y :OSCYank<CR>
+" vnoremap  <leader>y  "+y
 nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 " nnoremap  <leader>yy  "+yy
@@ -324,7 +331,6 @@ let g:nvim_tree_highlight_opened_files = 1
 
 lua <<EOF
 require'nvim-tree'.setup({
-    auto_close = true,
     update_focused_file = {
         enable = true
     },
@@ -348,7 +354,7 @@ nnoremap <leader>S :lua require('spectre').open()<CR>
 " Treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
+ensure_installed = "all",
   highlight = {
     enable = true,
   },
@@ -363,16 +369,12 @@ EOF
 if &guifont == ""
     " set guifont=MonoLisa:h14
     " set guifont=Fira\ Code:h14
-    set guifont=FiraCode\ Nerd\ Font:h14
+    set guifont=JetBrainsMono\ Nerd\ Font:h14
     " set guifont=Apercu\ Pro\ Mono:h14
 endif
+
 let g:neovide_cursor_animation_length=0
-" let g:neovide_refresh_rate=140
-" let neovide_remember_window_size = v:true
-let g:neovide_floating_blur = 0
 let g:neovide_window_floating_opacity = 0
-" let g:neovide_remember_window_size = v:true
-let g:neovide_transparency = 0
 
 " Set the fancy notification tool as the default one in vim
 :lua vim.notify = require("notify")
@@ -500,6 +502,8 @@ execute "digraphs WS " . 0x1D42
 let g:himalaya_mailbox_picker = 'telescope'
 let g:himalaya_telescope_preview_enabled = 1
 
+nmap <silent> <leader>m :Himalaya<CR>
+
 
 function! Startup()
   " Create default projects
@@ -515,11 +519,14 @@ function! Startup()
   :TabooOpen mac-config
   :tcd ~/dev/git/mac-config
 
+  :TabooOpen email
+
   :tabfirst
 endfunction
 
 
-augroup startup
-  autocmd!
-  autocmd VimEnter * :call Startup()
-augroup END
+" NOTE: Disabling as I'm testing whether I want to have these open
+" augroup startup
+"   autocmd!
+"   autocmd VimEnter * :call Startup()
+" augroup END
