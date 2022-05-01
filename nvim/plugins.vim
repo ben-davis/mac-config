@@ -40,6 +40,9 @@ Plug 'simrat39/symbols-outline.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
+" Fixes Python indentation
+Plug 'Vimjas/vim-python-pep8-indent'
+
 " Telescope for lsp popup lists
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -72,12 +75,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'pwntester/octo.nvim'
 " Plug '~/dev/git/octo.nvim'
+Plug 'sindrets/diffview.nvim'
 
 " Git signs
 Plug 'lewis6991/gitsigns.nvim'
 
 " Testing
 Plug 'janko/vim-test'
+" Used to allow the same terminal to be used during test sessions
+Plug 'kassio/neoterm'
 
 " Lots of language syntax support
 " NOTE: Disabled as we're using treesitter

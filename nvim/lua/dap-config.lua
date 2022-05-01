@@ -1,17 +1,40 @@
 local dap = require("dap")
 local dapui = require("dapui")
 
-dap.adapters.python = {
-	type = "executable",
-	command = "python",
-	args = { "-m", "debugpy.adapter" },
-}
+-- dap.adapters.python = {
+-- 	type = "executable",
+-- 	command = "python",
+-- 	args = { "-m", "debugpy.adapter" },
+-- }
 
-dap.adapters.pythonServer = {
-	type = "server",
-	host = "127.0.0.1",
-	port = "5678",
-}
+-- dap.adapters.pythonServer = {
+-- 	type = "server",
+-- 	host = "127.0.0.1",
+-- 	port = "5678",
+-- }
+
+dap.adapters.python = function(cb, config)
+	if config.request == "attach" then
+		local port = (config.connect or config).port
+		cb({
+			type = "server",
+			port = assert(port, "`connect.port` is required for a python `attach` configuration"),
+			host = (config.connect or config).host or "127.0.0.1",
+			options = {
+				source_filetype = "python",
+			},
+		})
+	else
+		cb({
+			type = "executable",
+			command = "python",
+			args = { "-m", "debugpy.adapter" },
+			options = {
+				source_filetype = "python",
+			},
+		})
+	end
+end
 
 dap.configurations.python = {
 	{
@@ -23,9 +46,10 @@ dap.configurations.python = {
 		console = "integratedTerminal",
 	},
 	{
-		type = "pythonServer",
+		type = "python",
 		request = "attach",
-		name = "Rupa",
+		name = "Rupa - Server",
+		port = "5678",
 		pathMappings = {
 			{
 				localRoot = "/Users/ben/dev/git/rupalabs/server",
@@ -34,7 +58,19 @@ dap.configurations.python = {
 		},
 	},
 	{
-		type = "pythonServer",
+		type = "python",
+		request = "attach",
+		name = "Rupa - Tests",
+		port = 5679,
+		pathMappings = {
+			{
+				localRoot = "/Users/ben/dev/git/rupalabs/server",
+				remoteRoot = "/app",
+			},
+		},
+	},
+	{
+		type = "python",
 		request = "attach",
 		name = "Adventure Text",
 		pathMappings = {
@@ -46,7 +82,7 @@ dap.configurations.python = {
 	},
 }
 
-dap.defaults.fallback.terminal_win_cmd = "10vsplit new"
+dap.defaults.fallback.terminal_win_cmd = "10vsplit new | set winfixwidth"
 
 require("dapui").setup()
 require("nvim-dap-virtual-text").setup()

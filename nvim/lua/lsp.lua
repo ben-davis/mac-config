@@ -87,12 +87,16 @@ local on_attach = function(client, bufnr)
 end
 
 -- Configure lua language server for neovim development
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
 local lua_settings = {
 	Lua = {
 		runtime = {
 			-- LuaJIT in the case of Neovim
 			version = "LuaJIT",
-			path = vim.split(package.path, ";"),
+			path = runtime_path,
 		},
 		diagnostics = {
 			-- Get the language server to recognize the `vim` global
@@ -100,10 +104,7 @@ local lua_settings = {
 		},
 		workspace = {
 			-- Make the server aware of Neovim runtime files
-			library = {
-				[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-				[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-			},
+			library = vim.api.nvim_get_runtime_file("", true),
 		},
 	},
 }
@@ -230,7 +231,7 @@ lsp_installer.on_server_ready(function(server)
 	local config = make_lsp_config()
 
 	-- language specific config
-	if server.name == "lua" then
+	if server.name == "sumneko_lua" then
 		config.settings = lua_settings
 	end
 
@@ -257,9 +258,6 @@ lsp_installer.on_server_ready(function(server)
 			},
 		}
 
-		if server.name == "sumneko_lua" then
-			config.settings.Lua.diagnostics.globals = { "vim" }
-		end
 		-- config.settings = {
 		--   yaml = {
 		--     schemas = {
@@ -413,6 +411,7 @@ cmp.setup({
 	},
 })
 
+-- Insert ( on complete
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 

@@ -5,6 +5,7 @@ source ~/.config/nvim/plugins.vim
 :lua require('tab-line')
 :lua require('dap-config')
 :lua require('projects')
+:lua require('tests')
 
 " set termguicolors
 set background=dark
@@ -75,7 +76,7 @@ augroup filetypes
         autocmd Filetype lua setlocal ts=2 sw=2
         autocmd Filetype markdown setlocal ts=2 sw=2 wrap linebreak
 
-        autocmd VimResized * wincmd =
+        " autocmd VimResized * wincmd =
 augroup END
 
 " Show line numbers always
@@ -199,49 +200,9 @@ let g:dasht_results_window = 'vnew'
 set relativenumber
 set nu rnu
 
-" Test configuration
-let test#strategy = "neoterm"
-let test#preserve_screen = 0
-nnoremap <silent> <leader>tn :TestNearest<CR>
-nnoremap <silent> <leader>tf :TestFile<CR>
-nnoremap <silent> <leader>tl :TestLast<CR>
-nnoremap <silent> <leader>ts :TestSuite<CR>
 
 :lua require('dap').set_log_level('TRACE')
 
-lua << EOF
-function _G.dapLaunchDocker(cmd)
-    local dap = require"dap"
-    adapter = {
-        type = "executable",
-        command = "docker-compose",
-        args = {"run", "--rm", "--service-ports", "test", "python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "--wait-for-client", "-m", "pytest", cmd:gsub("pytest server/", "")}
-    }
-
-    config = {
-        request = 'attach',
-        name = "Rupa",
-        pathMappings = {
-            {
-              localRoot = "/Users/ben/dev/git/rupalabs/server",
-              remoteRoot = "/app",
-            }
-        },
-    }
-
-		dap.launch(adapter, config)
-end
-EOF
-
-let DockerStrategy = luaeval('dapLaunchDocker')
-
-let g:test#custom_strategies = {'docker': DockerStrategy}
-let g:test#strategy = 'docker'
-
-" let test#javascript#jest#options = {
-"   \ 'nearest': '--watch',
-"   \ 'file':    '--watch'
-" \}
 "
 nnoremap <silent> <leader>l :LazyGit<CR>
 " let g:lazygit_floating_window_use_plenary = 1
@@ -354,10 +315,16 @@ nnoremap <leader>S :lua require('spectre').open()<CR>
 " Treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-ensure_installed = "all",
+  ensure_installed = "all",
+  ignore_install = { "markdown" },
   highlight = {
     enable = true,
   },
+  indent = {
+    enable = true,
+    -- Treesitter Python indentation gets a lot wrong. I'm using Vimjas/vim-python-pep8-indent to correct.
+    disable = {"python"}
+  }
 }
 EOF
 
