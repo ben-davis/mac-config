@@ -1,6 +1,27 @@
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
 
+-- Disabled in favor of nvim-cmp due to lack of color in the completion items
+-- vim.g.coq_settings = {
+-- 	auto_start = true,
+-- 	display = {
+-- 		preview = {
+-- 			positions = {
+-- 				east = 1,
+-- 				west = 2,
+-- 				south = 3,
+-- 				north = 4,
+-- 			},
+-- 		},
+-- 	},
+-- 	keymap = {
+-- 		-- recommended = false,
+-- 		jump_to_mark = "<C-m>",
+-- 		bigger_preview = nil,
+-- 		manual_complete = nil,
+-- 	},
+-- }
+
 -- nvim-cmp setup
 local cmp = require("cmp")
 local cmp_buffer = require("cmp_buffer")
@@ -19,7 +40,7 @@ cmp.setup({
 		["<C-e>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
+			select = false,
 		}),
 		["<Tab>"] = function(fallback)
 			if vim.fn.pumvisible() == 1 then
@@ -39,6 +60,7 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "vsnip" },
+		{ name = "path" },
 		-- Disabled as it required building lua-nuspell which didn't work
 		-- { name = "nuspell" },
 		-- Disabled as the constant popups are slow

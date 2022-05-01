@@ -7,7 +7,12 @@ Plug 'williamboman/nvim-lsp-installer'
 " LSP-supported autocomplete
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
+
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+
 " LSP Signature help
 Plug 'ray-x/lsp_signature.nvim'
 " LSP-icons in autocomplete
