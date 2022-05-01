@@ -26,24 +26,27 @@ end
 -- The lualine colors provided by tokyonight
 local config = require("tokyonight.config")
 local colors = require("tokyonight.colors").setup(config)
+local theme = require("lualine.themes.tokyonight")
+
+theme.inactive.a = { bg = colors.fg_gutter, fg = colors.blue }
 
 local setup = function()
 	require("lualine").setup({
 		options = {
 			icons_enabled = true,
-			theme = "tokyonight",
+			theme = theme,
 			component_separators = { left = "|", right = "|" },
-			section_separators = { left = "", right = "" },
+			section_separators = { left = "", right = "" },
 			disabled_filetypes = { "NvimTree" },
 		},
 		sections = {
-			lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
-			lualine_b = { "filename" },
+			lualine_a = { { "mode", right_padding = 2 } },
+			lualine_b = { { "filename", separator = { right = "" } } },
 			lualine_c = {},
 			lualine_x = {},
-			lualine_y = { symbol },
+			lualine_y = { { symbol, separator = { left = "" } } },
 			lualine_z = {
-				{ "location", separator = { right = "" }, left_padding = 2 },
+				{ "location", left_padding = 2 },
 			},
 		},
 		inactive_sections = {
@@ -59,7 +62,9 @@ local setup = function()
 			lualine_b = {},
 			lualine_c = {},
 			lualine_x = { "diff" },
-			lualine_y = { "branch" },
+			lualine_y = {
+				{ "branch", color = { bg = colors.bg_statusline, fg = colors.blue }, separators = { left = "" } },
+			},
 			lualine_z = { { "tabs", mode = 1 } },
 		},
 		extensions = {},

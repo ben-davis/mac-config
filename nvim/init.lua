@@ -15,5 +15,6 @@ require("local/status-line")
 require("local/tab-line")
 require("local/telescope")
 require("local/tests")
-require("local/theme")
 require("local/treesitter")
+
+require("local/theme")
