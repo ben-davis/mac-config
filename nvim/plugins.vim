@@ -140,8 +140,6 @@ Plug '907th/vim-auto-save'
 vnoremap  <leader>y OSCYank<CR>
 " Status line
 Plug 'nvim-lualine/lualine.nvim'
-" Tab renaming
-Plug 'gcmt/taboo.vim'
 
 " Tab line
 Plug 'alvarosevilla95/luatab.nvim'
