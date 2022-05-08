@@ -40,8 +40,8 @@ local setup = function()
 			disabled_filetypes = { "NvimTree" },
 		},
 		sections = {
-			lualine_a = { { "mode", right_padding = 2 } },
-			lualine_b = { { "filename", separator = { right = "" } } },
+			lualine_a = { { "mode", right_padding = 2, separator = { right = "" } } },
+			lualine_b = {},
 			lualine_c = {},
 			lualine_x = {},
 			lualine_y = { { symbol, separator = { left = "" } } },
