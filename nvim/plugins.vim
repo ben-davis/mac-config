@@ -89,6 +89,8 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'janko/vim-test'
 " Used to allow the same terminal to be used during test sessions
 Plug 'kassio/neoterm'
+" Used to run tests in a floating term
+Plug 'voldikss/vim-floaterm'
 
 " Lots of language syntax support
 " NOTE: Disabled as we're using treesitter
