@@ -1,23 +1,28 @@
 -- vim-test configuration
-vim.g["test#strategy"] = "neoterm"
+vim.g["test#strategy"] = "floaterm"
 vim.g["test#python#runner"] = "pytest"
 vim.g["test#project_root"] = "/Users/ben/dev/git/rupalabs/server"
 vim.g["term#preserve_screen"] = 0
 
--- Neoterm configuration (used as the strategy for vim-test)
+-- Floaterm config (currently used as the strategy)
+vim.g["floaterm_width"] = 0.3
+vim.g["floaterm_height"] = 0.9
+vim.g["floaterm_position"] = "right"
+vim.g["floaterm_title"] = "pytest"
+
+-- Neoterm configuration (previously used as the strategy for vim-test)
 vim.g["neoterm_default_mod"] = "vertical"
 vim.g["neoterm_size"] = 80
 
 local function get_pytest_exec()
 	local breakpoints = require("dap.breakpoints").get() or {}
-	local buffer = vim.api.nvim_get_current_buf()
-	local does_buffer_have_breakpoints = breakpoints[buffer] ~= nil
+	local does_buffer_have_breakpoints = next(breakpoints) ~= nil
 
 	if does_buffer_have_breakpoints then
-		return "docker-compose run --rm -p 5679:5679 --entrypoint python test -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m pytest --reuse-db"
+		return "docker-compose run --rm -p 5679:5679 --entrypoint python test -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m pytest --reuse-db --disable-warnings -vv"
 	end
 
-	return "docker-compose run --rm test --reuse-db"
+	return "docker-compose run --rm test --reuse-db --disable-warnings -vv"
 end
 
 local function run_test_command(test_command)
