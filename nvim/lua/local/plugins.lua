@@ -49,3 +49,14 @@ vim.g["himalaya_mailbox_picker"] = "telescope"
 vim.g["himalaya_telescope_preview_enabled"] = 1
 
 vim.keymap.set("n", "<leader>m", ":Himalaya<CR>", { silent = true, noremap = true })
+
+-- Floaterm
+local function toggle_floaterm()
+	local is_open = vim.fn["floaterm#window#find"]()
+	if is_open > 0 then
+		vim.api.nvim_command("FloatermToggle term")
+	else
+		vim.api.nvim_command("FloatermNew --height=0.8 --width=0.9 --wintype=float --title=term --position=center")
+	end
+end
+vim.keymap.set("n", "<leader>m", toggle_floaterm, { silent = true, noremap = true })

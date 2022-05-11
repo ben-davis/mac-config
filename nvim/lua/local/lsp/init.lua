@@ -1,4 +1,4 @@
-local util = require("lspconfig").util
+require("local/lsp/null-ls")
 
 -- Status bar components
 local lsp_status = require("lsp-status")
@@ -19,8 +19,27 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+-- Use custom formatting function to filter out conflicts
+-- Recommended here: https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
+-- NOTE: Disabled until nvim 0.8
+-- local lsp_formatting = function(bufnr)
+--     vim.lsp.buf.format({
+--         filter = function(clients)
+--             -- filter out clients that you don't want to use
+--             return vim.tbl_filter(function(client)
+--                 return client.name ~= "tsserver"
+--             end, clients)
+--         end,
+--         bufnr = bufnr,
+--     })
+-- end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
+
+-- Servers who's formatting we want to use instead of null-ls
+local enabled_formatters = { "elixirls" }
+
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
 		vim.api.nvim_set_keymap(...)
@@ -44,26 +63,15 @@ local on_attach = function(client, bufnr)
 	-- Show diagnostics on hover
 	vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.diagnostic.open_float({focus = false, source = true })")
 
-	-- So that the only client with format capabilities is efm
-	if client.name ~= "efm" then
-		client.resolved_capabilities.document_formatting = false
+	-- Disable conflicting servers
+	-- NOTE: Remove in favor of `lsp_formatting` above in 0.8 (as it will probably break)
+	for _, v in pairs(enabled_formatters) do
+		if client.name == v then
+			client.resolved_capabilities.document_formatting = true
+		else
+			client.resolved_capabilities.document_formatting = false
+		end
 	end
-
-	if client.resolved_capabilities.document_formatting then
-		-- Autoformat
-		vim.api.nvim_exec(
-			[[
-              augroup Format
-                au! * <buffer>
-                au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 5000)
-              augroup END
-            ]],
-			true
-		)
-	end
-
-	-- Highlights
-	-- require 'illuminate'.on_attach(client, bufnr)
 
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -116,81 +124,6 @@ local lua_settings = {
 	},
 }
 
-local eslint = {
-	lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT} --cache",
-	lintIgnoreExitCode = true,
-	lintStdin = true,
-	lintFormats = { "%f:%l:%c: %m" },
-	-- Doesn't work
-	-- formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
-	-- formatStdin = true,
-	commands = {
-		{
-			title = "eslint fix",
-			command = "eslint",
-			arguments = {
-				"--fix",
-				"${INPUT}",
-			},
-		},
-	},
-}
-
-local luaFormat = {
-	formatCommand = "stylua -",
-	formatStdin = true,
-	lintSeverity = 2,
-}
-
--- NOTE: isort makes formatting not instant. blackd-client is instant on its own.
-local isort = { formatCommand = "isort --quiet -", formatStdin = true }
-local prettier = {
-	formatCommand = 'prettierd "${INPUT}"',
-	formatStdin = true,
-	-- formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
-	-- formatStdin = true
-}
-local black = { formatCommand = "blackd-client", formatStdin = true }
-local clangFormat = { formatCommand = "clang-format", formatStdin = true }
-
-local function make_efm_config(config)
-	config.init_options = { documentFormatting = true, codeAction = true }
-	config.rootMarkers = { ".git/" }
-	config.filetypes = {
-		"python",
-		"css",
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact",
-		"json",
-		"html",
-		"lua",
-		"c",
-		"markdown",
-	}
-	config.settings = {
-		rootMarkers = { ".git/" },
-		languages = {
-			python = { isort, black },
-			javascript = { prettier, eslint },
-			javascriptreact = { prettier, eslint },
-			typescriptreact = { prettier, eslint },
-			["javascript.jsx"] = { prettier, eslint },
-			typescript = { prettier, eslint },
-			["typescript.tsx"] = { prettier, eslint },
-			css = { prettier },
-			html = { prettier },
-			json = { prettier, eslint },
-			lua = { luaFormat },
-			c = { clangFormat },
-			markdown = { prettier },
-		},
-	}
-
-	return config
-end
-
 local function on_init(client, result)
 	if client.name == "pyright" then
 		local project_name = client.config.root_dir:match("^.+/(.+)$")
@@ -242,10 +175,6 @@ lsp_installer.on_server_ready(function(server)
 		config.settings = lua_settings
 	end
 
-	if server.name == "efm" then
-		config = make_efm_config(config)
-	end
-
 	if server.name == "json" then
 		config.settings = {
 			json = {
@@ -264,21 +193,6 @@ lsp_installer.on_server_ready(function(server)
 				schemas = require("schemastore").json.schemas(),
 			},
 		}
-
-		-- config.settings = {
-		--   yaml = {
-		--     schemas = {
-		--       ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*.{yml,yaml}',
-		--       ['http://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
-		--       ['http://json.schemastore.org/prettierrc'] = '.prettierrc.{yml,yaml}',
-		--       ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] = {
-		--         '*.stack.{yml,yaml}',
-		--         'docker-compose.*.{yml,yaml}',
-		--         'docker-compose.{yml,yaml}',
-		--       }
-		--     }
-		--   }
-		-- }
 	end
 
 	if server.name == "clangd" then
@@ -287,87 +201,3 @@ lsp_installer.on_server_ready(function(server)
 
 	server:setup(config)
 end)
-
--- NOTE: Disabling as it broke startup for some reason
--- -- Add custom installer for unifiedls
--- local configs = require "lspconfig/configs"
--- local lspconfig = require "lspconfig"
--- local server = require "nvim-lsp-installer.server"
--- local npm = require "nvim-lsp-installer.installers.npm"
--- local servers = require "nvim-lsp-installer.servers"
--- local path = require "nvim-lsp-installer.path"
-
--- local server_name = "unified_language_server"
-
--- configs[server_name] = {
---     default_config = {
---         filetypes = {"markdown"},
---         root_dir = lspconfig.util.root_pattern ".git"
---     }
--- }
-
--- local root_dir = server.get_server_root_path(server_name)
-
--- local installer = npm.packages {"unified-language-server"}
--- local unified_language_server =
---     server.Server:new {
---     name = server_name,
---     root_dir = root_dir,
---     installer = installer,
---     default_options = {
---         cmd = {
---             path.concat {root_dir, "node_modules", ".bin", "unified-language-server"},
---             "--parser=remark-parse",
---             "--stdio"
---         }
---     }
--- }
-
--- -- 3. (optional, recommended) Register your server with nvim-lsp-installer.
--- --    This makes it available via other APIs (e.g., :LspInstall, lsp_installer.get_available_servers()).
--- servers.register(unified_language_server)
-
--- Autocomplete
--- require'compe'.setup {
---   enabled = true;
---   autocomplete = true;
---   debug = false;
---   min_length = 1;
---   preselect = 'enable';
---   throttle_time = 80;
---   source_timeout = 200;
---   incomplete_delay = 400;
---   max_abbr_width = 100;
---   max_kind_width = 100;
---   max_menu_width = 100;
---   documentation = true;
-
---   source = {
---     path = true;
---     nvim_lsp = true;
---     orgmode = true;
---   };
--- }
--- vim.o.completeopt = "menuone,noselect"
--- vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {expr = true, silent = true})
--- vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", {expr = true, silent = true})
---
---
-
--- Symbol highlighting
--- vim.api.nvim_command [[ hi def link LspReferenceText CursorLine ]]
--- vim.api.nvim_command [[ hi def link LspReferenceWrite CursorLine ]]
--- vim.api.nvim_command [[ hi def link LspReferenceRead CursorLine ]]
-
--- Autoformat
--- Doing this here rather than per-buffer as there were issues with formatting
--- being disconnected when configured per-buffer.
--- vim.api.nvim_exec([[
--- augroup FormatAutogroup
---   autocmd!
---   autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.py,*.lua,*.html,*.json,*.css,*.c,*.md lua vim.lsp.buf.formatting_sync(nil, 3000)
--- augroup END
--- ]], true)
-
--- ZK
--- require'lspconfig'.zk.setup{}
