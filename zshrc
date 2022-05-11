@@ -46,7 +46,8 @@ export PATH="/usr/local/opt/python@3.10/bin:$PATH"
 # Contains symlinks for `python` (above has links for `python3`)
 export PATH="/usr/local/opt/python@3.10/libexec/bin:$PATH"
 # Make node 12 the default
-export PATH="/usr/local/opt/node@12/bin:$PATH"
+# NOTE: I don't know why I made node12 the default but it's wildly out of date.
+# export PATH="/usr/local/opt/node@12/bin:$PATH"
 # Poetry likes to install itself separately
 
 # Yarn
