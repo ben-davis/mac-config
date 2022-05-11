@@ -20,6 +20,9 @@ Plug 'onsails/lspkind-nvim'
 " Adds support for schemastore to yaml/json LSP
 Plug 'b0o/SchemaStore.nvim'
 
+" Formatting
+Plug 'jose-elias-alvarez/null-ls.nvim'
+
 " Spell check
 " Disabled as building lua-nuspell didn't work
 " Plug 'f3fora/lua-nuspell'
@@ -68,6 +71,10 @@ Plug 'windwp/nvim-spectre'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 " LSP-enabled explorer
 Plug 'kyazdani42/nvim-tree.lua'
+" Testing out another option
+" This is a requirement
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
 
 " Theme
 " Looks abandoned
