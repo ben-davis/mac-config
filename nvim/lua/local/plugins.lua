@@ -52,11 +52,21 @@ vim.keymap.set("n", "<leader>m", ":Himalaya<CR>", { silent = true, noremap = tru
 
 -- Floaterm
 local function toggle_floaterm()
-	local is_open = vim.fn["floaterm#window#find"]()
-	if is_open > 0 then
-		vim.api.nvim_command("FloatermToggle term")
+	local cwd = vim.fn.getcwd(0, 0)
+	local project = vim.fn.fnamemodify(cwd, ":t")
+
+	local bufnr = vim.fn["floaterm#terminal#get_bufnr"](project)
+
+	if bufnr > -1 then
+		vim.api.nvim_command(bufnr .. "FloatermToggle")
 	else
-		vim.api.nvim_command("FloatermNew --height=0.8 --width=0.9 --wintype=float --title=term --position=center")
+		vim.api.nvim_command(
+			"FloatermNew --height=0.8 --width=0.9 --wintype=float --name="
+				.. project
+				.. " --title="
+				.. project
+				.. " --position=center"
+		)
 	end
 end
-vim.keymap.set("n", "<leader>m", toggle_floaterm, { silent = true, noremap = true })
+vim.keymap.set({ "n", "t" }, "<leader>a", toggle_floaterm, { silent = true, noremap = true })
