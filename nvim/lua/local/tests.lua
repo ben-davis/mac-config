@@ -1,7 +1,6 @@
 -- vim-test configuration
 vim.g["test#strategy"] = "floaterm"
 vim.g["test#python#runner"] = "pytest"
-vim.g["test#project_root"] = "/Users/ben/dev/git/rupalabs/server"
 vim.g["term#preserve_screen"] = 0
 
 -- Floaterm config (currently used as the strategy)
@@ -28,6 +27,15 @@ end
 local function run_test_command(test_command)
 	-- Set the exec based on the env
 	vim.g["test#python#pytest#executable"] = get_pytest_exec()
+
+	local cwd = vim.fn.getcwd(0, 0)
+	local project = vim.fn.fnamemodify(cwd, ":t")
+
+	if project == "rupalabs" then
+		vim.g["test#project_root"] = "/Users/ben/dev/git/rupalabs/server"
+	else
+		vim.g["test#project_root"] = nil
+	end
 
 	-- Call the script
 	vim.api.nvim_command(test_command)
