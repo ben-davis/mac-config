@@ -95,6 +95,7 @@ vim.api.nvim_exec(
         autocmd Filetype c setlocal ts=2 sw=2
         autocmd Filetype lua setlocal ts=2 sw=2
         autocmd Filetype markdown setlocal ts=2 sw=2 wrap linebreak
+        autocmd Filetype elixir setlocal ts=2 sw=2 wrap linebreak
     augroup END
   ]],
 	true
