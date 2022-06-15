@@ -18,10 +18,8 @@ cd ~/dev/git/mac-config
 echo "--------- Installing brew packages"
 brew bundle install
 
-if ! [ -z "${ZSH_NAME}" ]; then
-  echo "--------- Setting default shell to zsh"
-  chsh -s /usr/local/bin/zsh
-fi
+echo "--------- Setting default shell to zsh"
+chsh -s /usr/local/bin/zsh
 
 if ! [ -f ~/.fzf.zsh ]; then
   echo "--------- Install fzf key bindings and fuzzy completion"
