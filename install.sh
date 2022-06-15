@@ -69,10 +69,10 @@ echo "System Preferences > Dock: size"
 defaults write com.apple.dock tilesize -int 36
 
 echo "System Preferences > Keyboard: set fast key repeat"
-defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write -g NSGlobalDomain KeyRepeat -int 2
 
 echo "System Preferences > Keyboard: set fast key repeat"
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write -g NSGlobalDomain InitialKeyRepeat -int 15
 
 echo "System Preferences > Trackpad: tap to click"
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
