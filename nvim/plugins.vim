@@ -69,9 +69,6 @@ Plug 'windwp/nvim-spectre'
 
 " Dev icons
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
-" LSP-enabled explorer
-Plug 'kyazdani42/nvim-tree.lua'
-" Testing out another option
 " This is a requirement
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
@@ -179,9 +176,6 @@ Plug 'windwp/nvim-autopairs'
 " Zenmode, mostly for markdown editing
 Plug 'folke/zen-mode.nvim'
 Plug 'ellisonleao/glow.nvim'
-
-" Email, because why not
-Plug 'soywod/himalaya', {'rtp': 'vim'}
 
 " Notes via zettl
 Plug 'oberblastmeister/neuron.nvim'
