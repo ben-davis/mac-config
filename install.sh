@@ -15,18 +15,14 @@ fi
 
 cd ~/dev/git/mac-config
 
+echo "--------- Symlinking zshrc"
+ln -s -f ~/dev/git/mac-config/zshrc ~/.zshrc
+
+echo "--------- Source .zshrc"
+source ~/.zshrc
+
 echo "--------- Installing brew packages"
 brew bundle install
-
-if [ ! -x "$(command -v pod)" ]; then
-  echo "--------- Installing cocoapods"
-  sudo gem install cocoapods
-fi
-
-if [ ! -x "$(command -v yarn)" ]; then
-  echo "--------- Installing yarn"
-  npm install -g yarn
-fi
 
 if ! [ -z "${ZSH_NAME}" ]; then
   echo "--------- Setting default shell to zsh"
@@ -38,37 +34,21 @@ if ! [ -f ~/.fzf.zsh ]; then
   $(brew --prefix)/opt/fzf/install
 fi
 
-pip3 install virtualenv
-pip3 install virtualenvwrapper
+echo "--------- Installing global Python packages"
+pip install -r ./requirements.txt
 
 if [ ! -d ~/.config ]; then
   echo "--------- Making ~/.config"
   mkdir ~/.config
 fi
 
-if [ ! -d ~/.tmux/plugins/tpm ]; then
-  echo "--------- Installing tmux plugin manager"
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-
-echo "--------- Symlinking tmux.config"
-ln -s -f ~/dev/git/mac-config/tmux.conf ~/.tmux.conf
-
 if [ ! -d ~/.config/nvim ]; then
   echo "--------- Symlinking nvim config"
   ln -s -f ~/dev/git/mac-config/nvim ~/.config
 fi
 
-if [ ! -d ~/.config/tmuxinator ]; then
-  echo "--------- Symlinking tmuxinator config"
-  ln -s -f ~/dev/git/mac-config/tmuxinator ~/.config
-fi
-
 echo "--------- Symlinking git config"
 ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
-
-echo "--------- Symlinking iTerm2 config"
-ln -s -f ~/dev/git/mac-config/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
 if [ ! -d ~/.oh-my-zsh ]; then
   echo "--------- Install oh-my-zsh"
@@ -79,9 +59,6 @@ if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
   echo "--------- Install oh-my-zsh plugin: zsh-autosuggestions"
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
-
-echo "--------- Symlinking zshrc"
-ln -s -f ~/dev/git/mac-config/zshrc ~/.zshrc
 
 echo "--------- Symlinking bencd oh-my-zsh theme"
 ln -s -f ~/dev/git/mac-config/bencd.zsh-theme ~/.oh-my-zsh/themes/bencd.zsh-theme
