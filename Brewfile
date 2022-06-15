@@ -78,6 +78,7 @@ cask "raycast"
 cask "slack"
 cask "transmission"
 cask "vlc"
+cask "zoom"
 mas "Blackmagic RAW Speed Test", id: 1466185689
 mas "Infuse", id: 1136220934
 mas "Keynote", id: 409183694
