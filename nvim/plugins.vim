@@ -81,13 +81,19 @@ Plug 'nvim-neo-tree/neo-tree.nvim'
 " Plug 'ayu-theme/ayu-vim'
 Plug 'Luxed/ayu-vim'
 Plug 'folke/tokyonight.nvim'
+Plug 'rose-pine/neovim'
+Plug 'savq/melange'
 
 " Git support
-Plug 'tpope/vim-fugitive'
+" Adds GBrowse command
 Plug 'tpope/vim-rhubarb'
+" For GH coderevuew
 Plug 'pwntester/octo.nvim'
 " Plug '~/dev/git/octo.nvim'
+" Show diffs
 Plug 'sindrets/diffview.nvim'
+" For blames
+Plug 'rhysd/git-messenger.vim'
 
 " Git signs
 Plug 'lewis6991/gitsigns.nvim'
@@ -140,6 +146,9 @@ Plug 'mrjones2014/dash.nvim', { 'do': 'make install' }
 
 " Script writing
 Plug 'kblin/vim-fountain'
+
+" For prose writingA
+Plug 'preservim/vim-pencil'
 
 " Autosave
 Plug '907th/vim-auto-save'

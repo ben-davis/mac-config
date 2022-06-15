@@ -69,3 +69,4 @@ vim.api.nvim_set_keymap(
 	"<cmd>lua require('telescope').extensions.tele_tabby.list{}<CR>",
 	{ silent = true }
 )
+vim.api.nvim_set_keymap("n", "<space>w", "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", { silent = true })

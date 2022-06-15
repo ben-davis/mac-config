@@ -49,7 +49,7 @@ dap.configurations.python = {
 		type = "python",
 		request = "attach",
 		name = "Rupa - Server",
-		port = "5678",
+		port = 5678,
 		pathMappings = {
 			{
 				localRoot = "/Users/ben/dev/git/rupalabs/server",
@@ -79,6 +79,27 @@ dap.configurations.python = {
 				remoteRoot = "/code",
 			},
 		},
+	},
+}
+
+-- Node
+
+dap.adapters.node2 = {
+	type = "executable",
+	command = "node",
+	args = { os.getenv("HOME") .. "/dev/git/vscode-node-debug2/out/src/nodeDebug.js" },
+}
+
+dap.configurations.typescript = {
+	{
+		name = "Launch",
+		type = "node2",
+		request = "launch",
+		program = "${file}",
+		cwd = vim.fn.getcwd(),
+		sourceMaps = true,
+		protocol = "inspector",
+		console = "integratedTerminal",
 	},
 }
 

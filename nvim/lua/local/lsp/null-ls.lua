@@ -10,17 +10,21 @@ require("null-ls").setup({
 				buffer = bufnr,
 				callback = function()
 					-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-					vim.lsp.buf.formatting_sync()
+					vim.lsp.buf.formatting_sync(nil, 10000)
 				end,
 			})
 		end
 	end,
 	sources = {
-		-- require("null-ls").builtins.completion.spell,
+		-- require("null-ls").builtins.completion.spell.with({
+		-- 	filetypes = { "markdown" },
+		-- }),
 		require("null-ls").builtins.code_actions.eslint_d,
+		-- require("null-ls").builtins.code_actions.proselint,
 
 		require("null-ls").builtins.diagnostics.eslint_d,
 		require("null-ls").builtins.diagnostics.actionlint,
+		-- require("null-ls").builtins.diagnostics.proselint,
 
 		require("null-ls").builtins.formatting.stylua,
 		require("null-ls").builtins.formatting.isort,
@@ -28,5 +32,7 @@ require("null-ls").setup({
 		require("null-ls").builtins.formatting.clang_format,
 		require("null-ls").builtins.formatting.prettierd,
 		require("null-ls").builtins.formatting.rustfmt,
+
+		require("null-ls").builtins.hover.dictionary,
 	},
 })

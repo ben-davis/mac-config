@@ -50,3 +50,7 @@ vim.keymap.set("n", "Y", "y$", { noremap = true, silent = true })
 
 -- Search and replace
 vim.keymap.set("n", "<leader>S", ":lua require('spectre').open()<CR>", { noremap = true })
+
+-- Set movement to always go to visual lines, rather than real lines
+vim.keymap.set("n", "j", "gj")
+vim.keymap.set("n", "k", "gk")

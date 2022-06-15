@@ -70,3 +70,6 @@ local function toggle_floaterm()
 	end
 end
 vim.keymap.set({ "n", "t" }, "<leader>a", toggle_floaterm, { silent = true, noremap = true })
+
+-- Git blame popup
+-- The plugin doesn't need setup but I'm adding a comment so I have a reminder. The plugin sets <leader>gm as the map.

@@ -13,25 +13,40 @@ vim.g["floaterm_title"] = "pytest"
 vim.g["neoterm_default_mod"] = "vertical"
 vim.g["neoterm_size"] = 80
 
-local function get_pytest_exec()
-	local breakpoints = require("dap.breakpoints").get() or {}
-	local does_buffer_have_breakpoints = next(breakpoints) ~= nil
+local function get_pytest_exec(project)
+	if project == "rupalabs" then
+		local breakpoints = require("dap.breakpoints").get() or {}
+		local does_buffer_have_breakpoints = next(breakpoints) ~= nil
 
-	if does_buffer_have_breakpoints then
-		return "docker-compose run --rm -p 5679:5679 --entrypoint python test -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m pytest --reuse-db --disable-warnings -vv"
+		if does_buffer_have_breakpoints then
+			return "docker-compose run --rm -p 5679:5679 --entrypoint python test -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m pytest --reuse-db --disable-warnings -vv"
+		end
+
+		return "docker-compose run --rm test --reuse-db --disable-warnings -vv"
 	end
 
-	return "docker-compose run --rm test --reuse-db --disable-warnings -vv"
+	local pipenv_prefix = ""
+
+	if vim.fn.filereadable("Pipfile") > 0 then
+		pipenv_prefix = "pipenv run "
+	elseif vim.fn.filereadable("poetry.lock") > 0 then
+		pipenv_prefix = "poetry run "
+	else
+		pipenv_prefix = "python -m "
+	end
+
+	return pipenv_prefix .. "pytest"
 end
 
 local function run_test_command(test_command)
-	-- Set the exec based on the env
-	vim.g["test#python#pytest#executable"] = get_pytest_exec()
-
 	local cwd = vim.fn.getcwd(0, 0)
 	local project = vim.fn.fnamemodify(cwd, ":t")
+	local filetype = vim.bo.filetype
 
-	if project == "rupalabs" then
+	-- Set the exec based on the env
+	vim.g["test#python#pytest#executable"] = get_pytest_exec(project)
+
+	if project == "rupalabs" and filetype == "python" then
 		vim.g["test#project_root"] = "/Users/ben/dev/git/rupalabs/server"
 	else
 		vim.g["test#project_root"] = nil
