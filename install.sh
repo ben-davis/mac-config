@@ -69,7 +69,7 @@ echo "System Preferences > Dock: size"
 defaults write com.apple.dock tilesize -int 36
 
 echo "System Preferences > Keyboard: set fast key repeat"
-defaults write -g NSGlobalDomain KeyRepeat -int 2
+defaults write -g NSGlobalDomain KeyRepeat -int 1
 
 echo "System Preferences > Keyboard: set fast key repeat"
 defaults write -g NSGlobalDomain InitialKeyRepeat -int 15
