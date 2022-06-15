@@ -11,15 +11,11 @@ ZSH_THEME="bencd"
 # oh-my-zsh plugins
 plugins=(
     git 
-    tmux 
     docker 
     docker-compose 
     vi-mode 
     kubectl 
-    helm 
-    django
     encode64
-    arcanist
     autojump
     zsh-autosuggestions
     poetry
