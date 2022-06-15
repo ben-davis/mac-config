@@ -39,6 +39,10 @@ fi
 echo "--------- Symlinking zshrc"
 ln -s -f ~/dev/git/mac-config/zshrc ~/.zshrc
 
+echo "--------- Symlinking alacritty"
+mkdir -p ~/.config/alacritty
+ln -s -f ~/dev/git/mac-config/alacritty.yml ~/.config/alacritty/alacritty.yml
+
 if [ ! -d ~/.oh-my-zsh ]; then
   echo "--------- Install oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
