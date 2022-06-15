@@ -27,6 +27,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# Add brew to the path
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Use homebrew installed bin
 export PATH=/usr/local/bin:/usr/local/sbin:$HOME/local/bin:$PATH
 # Rust bin
