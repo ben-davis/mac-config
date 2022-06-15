@@ -49,14 +49,14 @@ if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
-echo "--------- Installing global Python packages"
-pip install -r ./requirements.txt
-
 echo "--------- Symlinking bencd oh-my-zsh theme"
 ln -s -f ~/dev/git/mac-config/bencd.zsh-theme ~/.oh-my-zsh/themes/bencd.zsh-theme
 
 echo "--------- Source .zshrc"
 source ~/.zshrc
+
+echo "--------- Installing global Python packages"
+pip install -r ./requirements.txt
 
 echo "--------- Symlinking git config"
 ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
