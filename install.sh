@@ -26,9 +26,6 @@ if ! [ -f ~/.fzf.zsh ]; then
   $(brew --prefix)/opt/fzf/install
 fi
 
-echo "--------- Installing global Python packages"
-pip install -r ./requirements.txt
-
 if [ ! -d ~/.config ]; then
   echo "--------- Making ~/.config"
   mkdir ~/.config
@@ -51,6 +48,9 @@ if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
   echo "--------- Install oh-my-zsh plugin: zsh-autosuggestions"
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
+
+echo "--------- Installing global Python packages"
+pip install -r ./requirements.txt
 
 echo "--------- Symlinking bencd oh-my-zsh theme"
 ln -s -f ~/dev/git/mac-config/bencd.zsh-theme ~/.oh-my-zsh/themes/bencd.zsh-theme
