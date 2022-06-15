@@ -15,26 +15,6 @@ fi
 
 cd ~/dev/git/mac-config
 
-echo "--------- Symlinking zshrc"
-ln -s -f ~/dev/git/mac-config/zshrc ~/.zshrc
-
-
-if [ ! -d ~/.oh-my-zsh ]; then
-  echo "--------- Install oh-my-zsh"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
-
-if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
-  echo "--------- Install oh-my-zsh plugin: zsh-autosuggestions"
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-fi
-
-echo "--------- Symlinking bencd oh-my-zsh theme"
-ln -s -f ~/dev/git/mac-config/bencd.zsh-theme ~/.oh-my-zsh/themes/bencd.zsh-theme
-
-echo "--------- Source .zshrc"
-source ~/.zshrc
-
 echo "--------- Installing brew packages"
 brew bundle install
 
@@ -60,6 +40,25 @@ if [ ! -d ~/.config/nvim ]; then
   echo "--------- Symlinking nvim config"
   ln -s -f ~/dev/git/mac-config/nvim ~/.config
 fi
+
+echo "--------- Symlinking zshrc"
+ln -s -f ~/dev/git/mac-config/zshrc ~/.zshrc
+
+if [ ! -d ~/.oh-my-zsh ]; then
+  echo "--------- Install oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
+  echo "--------- Install oh-my-zsh plugin: zsh-autosuggestions"
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
+
+echo "--------- Symlinking bencd oh-my-zsh theme"
+ln -s -f ~/dev/git/mac-config/bencd.zsh-theme ~/.oh-my-zsh/themes/bencd.zsh-theme
+
+echo "--------- Source .zshrc"
+source ~/.zshrc
 
 echo "--------- Symlinking git config"
 ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
