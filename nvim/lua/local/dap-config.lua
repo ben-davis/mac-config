@@ -48,6 +48,12 @@ dap.configurations.python = {
 	{
 		type = "python",
 		request = "attach",
+		name = "Tests",
+		port = 5679,
+	},
+	{
+		type = "python",
+		request = "attach",
 		name = "Rupa - Server",
 		port = 5678,
 		pathMappings = {
