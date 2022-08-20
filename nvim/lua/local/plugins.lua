@@ -73,3 +73,25 @@ vim.keymap.set({ "n", "t" }, "<leader>a", toggle_floaterm, { silent = true, nore
 
 -- Git blame popup
 -- The plugin doesn't need setup but I'm adding a comment so I have a reminder. The plugin sets <leader>gm as the map.
+
+-- Whichkey
+require("which-key").setup()
+
+-- Floating goto previews
+require("goto-preview").setup({
+  default_mappings = true
+})
+
+-- Run requests
+vim.keymap.set("n", "<leader>r", "<Plug>RestNvim", { silent = true, noremap = true })
+require("rest-nvim").setup({
+  result = {
+    formatters = {
+      json = "jq",
+      vnd = "jq",
+      html = function(body)
+        return vim.fn.system({"tidy", "-i", "-q", "-"}, body)
+      end
+    }
+  }
+})
