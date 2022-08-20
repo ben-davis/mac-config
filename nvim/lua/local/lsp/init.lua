@@ -12,6 +12,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 	underline = true,
 })
 
+-- Render diagnostics as floating lines
+-- NOTE: I found this a little annoying
+-- require("lsp_lines").setup()
+
 -- Use icons for LSP gutter diagnostics
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
@@ -143,7 +147,7 @@ local function on_init(client, result)
 
 		-- This is rupalabs
 		if project_name == "server" then
-			client.config.settings.python.pythonPath = "/Users/ben/dev/.venvs/server-iwTf5wu_/bin/python"
+			client.config.settings.python.pythonPath = "/Users/ben/.local/share/virtualenvs/server-iwTf5wu_/bin/python"
 		elseif project_name == "fastapi-rest-framework" then
 			client.config.settings.python.pythonPath =
 				"/Users/ben/Library/Caches/pypoetry/virtualenvs/fastapi-rest-framework-rZAynlgp-py3.10/bin/python"
