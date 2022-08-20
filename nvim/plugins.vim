@@ -17,6 +17,9 @@ Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ray-x/lsp_signature.nvim'
 " LSP-icons in autocomplete
 Plug 'onsails/lspkind-nvim'
+" LSP diagnostics as floating lines
+Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+
 " Adds support for schemastore to yaml/json LSP
 Plug 'b0o/SchemaStore.nvim'
 
@@ -85,8 +88,8 @@ Plug 'savq/melange'
 " Adds GBrowse command
 Plug 'tpope/vim-rhubarb'
 " For GH coderevuew
-Plug 'pwntester/octo.nvim'
-" Plug '~/dev/git/octo.nvim'
+" Plug 'pwntester/octo.nvim'
+Plug '~/dev/git/octo.nvim'
 " Show diffs
 Plug 'sindrets/diffview.nvim'
 " For blames
@@ -137,8 +140,6 @@ Plug 'ggandor/lightspeed.nvim'
 Plug 'moll/vim-bbye'
 
 " Dasht
-Plug 'sunaku/vim-dasht'
-Plug 'rhysd/devdocs.vim'
 Plug 'mrjones2014/dash.nvim', { 'do': 'make install' }
 
 " Script writing
@@ -175,11 +176,23 @@ Plug 'windwp/nvim-autopairs'
 
 " Zenmode, mostly for markdown editing
 Plug 'folke/zen-mode.nvim'
+Plug 'Pocco81/true-zen.nvim'
 Plug 'ellisonleao/glow.nvim'
 
 " Notes via zettl
 Plug 'oberblastmeister/neuron.nvim'
 
 Plug 'ojroques/vim-oscyank'
+
+Plug 'folke/which-key.nvim'
+
+" To preview gotos in a floating window
+Plug 'rmagatti/goto-preview'
+
+" Send requests
+" Plug 'rest-nvim/rest.nvim'
+Plug '~/dev/git/rest.nvim'
+
 call plug#end()
+
 
