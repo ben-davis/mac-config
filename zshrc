@@ -28,18 +28,25 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Use homebrew installed bin
 export PATH=$(brew --prefix)/bin:$(brew --prefix)/sbin:$HOME/local/bin:$PATH
+
 # Rust bin
 export PATH=$HOME/.cargo/bin:$PATH
+
 # Replaces BSD coreutils with GNU alternatives
 export PATH=$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH
+
 # Make brew python default
 export PATH="$(brew --prefix)/opt/python/libexec/bin:$PATH"
+
 # TEMP: Use 3.10 by default (until brew python default is upgraded to 3.10)
-export PATH="$(brew --prefix)/opt/python@3.10/bin:$PATH"
+export PATH="$(brew --prefix)/opt/python@3.10/bin:/Users/ben/Library/Python/3.10/bin:$PATH"
+
 # Contains symlinks for `python` (above has links for `python3`)
 export PATH="$(brew --prefix)/opt/python@3.10/libexec/bin:$PATH"
+
 # Make node 12 the default
 # NOTE: I don't know why I made node12 the default but it's wildly out of date.
+
 # export PATH="$(brew --prefix)/opt/node@12/bin:$PATH"
 # Poetry likes to install itself separately
 
@@ -53,13 +60,12 @@ export PATH="$(brew --prefix)/opt/openssl/bin:$PATH"
 #export CPPFLAGS="-I$(brew --prefix)/opt/openssl/include"
 export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/opt/openssl/lib/
 
-# For pillow to work
-export LDFLAGS="-L$(brew --prefix)/opt/zlib/lib"
-export CPPFLAGS="-I$(brew --prefix)/opt/zlib/include"
-
-# For nvui
-export LDFLAGS="-L$(brew --prefix)/opt/node@12/lib"
-export CPPFLAGS="-I$(brew --prefix)/opt/node@12/include"
+# For:
+# 1. pillow
+# 2. nvui
+# 3. openssl (so python postgres works)
+export LDFLAGS="-L$(brew --prefix)/opt/zlib/lib -L$(brew --prefix)/opt/node@12/lib -L$(brew --prefix openssl)/lib"
+export CPPFLAGS="-I$(brew --prefix)/opt/zlib/include -I$(brew --prefix)/opt/node@12/include -I$(brew --prefix openssl)/include"
 
 # Disable brew autoupdating every time you run install
 HOMEBREW_NO_AUTO_UPDATE=0
