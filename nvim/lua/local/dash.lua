@@ -1,13 +1,13 @@
 vim.keymap.set("n", "<leader>k", ":DashWord<CR>", { noremap = true })
 vim.keymap.set("n", "<space>k", ":Dash<CR>", { noremap = true })
 
-vim.g["dasht_filetype_docsets"] = {
-	python = { "Django" },
-	htmldjango = { "Django" },
-	javascript = { "React" },
-	typescript = { "React" },
-	typescriptreact = { "React" },
-	javascriptreact = { "React" },
-}
 
-vim.g["dasht_results_window"] = "vnew"
+require("dash").setup({
+  file_type_keywords = {
+    python = { "python3", "Django" },
+    javascript = { 'javascript', 'nodejs' },
+    typescript = { 'typescript', 'javascript', 'nodejs' },
+    typescriptreact = { 'typescript', 'javascript', 'react' },
+    javascriptreact = { 'javascript', 'react' },
+	},
+})
