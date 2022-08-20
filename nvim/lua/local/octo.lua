@@ -12,3 +12,7 @@ require("octo").setup({
 })
 
 vim.keymap.set("n", "<space>g", ":Octo actions<CR>", { noremap = true })
+
+-- I have no idea why, but OctoEditable is bright pink, even though it should default to NormalFloat.
+-- So I just reset it here, which seems to work.
+vim.api.nvim_exec("hi! link OctoEditable NormalFloat", true)
