@@ -113,3 +113,7 @@ vim.api.nvim_exec(
   ]],
 	true
 )
+
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.api.nvim_exec("set nofoldenable", true)
