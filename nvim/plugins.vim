@@ -60,9 +60,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-github.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nvim-telescope/telescope-project.nvim'
 Plug 'TC72/telescope-tele-tabby.nvim'
 Plug 'nvim-telescope/telescope-dap.nvim'
+Plug 'ahmedkhalf/project.nvim'
 
 " Reload nvim without restarting
 Plug 'famiu/nvim-reload'
@@ -192,6 +192,10 @@ Plug 'rmagatti/goto-preview'
 " Send requests
 " Plug 'rest-nvim/rest.nvim'
 Plug '~/dev/git/rest.nvim'
+
+" Note taking
+Plug 's1n7ax/nvim-window-picker'
+Plug 'phaazon/mind.nvim'
 
 call plug#end()
 

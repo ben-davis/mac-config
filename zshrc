@@ -95,5 +95,6 @@ alias lg='lazygit'
 alias vim='nvim'
 alias ll='exa -l'
 alias dc='docker-compose'
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 export PATH="$HOME/.poetry/bin:$PATH"
