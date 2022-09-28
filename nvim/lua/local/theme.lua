@@ -1,5 +1,5 @@
 vim.o.background = "dark"
-vim.g["tokyonight_style"] = "storm"
+vim.g["tokyonight_style"] = "moon"
 vim.g["tokyonight_lualine_bold"] = true
 vim.g["tokyonight_italic_functions"] = 1
 vim.g["tokyonight_italic_keywords"] = 1
@@ -7,3 +7,37 @@ vim.g["tokyonight_dark_sidebar"] = "false"
 vim.g["tokyonight_transparent_sidebar"] = 1
 
 vim.api.nvim_command("colorscheme tokyonight")
+
+require("tokyonight").setup({
+  -- Borderless telescope
+  on_highlights = function(hl, c)
+    local prompt = "#2d3149"
+    hl.TelescopeNormal = {
+      bg = c.bg_dark,
+      fg = c.fg_dark,
+    }
+    hl.TelescopeBorder = {
+      bg = c.bg_dark,
+      fg = c.bg_dark,
+    }
+    hl.TelescopePromptNormal = {
+      bg = prompt,
+    }
+    hl.TelescopePromptBorder = {
+      bg = prompt,
+      fg = prompt,
+    }
+    hl.TelescopePromptTitle = {
+      bg = prompt,
+      fg = prompt,
+    }
+    hl.TelescopePreviewTitle = {
+      bg = c.bg_dark,
+      fg = c.bg_dark,
+    }
+    hl.TelescopeResultsTitle = {
+      bg = c.bg_dark,
+      fg = c.bg_dark,
+    }
+  end,
+})
