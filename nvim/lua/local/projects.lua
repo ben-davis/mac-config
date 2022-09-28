@@ -13,3 +13,7 @@
 -- ]],
 --     true
 -- )
+--
+require("project_nvim").setup({
+  scope_chdir = "tab"
+})
