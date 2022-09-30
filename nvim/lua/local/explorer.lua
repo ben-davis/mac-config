@@ -6,14 +6,15 @@ vim.keymap.set("n", "<Leader>E", ":Neotree toggle reveal .<CR>", { silent = true
 -- vim.keymap.set("n", "<Leader>E", ":NvimTreeFindFile<CR>", { silent = true, noremap = true })
 
 require("neo-tree").setup({
-	filesystem = {
-		commands = {
-			-- Override delete to use trash instead of rm
-			delete = function(state)
-				local path = state.tree:get_node().path
-				vim.fn.system({ "trash", vim.fn.fnameescape(path) })
-                                require("neo-tree.sources.manager").refresh(state.name)
-			end,
-		},
-	},
+  filesystem = {
+    follow_current_file = true,
+    commands = {
+      -- Override delete to use trash instead of rm
+      delete = function(state)
+        local path = state.tree:get_node().path
+        vim.fn.system({ "trash", vim.fn.fnameescape(path) })
+        require("neo-tree.sources.manager").refresh(state.name)
+      end,
+    },
+  },
 })
