@@ -3,7 +3,8 @@ call plug#begin('~/.config/nvim/plugged')
 " Easier LSP configuration
 Plug 'neovim/nvim-lspconfig'
 " Handles automatically installing language servers locally
-Plug 'williamboman/nvim-lsp-installer'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 " LSP-supported autocomplete
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'

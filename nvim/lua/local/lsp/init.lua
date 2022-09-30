@@ -1,7 +1,5 @@
 require("local/lsp/null-ls")
 
--- require("nvim-lsp-installer").setup {}
-
 -- Status bar components
 local lsp_status = require("lsp-status")
 lsp_status.register_progress()
@@ -63,7 +61,7 @@ local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
 
   -- Add status line support
-  lsp_status.on_attach(client, bufnr)
+  lsp_status.on_attach(client)
 
   -- Add signature help support
   require("lsp_signature").on_attach()
@@ -75,14 +73,14 @@ local on_attach = function(client, bufnr)
   -- NOTE: Remove in favor of `lsp_formatting` above in 0.8 (as it will probably break)
   for _, v in pairs(enabled_formatters) do
     if client.name == v then
-      client.resolved_capabilities.document_formatting = true
+      client.server_capabilities.document_formatting = true
     else
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.document_formatting = false
     end
   end
 
   -- -- Sync format on save
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = formatting_augroup,
@@ -133,6 +131,52 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<space>D", "<cmd>lua require('telescope.builtin').diagnostics()<CR>", opts)
 end
 
+local function on_init(client, result)
+  if client.name == "pyright" then
+    local project_name = client.config.root_dir:match("^.+/(.+)$")
+
+    -- This is rupalabs
+    if project_name == "server" then
+      client.config.settings.python.pythonPath = "/Users/ben/.local/share/virtualenvs/server-iwTf5wu_/bin/python"
+    elseif project_name == "fastapi-resources" then
+      client.config.settings.python.pythonPath = "/Users/ben/Library/Caches/pypoetry/virtualenvs/fastapi-resources-lgcGwL0s-py3.10/bin/python"
+    else
+      client.config.settings.python.pythonPath = "/usr/local/opt/python@3.10/libexec/bin/python"
+    end
+
+    client.notify("workspace/didChangeConfiguration")
+  end
+
+  return true
+end
+
+-- config that activates keymaps and enables snippet support
+local function make_default_config()
+  -- Start with lsp's default config
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+  -- Update it with cmp lsp
+  capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+
+  -- Update it with lsp_status
+  capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
+
+  return {
+    -- enable snippet support
+    capabilities = capabilities,
+    -- map buffer local keybindings when the language server attaches
+    on_attach = on_attach,
+    on_init = on_init,
+  }
+end
+
+require("mason").setup()
+require("mason-lspconfig").setup({
+  automatic_installation = true
+})
+
+local default_config = make_default_config()
+
 -- Configure lua language server for neovim development
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
@@ -156,65 +200,23 @@ local lua_settings = {
   },
 }
 
-local function on_init(client, result)
-  if client.name == "pyright" then
-    local project_name = client.config.root_dir:match("^.+/(.+)$")
 
-    -- This is rupalabs
-    if project_name == "server" then
-      client.config.settings.python.pythonPath = "/Users/ben/.local/share/virtualenvs/server-iwTf5wu_/bin/python"
-    elseif project_name == "fastapi-resources" then
-      client.config.settings.python.pythonPath = "/Users/ben/Library/Caches/pypoetry/virtualenvs/fastapi-resources-lgcGwL0s-py3.10/bin/python"
-    else
-      client.config.settings.python.pythonPath = "/usr/local/opt/python@3.10/libexec/bin/python"
-    end
-
-    client.notify("workspace/didChangeConfiguration")
-  end
-
-  return true
-end
-
--- config that activates keymaps and enables snippet support
-local function make_lsp_config()
-  -- Start with lsp's default config
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-  -- Update it with cmp lsp
-  capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-
-  -- Update it with lsp_status
-  capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
-
-  return {
-    -- enable snippet support
-    capabilities = capabilities,
-    -- map buffer local keybindings when the language server attaches
-    on_attach = on_attach,
-    on_init = on_init,
-  }
-end
-
--- Sets up all supported servers
-local lsp_installer = require("nvim-lsp-installer")
-
-lsp_installer.on_server_ready(function(server)
-  local config = make_lsp_config()
-
-  -- language specific config
-  if server.name == "sumneko_lua" then
-    config.settings = lua_settings
-  end
-
-  if server.name == "json" then
+local servers = {
+  pyright = function(config) return config end,
+  tsserver = function(config) return config end,
+  jsonls = function(config)
     config.settings = {
       json = {
         schemas = require("schemastore").json.schemas(),
       },
     }
-  end
-
-  if server.name == "yamlls" then
+    return config
+  end,
+  sumneko_lua = function(config)
+    config.settings = lua_settings
+    return config
+  end,
+  yamlls = function(config)
     config.filetypes = {
       "yaml",
       "yaml.docker-compose",
@@ -224,11 +226,24 @@ lsp_installer.on_server_ready(function(server)
         schemas = require("schemastore").json.schemas(),
       },
     }
-  end
-
-  if server.name == "clangd" then
+    return config
+  end,
+  clangd = function(config)
     config.capabilities.offsetEncoding = { "utf-16" }
+    return config
+  end,
+}
+
+for name, update_config in pairs(servers) do
+  local config = {
+    on_attach = default_config.on_attach,
+    on_init = default_config.on_init,
+    capabilities = default_config.capabilities,
+  }
+
+  if update_config then
+    config = update_config(config)
   end
 
-  server:setup(config)
-end)
+  require('lspconfig')[name].setup(config)
+end
