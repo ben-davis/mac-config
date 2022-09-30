@@ -15,5 +15,6 @@
 -- )
 --
 require("project_nvim").setup({
-  scope_chdir = "tab"
+  manual_mode = true,
+  scope_chdir = "tab",
 })
