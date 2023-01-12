@@ -40,6 +40,9 @@ vim.o.smartcase = true
 -- For performance
 vim.o.lazyredraw = true
 
+-- Set cmdheight to 0
+-- vim.o.cmdheight = 0
+
 -- Auto scroll terminals
 vim.g["neoterm_autoscroll"] = 1
 
@@ -53,28 +56,28 @@ vim.notify = require("notify")
 -- NOTE: This is currently not working. Assuming because nvim 5 isn't setting
 -- server name correctly.
 vim.api.nvim_exec(
-	[[
+  [[
   if has('nvim') && executable('nvr')
     let $GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
   endif
   ]],
-	true
+  true
 )
 
 -- Highlight on yank
 vim.api.nvim_exec(
-	[[
+  [[
   augroup YankHighlight
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
   ]],
-	true
+  true
 )
 
 -- Set filetype options
 vim.api.nvim_exec(
-	[[
+  [[
     augroup filetypes
         autocmd!
         autocmd Filetype python setlocal ts=4 sw=4
@@ -98,11 +101,11 @@ vim.api.nvim_exec(
         autocmd Filetype elixir setlocal ts=2 sw=2
     augroup END
   ]],
-	true
+  true
 )
 
 vim.api.nvim_exec(
-	[[
+  [[
   augroup terminallinenumbers
     autocmd!
     autocmd TermOpen * setlocal nonumber norelativenumber
@@ -111,7 +114,7 @@ vim.api.nvim_exec(
     " au BufLeave term://* stopinsert
   augroup END
   ]],
-	true
+  true
 )
 
 vim.o.foldmethod = "expr"

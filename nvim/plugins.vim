@@ -10,6 +10,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'ray-x/cmp-treesitter'
 
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
@@ -63,6 +64,7 @@ Plug 'nvim-telescope/telescope-github.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'TC72/telescope-tele-tabby.nvim'
 Plug 'nvim-telescope/telescope-dap.nvim'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'ahmedkhalf/project.nvim'
 
 " Reload nvim without restarting
@@ -86,7 +88,8 @@ Plug 'rose-pine/neovim'
 Plug 'savq/melange'
 
 " Git support
-" Adds GBrowse command
+Plug 'tpope/vim-fugitive'
+" Adds GBrowse command to fugitive
 Plug 'tpope/vim-rhubarb'
 " For GH coderevuew
 " Plug 'pwntester/octo.nvim'
@@ -161,7 +164,8 @@ Plug 'nvim-lualine/lualine.nvim'
 " Tab line
 Plug 'alvarosevilla95/luatab.nvim'
 
-" Notificiations
+" UI
+Plug 'MunifTanjim/nui.nvim'
 Plug 'rcarriga/nvim-notify'
 
 " DAP
@@ -197,6 +201,9 @@ Plug '~/dev/git/rest.nvim'
 " Note taking
 Plug 's1n7ax/nvim-window-picker'
 Plug 'phaazon/mind.nvim'
+
+" Smooth scroll
+Plug 'karb94/neoscroll.nvim'
 
 call plug#end()
 

@@ -54,3 +54,7 @@ vim.keymap.set("n", "<leader>S", ":lua require('spectre').open()<CR>", { noremap
 -- Set movement to always go to visual lines, rather than real lines
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
+
+-- Easier tab management
+vim.keymap.set({ "n", "t" }, "<leader>n", ":tabnew<CR>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "t" }, "<leader>c", ":tabclose<CR>", { noremap = true, silent = true })

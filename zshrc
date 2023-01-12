@@ -98,3 +98,11 @@ alias dc='docker-compose'
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+# Enables the ruby version manager
+eval "$(rbenv init - zsh)"
+
+# Use ruby homebrew by default (can be overridden with rebenv if necessary)
+export PATH=/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.1.0/bin:$PATH
+export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"

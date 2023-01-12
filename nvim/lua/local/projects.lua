@@ -15,7 +15,7 @@
 -- )
 --
 require("project_nvim").setup({
-  manual_mode = true,
+  -- manual_mode = true,
   scope_chdir = "tab",
   -- Disable lsp detection as it doesn't work for non-lsp sources like personal notes. Plus
   -- I'm using manual_mode which disables autochdir based when LSP attaches.
