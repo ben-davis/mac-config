@@ -51,21 +51,17 @@ local on_attach = function(client, bufnr)
 
 	-- -- Sync format on save
 
-	vim.api.nvim_clear_autocmds(          {group = formatting_augroup, buffer = bufnr })
-
+	vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
 
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		group = formatting_augroup,
 		buffer = bufnr,
-		callback =  function()
-
-
+		callback = function()
 			print("Formatting" .. bufnr)
 			vim.lsp.buf.format({
 				filter = function(client)
 					-- Only support formatting from null-ls or elixirls
 					return client.name == "null-ls" or client.name == "elixirls"
-
 				end,
 				bufnr = bufnr,
 				timeout_ms = 10000,
@@ -100,7 +96,7 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 	-- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 	buf_set_keymap("n", "<space>d", "<cmd>lua require('telescope.builtin').diagnostics( {bufnr = 0} )<CR>", opts)
-  buf_set_keymap("n", "<space>D", "<cmd>lua require('telescope.builtin').diagnostics()<CR>", opts)
+	buf_set_keymap("n", "<space>D", "<cmd>lua require('telescope.builtin').diagnostics()<CR>", opts)
 end
 
 require("mason").setup()
@@ -109,42 +105,46 @@ require("mason-lspconfig").setup({
 })
 
 local function on_init(client, result)
-  if client.name == "pyright" then
-    local project_name = client.config.root_dir:match("^.+/(.+)$")
+	if client.name == "pyright" then
+		local project_name = client.config.root_dir:match("^.+/(.+)$")
 
-    -- This is rupalabs
-    if project_name == "server" then
-      client.config.settings.python.pythonPath = "/Users/ben/.local/share/virtualenvs/server-iwTf5wu_/bin/python"
-    elseif project_name == "fastapi-resources" then
-      client.config.settings.python.pythonPath = "/Users/ben/Library/Caches/pypoetry/virtualenvs/fastapi-resources-lgcGwL0s-py3.10/bin/python"
-    else
-      client.config.settings.python.pythonPath = "/usr/local/opt/python@3.10/libexec/bin/python"
-    end
+		-- This is rupalabs
+		if project_name == "server" then
+			client.config.settings.python.pythonPath = "/Users/ben/.local/share/virtualenvs/server-iwTf5wu_/bin/python"
+		elseif project_name == "fastapi-resources" then
+			client.config.settings.python.pythonPath =
+				"/Users/ben/Library/Caches/pypoetry/virtualenvs/fastapi-resources-lgcGwL0s-py3.10/bin/python"
+		elseif project_name == "cool-stuff-api" then
+			client.config.settings.python.pythonPath =
+				"/Users/ben/Library/Caches/pypoetry/virtualenvs/cool-stuff-api-yzxDkLTv-py3.10/bin/python"
+		else
+			client.config.settings.python.pythonPath = "/usr/local/opt/python@3.10/libexec/bin/python"
+		end
 
-    client.notify("workspace/didChangeConfiguration")
-  end
+		client.notify("workspace/didChangeConfiguration")
+	end
 
-  return true
+	return true
 end
 
 -- config that activates keymaps and enables snippet support
 local function make_default_config()
-  -- Start with lsp's default config
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
+	-- Start with lsp's default config
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-  -- Update it with cmp lsp
-  capabilities = vim.tbl_extend("keep", capabilities, require('cmp_nvim_lsp').default_capabilities())
+	-- Update it with cmp lsp
+	capabilities = vim.tbl_extend("keep", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-  -- Update it with lsp_status
-  capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
+	-- Update it with lsp_status
+	capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
 
-  return {
-    -- enable snippet support
-    capabilities = capabilities,
-    -- map buffer local keybindings when the language server attaches
-    on_attach = on_attach,
-    on_init = on_init,
-  }
+	return {
+		-- enable snippet support
+		capabilities = capabilities,
+		-- map buffer local keybindings when the language server attaches
+		on_attach = on_attach,
+		on_init = on_init,
+	}
 end
 
 local default_config = make_default_config()
