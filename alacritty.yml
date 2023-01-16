@@ -2,10 +2,12 @@ font:
   normal:
     # family: JetBrains Mono
     family: JetBrainsMono Nerd Font
+    # family: Courier Prime
     style: Regular
   bold:
     # family: JetBrains Mono
     family: JetBrainsMono Nerd Font
+    # family: Courier Prime
     style: Extra Bold
   # normal:
   #   # family: JetBrains Mono

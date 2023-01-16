@@ -65,4 +65,9 @@ require("rest-nvim").setup({
 })
 
 -- Mind
-require("mind").setup()
+require("mind").setup({
+	persistence = {
+		state_path = "/Users/ben/Documents/Notes/mind/mind.json",
+		data_dir = "/Users/ben/Documents/Notes/mind/data",
+	},
+})
