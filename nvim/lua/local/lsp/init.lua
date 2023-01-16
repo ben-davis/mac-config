@@ -57,7 +57,6 @@ local on_attach = function(client, bufnr)
 		group = formatting_augroup,
 		buffer = bufnr,
 		callback = function()
-			print("Formatting" .. bufnr)
 			vim.lsp.buf.format({
 				filter = function(client)
 					-- Only support formatting from null-ls or elixirls
