@@ -1,3 +1,9 @@
+# Ensure:
+# 1. You're authenticated with github
+# 2. If you're on a prelease macOS, ensure that xcode command line beta tools are installed
+
+set -e -o pipefail
+
 if ! [ -x "$(command -v brew)" ]; then
   echo "--------- Installing homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
