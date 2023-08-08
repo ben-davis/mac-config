@@ -97,4 +97,3 @@ mas "Pixelmator Pro", id: 1289583905
 mas "Roadblock", id: 1051436753
 mas "The Unarchiver", id: 425424353
 mas "Things", id: 904280696
-mas "Xcode", id: 497799835
