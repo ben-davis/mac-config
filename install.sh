@@ -16,7 +16,7 @@ fi
 cd ~/dev/git/mac-config
 
 echo "--------- Installing brew packages"
-brew bundle install
+/opt/homebrew/bin/brew bundle install
 
 echo "--------- Setting default shell to zsh"
 chsh -s /usr/local/bin/zsh
