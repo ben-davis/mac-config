@@ -25,7 +25,7 @@ echo "--------- Installing brew packages"
 /opt/homebrew/bin/brew bundle install
 
 echo "--------- Setting default shell to zsh"
-chsh -s /usr/local/bin/zsh
+chsh -s /opt/homebrew/bin/zsh
 
 if ! [ -f ~/.fzf.zsh ]; then
   echo "--------- Install fzf key bindings and fuzzy completion"
