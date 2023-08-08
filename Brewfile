@@ -12,6 +12,7 @@ tap "microsoft/mssql-preview"
 tap "shopify/shopify"
 tap "universal-ctags/universal-ctags"
 brew "python@3.10"
+brew "python@3.11"
 brew "autojump"
 brew "awscli"
 brew "bash"
@@ -46,8 +47,12 @@ brew "node"
 brew "postgresql"
 brew "ripgrep"
 brew "rsync"
+brew "sqlite"
+brew "swift"
+brew "swiftformat"
 brew "telnet"
-brew "terraform"
+brew "tmux"
+brew "tmuxinator"
 brew "trash"
 brew "tree"
 brew "watch"
@@ -91,8 +96,6 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
 mas "Roadblock", id: 1051436753
-mas "Tailscale", id: 1475387142
 mas "The Unarchiver", id: 425424353
 mas "Things", id: 904280696
-mas "Ulysses", id: 1225570693
 mas "Xcode", id: 497799835

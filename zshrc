@@ -11,10 +11,7 @@ ZSH_THEME="bencd"
 # oh-my-zsh plugins
 plugins=(
     git 
-    docker 
-    docker-compose 
     vi-mode 
-    kubectl 
     encode64
     autojump
     zsh-autosuggestions
@@ -54,6 +51,9 @@ export PATH="$(brew --prefix)/opt/python@3.10/libexec/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # Open ssl
 export PATH="$(brew --prefix)/opt/openssl/bin:$PATH"
+
+# QT
+export PATH="/opt/homebrew/opt/qt5/bin:$PATH"
 
 # Apple is deprecating SSL so homebrew doesn't add it to the library path by default, so manually patching here
 #export LDFLAGS="-L$(brew --prefix)/opt/openssl/lib"
@@ -106,3 +106,6 @@ eval "$(rbenv init - zsh)"
 export PATH=/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.1.0/bin:$PATH
 export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"
+
+# Used by the spotify tmux plugin to make it use apple music
+export MUSIC_APP="Music"
