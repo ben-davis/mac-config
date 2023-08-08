@@ -15,7 +15,7 @@ require("null-ls").setup({
 		require("null-ls").builtins.formatting.isort,
 		require("null-ls").builtins.formatting.black,
 		require("null-ls").builtins.formatting.clang_format,
-		require("null-ls").builtins.formatting.prettierd,
+		require("null-ls").builtins.formatting.prettier,
 		require("null-ls").builtins.formatting.rustfmt,
 		require("null-ls").builtins.formatting.swiftformat,
 

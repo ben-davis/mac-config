@@ -1,10 +1,8 @@
-local gps = require("nvim-gps")
-
-gps.setup()
+local navic = require("nvim-navic")
 
 local symbol = function()
-	if gps.is_available() then
-		return gps.get_location()
+	if navic.is_available() then
+		return navic.get_location()
 	end
 
 	return ""
@@ -60,7 +58,7 @@ local setup = function()
 		tabline = {
 			lualine_a = { { file_path, color = { bg = colors.bg_statusline, fg = colors.comment }, padding = 3 } },
 			lualine_b = {},
-			lualine_c = {},
+			lualine_c = { {} },
 			lualine_x = { "diff" },
 			lualine_y = {
 				{ "branch", color = { bg = colors.bg_statusline, fg = colors.blue }, separators = { left = "" } },

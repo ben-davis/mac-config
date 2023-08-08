@@ -1,4 +1,5 @@
 require("local/lsp/null-ls")
+local navic = require("nvim-navic")
 
 -- Status bar components
 local lsp_status = require("lsp-status")
@@ -42,6 +43,9 @@ local on_attach = function(client, bufnr)
 
 	-- Add status line support
 	lsp_status.on_attach(client)
+
+	-- Add code nav status bar
+	navic.attach(client, bufnr)
 
 	-- Add signature help support
 	require("lsp_signature").on_attach()
@@ -116,6 +120,9 @@ local function on_init(client, result)
 		elseif project_name == "cool-stuff-api" then
 			client.config.settings.python.pythonPath =
 				"/Users/ben/Library/Caches/pypoetry/virtualenvs/cool-stuff-api-yzxDkLTv-py3.10/bin/python"
+		elseif project_name == "rightmove-scraper" then
+			client.config.settings.python.pythonPath =
+				"/Users/ben/Library/Caches/pypoetry/virtualenvs/rightmove-scraper-d01ir8p1-py3.10/bin/python"
 		else
 			client.config.settings.python.pythonPath = "/usr/local/opt/python@3.10/libexec/bin/python"
 		end
@@ -179,7 +186,7 @@ local servers = {
 					autoSearchPaths = true,
 					diagnosticMode = "workspace",
 					useLibraryCodeForTypes = true,
-					autoImportCompletions = false,
+					autoImportCompletions = true,
 				},
 			},
 		}
@@ -199,7 +206,7 @@ local servers = {
 		}
 		return config
 	end,
-	sumneko_lua = function(config)
+	lua_ls = function(config)
 		config.settings = lua_settings
 		return config
 	end,
@@ -222,8 +229,12 @@ local servers = {
 	ccls = function(config)
 		return config
 	end,
+	-- tailwindcss = function(config)
+	-- 	return config
+	-- end,
 	sourcekit = function(config)
-		config.cmd = { "/opt/homebrew/opt/swift/Swift-5.7.xctoolchain/usr/bin/sourcekit-lsp" }
+		config.cmd =
+			{ "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp" }
 		return config
 	end,
 }

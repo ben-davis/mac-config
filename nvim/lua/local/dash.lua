@@ -4,10 +4,10 @@ vim.keymap.set("n", "<space>k", ":Dash<CR>", { noremap = true })
 require("dash").setup({
 	file_type_keywords = {
 		python = { "python3", "Django", "sqlalchemy", "pytest" },
-		javascript = { "javascript", "nodejs" },
-		typescript = { "typescript", "javascript", "nodejs" },
-		typescriptreact = { "typescript", "javascript", "react" },
-		javascriptreact = { "javascript", "react" },
+		javascript = { "javascript", "nodejs", "lodash" },
+		typescript = { "typescript", "javascript", "nodejs", "lodash" },
+		typescriptreact = { "typescript", "javascript", "react", "tailwindcss", "lodash" },
+		javascriptreact = { "javascript", "react", "tailwindcss", "lodash" },
 		swift = { "swift", "apple" },
 		objc = { "objc", "apple" },
 

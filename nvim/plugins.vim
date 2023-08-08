@@ -17,6 +17,7 @@ Plug 'windwp/nvim-autopairs'
 
 " Snippets
 Plug 'hrsh7th/vim-vsnip'
+Plug 'rafamadriz/friendly-snippets'
 
 " LSP Signature help
 Plug 'ray-x/lsp_signature.nvim'
@@ -33,9 +34,8 @@ Plug 'b0o/SchemaStore.nvim'
 
 " Status line
 Plug 'nvim-lua/lsp-status.nvim'
-
 " Provides context for the symbol under the cursor
-Plug 'SmiteshP/nvim-gps'
+Plug 'SmiteshP/nvim-navic'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -55,49 +55,39 @@ Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'ahmedkhalf/project.nvim'
 
-" Search and replace
-Plug 'windwp/nvim-spectre'
-
 " Dev icons
-Plug 'kyazdani42/nvim-web-devicons' " for file icons
+" Plug 'kyazdani42/nvim-web-devicons' " for file icons
 
 " Theme
 Plug 'folke/tokyonight.nvim'
 
-" Git support
-Plug 'tpope/vim-fugitive'
-" Adds GBrowse command to fugitive
-Plug 'tpope/vim-rhubarb'
-" For GH coderevuew
-Plug 'pwntester/octo.nvim'
-
-" Show diffs
+" " Git support
+" Plug 'tpope/vim-fugitive'
+" " Adds GBrowse command to fugitive
+" Plug 'tpope/vim-rhubarb'
+" " Show diffs
 Plug 'sindrets/diffview.nvim'
-" For blames
-Plug 'rhysd/git-messenger.vim'
+" " For blames
+" Plug 'rhysd/git-messenger.vim'
 
 " Git signs
 Plug 'lewis6991/gitsigns.nvim'
 
 " Testing
 Plug 'janko/vim-test'
-" Used to allow the same terminal to be used during test sessions
-Plug 'kassio/neoterm'
-" Used to run tests in a floating term
-Plug 'voldikss/vim-floaterm'
 
 " For easy commenting out 
 Plug 'tpope/vim-commentary'
 
 " Useful commands for common tasks
-Plug 'tpope/vim-eunuch'
+" Plug 'tpope/vim-eunuch'
 " Easily surround objects
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 " Repeat non-native commands
-Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-repeat'
 
 " Multiple cursors
-Plug 'mg979/vim-visual-multi'
+" Plug 'mg979/vim-visual-multi'
 
 " DB access
 Plug 'tpope/vim-dadbod'
@@ -106,8 +96,6 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 " Make it easy to use lazygit inside of vim
 Plug 'kdheepak/lazygit.nvim'
 
-" Doesn't work until neovim remote works
-" let g:lazygit_use_neovim_remote = 1
 let g:lazygit_floating_window_scaling_factor = 1
 
 " Neovim easymotion-like thing
@@ -117,18 +105,15 @@ Plug 'ggandor/lightspeed.nvim'
 Plug 'mrjones2014/dash.nvim', { 'do': 'make install' }
 
 " Script writing
- Plug 'kblin/vim-fountain'
+Plug 'kblin/vim-fountain'
 
 " For prose writingA
 Plug 'preservim/vim-pencil'
 
-" Copy to clipboard
-vnoremap  <leader>y OSCYank<CR>
-
 " Status line
 Plug 'nvim-lualine/lualine.nvim'
 
- " UI
+" UI
 Plug 'MunifTanjim/nui.nvim'
 Plug 'rcarriga/nvim-notify'
 
@@ -140,25 +125,25 @@ Plug 'theHamsta/nvim-dap-virtual-text'
 " Zenmode, mostly for markdown editing
 Plug 'folke/zen-mode.nvim'
 
-" Markdown preview
-Plug 'ellisonleao/glow.nvim'
-
-" Notes via zettl
-Plug 'oberblastmeister/neuron.nvim'
-
 Plug 'ojroques/vim-oscyank'
 
 Plug 'folke/which-key.nvim'
 
-" To preview gotos in a floating window
+" " To preview gotos in a floating window
 Plug 'rmagatti/goto-preview'
 
 " Send requests
+" Plug 'rest-nvim/rest.nvim'
 Plug '~/dev/git/rest.nvim'
 
 " Note taking
-
 Plug 'phaazon/mind.nvim'
+
+" So vim window movements will move tmux panes
+Plug 'christoomey/vim-tmux-navigator'
+
+" CSV highlighting
+Plug 'mechatroner/rainbow_csv'
 
 call plug#end()
 

@@ -13,7 +13,7 @@ vim.keymap.set("i", "<S-CR>", "<esc>O", { noremap = true })
 vim.keymap.set("v", "p", '"_dP', { noremap = true })
 
 -- Copy to clipboard
-vim.keymap.set("v", "<leader>y", ":OSCYank<CR>", { noremap = true })
+vim.keymap.set("v", "<leader>y", ":OSCYankVisual<CR>", { noremap = true })
 
 -- Paste from clipboard
 vim.keymap.set("n", "<leader>p", '"+p', { noremap = true })
