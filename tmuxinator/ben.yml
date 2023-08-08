@@ -1,0 +1,24 @@
+name: ben
+root: ~/
+
+windows:
+  - cool-stuff-api:
+      root: ~/dev/git/cool-stuff-api
+      layout: main-vertical
+      panes:
+        - nvim
+  - cool-stuff-app:
+      root: ~/dev/git/cool-stuff-app
+      layout: main-vertical
+      panes:
+        - nvim -c ":terminal npm run web:serve" -c ":file web-serve" -c ":terminal npx expo start" -c ":file app-serve"
+  - mac-config:
+      root: ~/dev/git/mac-config
+      layout: main-vertical
+      panes:
+        - nvim
+  - notes:
+      root: ~/Documents/Notes
+      layout: main-vertical
+      panes:
+        - nvim

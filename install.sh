@@ -65,6 +65,9 @@ pip install -r ./requirements.txt
 echo "--------- Symlinking git config"
 ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
 
+echo "--------- Symlinking tmuxinator config"
+ln -s -f ~/dev/git/mac-config/tmuxinator ~/.tmuxinator
+
 echo "--------- Configuring macOS defaults"
 echo "System Preferences > Dock: autohide dock"
 defaults write com.apple.dock autohide -bool true
