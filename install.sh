@@ -25,7 +25,7 @@ echo "--------- Installing brew packages"
 /opt/homebrew/bin/brew bundle install
 
 echo "--------- Setting default shell to zsh"
-if [ ! grep -Fxq "/opt/homebrew/bin/zsh" /etc/shells ]; then
+if ! grep -q "/opt/homebrew/bin/zsh" /etc/shells ; then
    # APPEND TO /etc/shells
    echo "/opt/homebrew/bin/zsh" >> /etc/shells
 fi
