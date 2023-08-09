@@ -49,25 +49,3 @@ require("which-key").setup()
 require("goto-preview").setup({
 	default_mappings = true,
 })
-
--- Run requests
-vim.keymap.set("n", "<leader>r", "<Plug>RestNvim", { silent = true, noremap = true })
-require("rest-nvim").setup({
-	result = {
-		formatters = {
-			json = "jq",
-			vnd = "jq",
-			html = function(body)
-				return vim.fn.system({ "tidy", "-i", "-q", "-" }, body)
-			end,
-		},
-	},
-})
-
--- Mind
-require("mind").setup({
-	persistence = {
-		state_path = "/Users/ben/Documents/Notes/mind/mind.json",
-		data_dir = "/Users/ben/Documents/Notes/mind/data",
-	},
-})

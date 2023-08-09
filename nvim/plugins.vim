@@ -132,13 +132,6 @@ Plug 'folke/which-key.nvim'
 " " To preview gotos in a floating window
 Plug 'rmagatti/goto-preview'
 
-" Send requests
-" Plug 'rest-nvim/rest.nvim'
-Plug '~/dev/git/rest.nvim'
-
-" Note taking
-Plug 'phaazon/mind.nvim'
-
 " So vim window movements will move tmux panes
 Plug 'christoomey/vim-tmux-navigator'
 
