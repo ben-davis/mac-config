@@ -47,3 +47,4 @@ key_bindings:
   # Allows shift-return ctrl-return to be used in neovim
   - { key: Return, mods: Shift, chars: "\x1b[13;2u" }
   - { key: Return, mods: Control, chars: "\x1b[13;5u" }
+  - { key: Return, mods: Alt, action: ToggleSimpleFullscreen }

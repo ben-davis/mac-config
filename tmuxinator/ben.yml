@@ -22,3 +22,6 @@ windows:
       layout: main-vertical
       panes:
         - nvim
+  - shell:
+      root: ~
+      layout: main-vertical
