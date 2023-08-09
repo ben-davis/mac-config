@@ -31,6 +31,12 @@ if ! grep -q "/opt/homebrew/bin/zsh" /etc/shells ; then
 fi
 chsh -s /opt/homebrew/bin/zsh
 
+echo "--------- Symlinking zshrc"
+ln -s -f ~/dev/git/mac-config/zshrc ~/.zshrc
+
+echo "--------- Source .zshrc"
+source ~/.zshrc
+
 if ! [ -f ~/.fzf.zsh ]; then
   echo "--------- Install fzf key bindings and fuzzy completion"
   $(brew --prefix)/opt/fzf/install
@@ -45,9 +51,6 @@ if [ ! -d ~/.config/nvim ]; then
   echo "--------- Symlinking nvim config"
   ln -s -f ~/dev/git/mac-config/nvim ~/.config
 fi
-
-echo "--------- Symlinking zshrc"
-ln -s -f ~/dev/git/mac-config/zshrc ~/.zshrc
 
 echo "--------- Symlinking alacritty"
 mkdir -p ~/.config/alacritty
@@ -65,9 +68,6 @@ fi
 
 echo "--------- Symlinking bencd oh-my-zsh theme"
 ln -s -f ~/dev/git/mac-config/bencd.zsh-theme ~/.oh-my-zsh/themes/bencd.zsh-theme
-
-echo "--------- Source .zshrc"
-source ~/.zshrc
 
 echo "--------- Installing global Python packages"
 pip install -r ./requirements.txt
