@@ -17,6 +17,7 @@ Plug 'windwp/nvim-autopairs'
 
 " Snippets
 Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'rafamadriz/friendly-snippets'
 
 " LSP Signature help
