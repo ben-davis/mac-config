@@ -60,10 +60,10 @@ local setup = function()
 			lualine_b = {},
 			lualine_c = { {} },
 			lualine_x = { "diff" },
-			lualine_y = {
+			lualine_y = {},
+			lualine_z = {
 				{ "branch", color = { bg = colors.bg_statusline, fg = colors.blue }, separators = { left = "" } },
 			},
-			lualine_z = { { "tabs", mode = 1 } },
 		},
 		extensions = {},
 	})
