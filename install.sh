@@ -89,7 +89,10 @@ echo "System Preferences > Keyboard: set fast key repeat"
 defaults write NSGlobalDomain KeyRepeat -int 1
 
 echo "System Preferences > Keyboard: set fast key repeat"
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain InitialKeyRepeat -int 20
+
+echo "System Preferences > Keyboard: disable press and hold"
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 echo "System Preferences > Trackpad: tap to click"
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
