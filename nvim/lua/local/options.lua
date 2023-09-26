@@ -103,6 +103,7 @@ vim.api.nvim_exec(
         autocmd Filetype markdown setlocal ts=2 sw=2 wrap linebreak spell
         autocmd Filetype elixir setlocal ts=2 sw=2
         autocmd Filetype glsl setlocal ts=2 sw=2
+        autocmd Filetype swift setlocal ts=2 sw=2
     augroup END
   ]],
 	true
