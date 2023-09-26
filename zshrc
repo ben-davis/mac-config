@@ -109,3 +109,7 @@ export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"
 
 # Used by the spotify tmux plugin to make it use apple music
 export MUSIC_APP="Music"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
