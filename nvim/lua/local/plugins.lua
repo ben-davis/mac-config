@@ -49,3 +49,6 @@ require("which-key").setup()
 require("goto-preview").setup({
 	default_mappings = true,
 })
+
+-- Leap
+require("leap").add_default_mappings()

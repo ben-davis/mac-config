@@ -61,6 +61,7 @@ Plug 'ahmedkhalf/project.nvim'
 
 " Theme
 Plug 'folke/tokyonight.nvim'
+Plug 'Shatur/neovim-ayu'
 
 " " Git support
 " Plug 'tpope/vim-fugitive'
@@ -100,7 +101,7 @@ Plug 'kdheepak/lazygit.nvim'
 let g:lazygit_floating_window_scaling_factor = 1
 
 " Neovim easymotion-like thing
-Plug 'ggandor/lightspeed.nvim'
+Plug 'ggandor/leap.nvim'
 
 " Dasht
 Plug 'mrjones2014/dash.nvim', { 'do': 'make install' }
