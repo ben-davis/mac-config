@@ -25,6 +25,7 @@ require("telescope").setup({
 			theme = "ivy",
 			-- disables netrw and use telescope-file-browser in its place
 			hijack_netrw = true,
+			select_buffer = true,
 		},
 	},
 })
@@ -46,7 +47,7 @@ _G.project_files = function()
 end
 
 -- VIM Lists
-vim.api.nvim_set_keymap("n", "<space>p", "<cmd>lua project_files()<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<space>p", "<cmd>lua require('telescope.builtin').find_files()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<space>f", "<cmd>lua require('telescope.builtin').live_grep()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<space>m", "<cmd>lua require('telescope.builtin').oldfiles()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<space>l", "<cmd>lua require('telescope.builtin').builtin()<CR>", { silent = true })
