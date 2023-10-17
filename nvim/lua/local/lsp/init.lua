@@ -45,7 +45,9 @@ local on_attach = function(client, bufnr)
 	lsp_status.on_attach(client)
 
 	-- Add code nav status bar
-	navic.attach(client, bufnr)
+	if client.server_capabilities.documentSymbolProvider then
+		navic.attach(client, bufnr)
+	end
 
 	-- Add signature help support
 	require("lsp_signature").on_attach()
@@ -128,6 +130,8 @@ local function on_init(client, result)
 		end
 
 		client.notify("workspace/didChangeConfiguration")
+	elseif client.name == "ruff_lsp" then
+		client.server_capabilities.hoverProvider = false
 	end
 
 	return true
@@ -195,9 +199,16 @@ local servers = {
 	tsserver = function(config)
 		return config
 	end,
+	ruff_lsp = function(config)
+		return config
+	end,
+	-- vtsls = function(config)
+	-- 	return config
+	-- end,
 	html = function(config)
 		return config
 	end,
+
 	jsonls = function(config)
 		config.settings = {
 			json = {
