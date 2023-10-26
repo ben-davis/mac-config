@@ -127,7 +127,7 @@ Plug 'theHamsta/nvim-dap-virtual-text'
 " Zenmode, mostly for markdown editing
 Plug 'folke/zen-mode.nvim'
 
-Plug 'ojroques/vim-oscyank'
+Plug 'ojroques/nvim-osc52'
 
 Plug 'folke/which-key.nvim'
 
