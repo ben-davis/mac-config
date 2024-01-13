@@ -57,7 +57,7 @@ Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'ahmedkhalf/project.nvim'
 
 " Dev icons
-" Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
 
 " Theme
 Plug 'folke/tokyonight.nvim'
@@ -140,6 +140,14 @@ Plug 'christoomey/vim-tmux-navigator'
 " CSV highlighting
 Plug 'mechatroner/rainbow_csv'
 
+" Search and replace
+Plug 'nvim-pack/nvim-spectre'
+
+" LSP outline
+Plug 'hedyhli/outline.nvim'
+
+
 call plug#end()
+
 
 

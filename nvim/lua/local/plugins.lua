@@ -60,3 +60,19 @@ require("osc52").setup({
 	trim = false, -- Trim surrounding whitespaces before copy
 	tmux_passthrough = true, -- Use tmux passthrough (requires tmux: set -g allow-passthrough on)
 })
+
+-- LSP outline
+require("outline").setup({
+	outline_window = {
+		position = "left",
+		auto_jump = false,
+		width = 18,
+	},
+	outline_items = {
+		show_symbol_lineno = true,
+	},
+})
+vim.keymap.set({ "n" }, "<leader>o", ":Outline<CR>", { silent = true, noremap = true })
+
+-- Diffview
+vim.keymap.set({ "n" }, "<leader>h", ":DiffviewFileHistory %<CR>", { silent = true, noremap = true })
