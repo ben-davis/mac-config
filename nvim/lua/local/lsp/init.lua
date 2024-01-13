@@ -111,20 +111,11 @@ require("mason-lspconfig").setup({
 
 local function on_init(client, result)
 	if client.name == "pyright" then
-		local project_name = client.config.root_dir:match("^.+/(.+)$")
+		local poetry_env =
+			vim.trim(vim.fn.system('cd "' .. client.config.root_dir .. '"; poetry env info -p 2>/dev/null'))
 
-		-- This is rupalabs
-		if project_name == "server" then
-			client.config.settings.python.pythonPath = "/Users/ben/.local/share/virtualenvs/server-iwTf5wu_/bin/python"
-		elseif project_name == "fastapi-resources" then
-			client.config.settings.python.pythonPath =
-				"/Users/ben/Library/Caches/pypoetry/virtualenvs/fastapi-resources-lgcGwL0s-py3.10/bin/python"
-		elseif project_name == "cool-stuff-api" then
-			client.config.settings.python.pythonPath =
-				"/Users/ben/Library/Caches/pypoetry/virtualenvs/cool-stuff-api-yzxDkLTv-py3.10/bin/python"
-		elseif project_name == "rightmove-scraper" then
-			client.config.settings.python.pythonPath =
-				"/Users/ben/Library/Caches/pypoetry/virtualenvs/rightmove-scraper-d01ir8p1-py3.10/bin/python"
+		if poetry_env then
+			client.config.settings.python.pythonPath = poetry_env .. "/bin/python"
 		else
 			client.config.settings.python.pythonPath = "/usr/local/opt/python@3.10/libexec/bin/python"
 		end
