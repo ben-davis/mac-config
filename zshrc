@@ -55,6 +55,9 @@ export PATH="$(brew --prefix)/opt/openssl/bin:$PATH"
 # QT
 export PATH="/opt/homebrew/opt/qt5/bin:$PATH"
 
+# Go binaries
+export PATH="~/dev/.go/bin:$PATH"
+
 # Apple is deprecating SSL so homebrew doesn't add it to the library path by default, so manually patching here
 #export LDFLAGS="-L$(brew --prefix)/opt/openssl/lib"
 #export CPPFLAGS="-I$(brew --prefix)/opt/openssl/include"
