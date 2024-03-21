@@ -66,13 +66,45 @@ require("outline").setup({
 	outline_window = {
 		position = "left",
 		auto_jump = false,
-		width = 18,
+		width = 14,
 	},
 	outline_items = {
 		show_symbol_lineno = true,
 	},
 })
 vim.keymap.set({ "n" }, "<leader>o", ":Outline<CR>", { silent = true, noremap = true })
+vim.keymap.set({ "n" }, "<leader>O", ":OutlineFocus<CR>", { silent = true, noremap = true })
 
 -- Diffview
 vim.keymap.set({ "n" }, "<leader>h", ":DiffviewFileHistory %<CR>", { silent = true, noremap = true })
+
+-- GPT
+local config = {
+	api_host_cmd = "echo http://localhost:11434",
+	api_key_cmd = "echo ollama",
+	openai_params = {
+		-- model = "codellama:13b",
+		model = "deepseek-coder:33b",
+	},
+}
+
+require("chatgpt").setup(config)
+
+-- LLMs
+-- require("llm").setup({
+-- 	backend = "ollama",
+-- 	model = "codellama:13b",
+-- 	accept_keymap = "<Tab>",
+-- 	dismiss_keymap = "<S-Tab>",
+-- 	url = "http://localhost:11434/api/generate",
+-- 	request_body = {
+-- 		options = {
+-- 			temperature = 0.2,
+-- 			top_p = 0.95,
+-- 		},
+-- 	},
+-- 	enable_suggestions_on_startup = false,
+-- 	lsp = {
+-- 		bin_path = vim.api.nvim_call_function("stdpath", { "data" }) .. "/mason/bin/llm-ls",
+-- 	},
+-- })

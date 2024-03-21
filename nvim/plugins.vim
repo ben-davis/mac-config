@@ -146,6 +146,10 @@ Plug 'nvim-pack/nvim-spectre'
 " LSP outline
 Plug 'hedyhli/outline.nvim'
 
+" GPT & LLMs
+Plug 'jackMort/ChatGPT.nvim'
+Plug 'huggingface/llm.nvim'
+
 
 call plug#end()
 

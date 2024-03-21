@@ -1,6 +1,7 @@
 local utils = require("telescope.utils")
 local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
+local fb_actions = require("telescope._extensions.file_browser.actions")
 
 require("telescope").setup({
 	defaults = {
@@ -26,6 +27,23 @@ require("telescope").setup({
 			-- disables netrw and use telescope-file-browser in its place
 			hijack_netrw = true,
 			select_buffer = true,
+			mappings = {
+				["n"] = {
+					["<S-c>"] = fb_actions.create,
+					["<S-r>"] = fb_actions.rename,
+					["<S-m>"] = fb_actions.move,
+					["<S-y>"] = fb_actions.copy,
+					["<S-d>"] = fb_actions.remove,
+					["<S-o>"] = fb_actions.open,
+					["<S-g>"] = fb_actions.goto_parent_dir,
+					["<S-e>"] = fb_actions.goto_home_dir,
+					["<S-w>"] = fb_actions.goto_cwd,
+					["<S-t>"] = fb_actions.change_cwd,
+					["<S-f>"] = fb_actions.toggle_browser,
+					["<S-h>"] = fb_actions.toggle_hidden,
+					["<S-s>"] = fb_actions.toggle_all,
+				},
+			},
 		},
 	},
 })
