@@ -11,9 +11,14 @@ windows:
       root: ~/dev/git/cool-stuff-app
       layout: main-vertical
       panes:
-        - nvim -c ":terminal" -c ":call feedkeys(\"inpm run web:serve\<CR>\", \"t\")" -c ":file web-serve" -c ":terminal" -c ":call feedkeys(\"inpx expo start\<CR>\", \"t\")" -c ":file app-serve"
+        - nvim -c ":terminal" -c ":call feedkeys(\"inpm run web:serve\<CR>\<ESC>\", \"t\")" -c ":file web-serve" -c ":terminal" -c ":call feedkeys(\"inpx expo start\<CR>\", \"t\")" -c ":file app-serve"
   - mac-config:
       root: ~/dev/git/mac-config
+      layout: main-vertical
+      panes:
+        - nvim
+  - rupa:
+      root: ~/dev/git/rupalabs
       layout: main-vertical
       panes:
         - nvim
