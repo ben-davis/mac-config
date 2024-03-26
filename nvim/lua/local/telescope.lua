@@ -69,7 +69,12 @@ vim.api.nvim_set_keymap("n", "<space>p", "<cmd>lua require('telescope.builtin').
 vim.api.nvim_set_keymap("n", "<space>f", "<cmd>lua require('telescope.builtin').live_grep()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<space>m", "<cmd>lua require('telescope.builtin').oldfiles()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<space>l", "<cmd>lua require('telescope.builtin').builtin()<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<space>b", "<cmd>lua require('telescope.builtin').buffers()<CR>", { silent = true })
+vim.api.nvim_set_keymap(
+	"n",
+	"<space>b",
+	"<cmd>lua require('telescope.builtin').buffers({ sort_mru = true, ignore_current_buffer = true })<CR>",
+	{ silent = true }
+)
 vim.api.nvim_set_keymap(
 	"n",
 	"<space>/",
