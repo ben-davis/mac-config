@@ -76,7 +76,9 @@ vim.keymap.set({ "n" }, "<leader>o", ":Outline<CR>", { silent = true, noremap = 
 vim.keymap.set({ "n" }, "<leader>O", ":OutlineFocus<CR>", { silent = true, noremap = true })
 
 -- Diffview
-vim.keymap.set({ "n" }, "<leader>h", ":DiffviewFileHistory %<CR>", { silent = true, noremap = true })
+vim.keymap.set({ "n" }, "<leader>h", ":DiffviewFileHistory<CR>", { silent = true, noremap = true })
+vim.keymap.set({ "n" }, "<leader>H", ":DiffviewFileHistory %<CR>", { silent = true, noremap = true })
+vim.keymap.set({ "n" }, "<leader>G", ":DiffviewOpen<CR>", { silent = true, noremap = true })
 
 -- GPT
 local config = {
@@ -84,7 +86,13 @@ local config = {
 	api_key_cmd = "echo ollama",
 	openai_params = {
 		-- model = "codellama:13b",
-		model = "deepseek-coder:33b",
+		-- model = "deepseek-coder:6.7b",
+		model = "gemma:7b",
+	},
+	openai_edit_params = {
+		-- model = "codellama:13b",
+		-- model = "deepseek-coder:6.7b",
+		model = "gemma:7b",
 	},
 }
 
