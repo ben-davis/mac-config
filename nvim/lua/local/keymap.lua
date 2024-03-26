@@ -57,4 +57,4 @@ vim.keymap.set("n", "k", "gk")
 
 -- Easier tab management
 vim.keymap.set({ "n", "t" }, "<leader>n", ":tabnew<CR>", { noremap = true, silent = true })
-vim.keymap.set({ "n", "t" }, "<leader>c", ":tabclose<CR>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "t" }, "<leader>C", ":tabclose<CR>", { noremap = true, silent = true })
