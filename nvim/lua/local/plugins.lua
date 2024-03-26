@@ -64,7 +64,7 @@ require("osc52").setup({
 -- LSP outline
 require("outline").setup({
 	outline_window = {
-		position = "left",
+		position = "right",
 		auto_jump = false,
 		width = 14,
 	},

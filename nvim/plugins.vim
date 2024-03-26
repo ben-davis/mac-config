@@ -56,6 +56,9 @@ Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'ahmedkhalf/project.nvim'
 
+" Explorer
+Plug 'nvim-neo-tree/neo-tree.nvim'
+
 " Dev icons
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 
