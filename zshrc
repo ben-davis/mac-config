@@ -35,11 +35,8 @@ export PATH=$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH
 # Make brew python default
 export PATH="$(brew --prefix)/opt/python/libexec/bin:$PATH"
 
-# TEMP: Use 3.10 by default (until brew python default is upgraded to 3.10)
-export PATH="$(brew --prefix)/opt/python@3.10/bin:/Users/ben/Library/Python/3.10/bin:$PATH"
-
-# Contains symlinks for `python` (above has links for `python3`)
-export PATH="$(brew --prefix)/opt/python@3.10/libexec/bin:$PATH"
+# Make brew clang default
+export PATH="$(brew --prefix)/Cellar/llvm/17.0.6_1/bin:$PATH"
 
 # Make node 12 the default
 # NOTE: I don't know why I made node12 the default but it's wildly out of date.
