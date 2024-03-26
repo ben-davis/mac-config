@@ -1,9 +1,9 @@
 -- vim-test configuration
-vim.g["test#strategy"] = "neovim"
+vim.g["test#strategy"] = "neovim_sticky"
 vim.g["test#python#runner"] = "pytest"
 vim.g["term#preserve_screen"] = 0
 
-vim.g["test#neovim#term_position"] = "botright 15"
+vim.g["test#neovim#term_position"] = "botright 25"
 
 local function get_pytest_exec(project)
 	local breakpoints = require("dap.breakpoints").get() or {}

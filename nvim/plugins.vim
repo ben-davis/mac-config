@@ -64,7 +64,7 @@ Plug 'folke/tokyonight.nvim'
 Plug 'Shatur/neovim-ayu'
 
 " " Git support
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " " Adds GBrowse command to fugitive
 " Plug 'tpope/vim-rhubarb'
 " " Show diffs
@@ -152,6 +152,7 @@ Plug 'huggingface/llm.nvim'
 
 
 call plug#end()
+
 
 
 
