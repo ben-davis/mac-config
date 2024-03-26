@@ -50,4 +50,3 @@ key_bindings:
   - { key: Return, mods: Alt, action: ToggleSimpleFullscreen }
 window:
   option_as_alt: "OnlyLeft"
-
