@@ -70,7 +70,7 @@ Plug 'tpope/vim-fugitive'
 " " Show diffs
 Plug 'sindrets/diffview.nvim'
 " " For blames
-" Plug 'rhysd/git-messenger.vim'
+Plug 'rhysd/git-messenger.vim'
 
 " Git signs
 Plug 'lewis6991/gitsigns.nvim'
@@ -152,7 +152,6 @@ Plug 'huggingface/llm.nvim'
 
 
 call plug#end()
-
 
 
 
