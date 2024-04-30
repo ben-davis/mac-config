@@ -2,7 +2,9 @@
 require("nvim-treesitter.configs").setup({
 	ensure_installed = "all",
 	-- phpdoc doesn't support arm
-	ignore_install = { "markdown", "phpdoc" },
+	-- ignore_install = { "markdown", "phpdoc" },
+	-- NOTE: I previously had markdown disabled in treesitter as it was slow
+	ignore_install = { "phpdoc" },
 	highlight = {
 		enable = true,
 	},
