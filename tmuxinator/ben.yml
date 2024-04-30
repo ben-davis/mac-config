@@ -12,6 +12,16 @@ windows:
       layout: main-vertical
       panes:
         - nvim -c ":terminal" -c ":call feedkeys(\"inpm run web:serve\<CR>\<ESC>\", \"t\")" -c ":file web-serve" -c ":terminal" -c ":call feedkeys(\"inpx expo start\<CR>\", \"t\")" -c ":file app-serve"
+  - cool-stuff-ai:
+      root: ~/dev/git/cool-stuff-ai
+      layout: main-vertical
+      panes:
+        - nvim
+  - fastapi-resources:
+      root: ~/dev/git/fastapi-resources
+      layout: main-vertical
+      panes:
+        - nvim
   - mac-config:
       root: ~/dev/git/mac-config
       layout: main-vertical
