@@ -8,6 +8,9 @@ vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSi
 vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
 
 require("neo-tree").setup({
+	-- Enabling git creates tons of UI lag
+	enable_git_status = false,
+	enable_diagnostics = false,
 	buffers = {
 		follow_current_file = {
 			enabled = true,
