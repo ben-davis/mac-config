@@ -68,7 +68,7 @@ export LDFLAGS="-L$(brew --prefix)/opt/zlib/lib -L$(brew --prefix)/opt/node@12/l
 export CPPFLAGS="-I$(brew --prefix)/opt/zlib/include -I$(brew --prefix)/opt/node@12/include -I$(brew --prefix openssl)/include"
 
 # Disable brew autoupdating every time you run install
-HOMEBREW_NO_AUTO_UPDATE=0
+HOMEBREW_NO_AUTO_UPDATE=1
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
