@@ -78,6 +78,9 @@ Plug 'rhysd/git-messenger.vim'
 " Git signs
 Plug 'lewis6991/gitsigns.nvim'
 
+" GH integration
+Plug 'pwntester/octo.nvim'
+
 " Testing
 Plug 'janko/vim-test'
 
@@ -123,6 +126,7 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'rcarriga/nvim-notify'
 
 " DAP
+Plug 'nvim-neotest/nvim-nio'
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'theHamsta/nvim-dap-virtual-text'
@@ -151,7 +155,7 @@ Plug 'hedyhli/outline.nvim'
 
 " GPT & LLMs
 Plug 'jackMort/ChatGPT.nvim'
-Plug 'huggingface/llm.nvim'
+Plug 'huynle/ogpt.nvim'
 
 
 call plug#end()
