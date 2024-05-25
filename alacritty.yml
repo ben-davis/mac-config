@@ -50,3 +50,4 @@ key_bindings:
   - { key: F, mods: Alt|Shift, action: ToggleSimpleFullscreen }
 window:
   option_as_alt: "OnlyLeft"
+  decorations: buttonless

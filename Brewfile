@@ -11,12 +11,21 @@ tap "koekeishiya/formulae"
 tap "microsoft/mssql-preview"
 tap "shopify/shopify"
 tap "universal-ctags/universal-ctags"
+tap "FelixKratz/formulae"
+tap "koekeishiya/formulae"
+
 brew "python@3.10"
 brew "python@3.11"
+brew "python@3.12"
 brew "autojump"
 brew "awscli"
 brew "bash"
 brew "bat"
+
+# Focus borders
+brew "borders"
+brew "yabai"
+
 brew "bfg"
 brew "cloc"
 brew "cmake"

@@ -69,6 +69,15 @@ echo "--------- Symlinking alacritty"
 mkdir -p ~/.config/alacritty
 ln -s -f ~/dev/git/mac-config/alacritty.yml ~/.config/alacritty/alacritty.yml
 
+echo "--------- Symlinking yabai"
+ln -s -f ~/dev/git/mac-config/yabai ~/.config/yabai
+
+echo "--------- Symlinking sketchybar"
+ln -s -f ~/dev/git/mac-config/sketchybar ~/.config/sketchybar
+
+echo "--------- Symlinking skhdrc"
+ln -s -f ~/dev/git/mac-config/skhd ~/.config/skhd
+
 echo "--------- Installing global Python packages"
 pip install -r ./requirements.txt
 
