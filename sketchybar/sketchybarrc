@@ -70,11 +70,12 @@ source "$ITEM_DIR/front_app.sh"
 source "$ITEM_DIR/spotify.sh"
 
 # Right
-source "$ITEM_DIR/calendar.sh"
-source "$ITEM_DIR/github.sh"
+source "$ITEM_DIR/date.sh"
+source "$ITEM_DIR/weather.sh"
 source "$ITEM_DIR/battery.sh"
 source "$ITEM_DIR/volume.sh"
-source "$ITEM_DIR/cpu.sh"
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/media.sh"
 
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update

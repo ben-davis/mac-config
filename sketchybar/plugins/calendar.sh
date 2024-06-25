@@ -1,3 +1,8 @@
 #!/bin/bash
+NEXT_EVENT=$(icalBuddy -eed -n -nc -nrd -ea -iep datetime,title -b '' -ps "| @ |" -li 1 eventsToday)
 
-sketchybar --set $NAME icon="$(date '+%a %d. %b')" label="$(date '+%H:%M')"
+if [ "$NEXT_EVENT" == "" ]; then
+  sketchybar --set $NAME drawing=off
+else
+  sketchybar --set $NAME label="$NEXT_EVENT" drawing=on
+fi
