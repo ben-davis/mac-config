@@ -100,6 +100,7 @@ Plug 'tpope/vim-commentary'
 " DB access
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'kristijanhusak/vim-dadbod-completion'
 
 " Make it easy to use lazygit inside of vim
 Plug 'kdheepak/lazygit.nvim'
