@@ -41,12 +41,10 @@ cmp.setup({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = false,
 		}),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.complete_common_string()
-			end
-			fallback()
-		end),
+		["<Tab>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Insert,
+			select = true,
+		}),
 	},
 	sources = {
 		{ name = "nvim_lsp" },
@@ -72,6 +70,9 @@ cmp.setup({
 		cmp.config.compare.sort_text,
 		cmp.config.compare.length,
 		cmp.config.compare.order,
+	},
+	experimental = {
+		ghost_text = true,
 	},
 })
 
