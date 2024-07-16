@@ -65,6 +65,7 @@ Plug 'kyazdani42/nvim-web-devicons' " for file icons
 " Theme
 Plug 'folke/tokyonight.nvim'
 Plug 'Shatur/neovim-ayu'
+Plug 'scottmckendry/cyberdream.nvim'
 
 " " Git support
 Plug 'tpope/vim-fugitive'
