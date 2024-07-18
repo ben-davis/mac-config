@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SPACE_ICONS=("Browsing" "Work" "Slack" "Finder" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15")
+SPACE_ICONS=("Browsing" "Work" "Slack" "Music" "Finder" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15")
 
 # Destroy space on right click, focus space on left click.
 # New space by left clicking separator (>)
