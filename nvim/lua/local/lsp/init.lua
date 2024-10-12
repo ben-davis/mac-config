@@ -239,6 +239,9 @@ local servers = {
 			{ "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp" }
 		return config
 	end,
+	hls = function(config)
+		return config
+	end,
 }
 
 for name, update_config in pairs(servers) do

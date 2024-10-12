@@ -126,6 +126,8 @@ Plug 'nvim-lualine/lualine.nvim'
 " UI
 Plug 'MunifTanjim/nui.nvim'
 Plug 'rcarriga/nvim-notify'
+Plug 'stevearc/dressing.nvim'
+
 
 " DAP
 Plug 'nvim-neotest/nvim-nio'
@@ -158,7 +160,15 @@ Plug 'hedyhli/outline.nvim'
 " GPT & LLMs
 Plug 'jackMort/ChatGPT.nvim'
 Plug 'huynle/ogpt.nvim'
+Plug 'stevearc/dressing.nvim'
+Plug 'olimorris/codecompanion.nvim'
 
+" Location lists
+Plug 'folke/trouble.nvim'
+
+" Note taking
+" Plug 'lua-utils'
+Plug 'nvim-neorg/neorg'
 
 call plug#end()
 

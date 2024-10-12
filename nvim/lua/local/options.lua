@@ -104,6 +104,7 @@ vim.api.nvim_exec(
         autocmd Filetype elixir setlocal ts=2 sw=2
         autocmd Filetype glsl setlocal ts=2 sw=2
         autocmd Filetype swift setlocal ts=2 sw=2
+        autocmd Filetype rules setlocal ts=2 sw=2
     augroup END
   ]],
 	true

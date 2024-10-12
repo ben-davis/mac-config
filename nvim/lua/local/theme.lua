@@ -1,5 +1,5 @@
 vim.o.background = "dark"
-vim.g["tokyonight_style"] = "moon"
+vim.g["tokyonight_style"] = "night"
 vim.g["tokyonight_lualine_bold"] = true
 vim.g["tokyonight_italic_functions"] = 1
 vim.g["tokyonight_italic_keywords"] = 1
@@ -11,6 +11,12 @@ vim.o.termguicolors = true
 
 require("tokyonight").setup({
 	transparent = true,
+	hide_inactive_statusline = true,
+	dim_inactive = true,
+
+	on_colors = function(colors)
+		colors.bg_statusline = nil
+	end,
 	-- Borderless telescope
 	on_highlights = function(hl, c)
 		local prompt = "#2d3149"
@@ -44,19 +50,5 @@ require("tokyonight").setup({
 	end,
 })
 
-require("cyberdream").setup({
-	-- Enable transparent backgrcund
-	transparent = true,
-	italic_comments = true,
-	hide_fillchars = true,
-	borderless_telescope = true,
-	terminal_colors = true,
-	extensions = {
-		telescope = true,
-		notify = true,
-		mini = true,
-	},
-})
-
 -- Set after so that the transparent stuff is set properly
-vim.api.nvim_command("colorscheme tokyonight")
+vim.api.nvim_command("colorscheme tokyonight-night")
