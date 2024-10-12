@@ -114,11 +114,17 @@ local function on_init(client, result)
 		local poetry_env =
 			vim.trim(vim.fn.system('cd "' .. client.config.root_dir .. '"; poetry env info -p 2>/dev/null'))
 
-		if poetry_env then
+		local venv_python_path = client.config.root_dir .. "/.venv/bin/python"
+
+		if vim.fn.filereadable(venv_python_path) == 1 then
+			client.config.settings.python.pythonPath = venv_python_path
+		elseif poetry_env then
 			client.config.settings.python.pythonPath = poetry_env .. "/bin/python"
 		else
 			client.config.settings.python.pythonPath = "/usr/local/opt/python@3.10/libexec/bin/python"
 		end
+
+		vim.notify(client.config.settings.python.pythonPath)
 
 		client.notify("workspace/didChangeConfiguration")
 	elseif client.name == "ruff_lsp" then
