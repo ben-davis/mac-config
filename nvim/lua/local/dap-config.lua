@@ -14,100 +14,120 @@ local dapui = require("dapui")
 -- }
 
 dap.adapters.python = function(cb, config)
-  if config.request == "attach" then
-    local port = (config.connect or config).port
-    cb({
-      type = "server",
-      port = assert(port, "`connect.port` is required for a python `attach` configuration"),
-      host = (config.connect or config).host or "127.0.0.1",
-      options = {
-        source_filetype = "python",
-      },
-    })
-  else
-    cb({
-      type = "executable",
-      command = "python",
-      args = { "-m", "debugpy.adapter" },
-      options = {
-        source_filetype = "python",
-      },
-    })
-  end
+	if config.request == "attach" then
+		local port = (config.connect or config).port
+		cb({
+			type = "server",
+			port = assert(port, "`connect.port` is required for a python `attach` configuration"),
+			host = (config.connect or config).host or "127.0.0.1",
+			options = {
+				source_filetype = "python",
+			},
+		})
+	else
+		cb({
+			type = "executable",
+			-- Will fail if debugpy is not installed
+			command = "python",
+			args = { "-m", "debugpy.adapter" },
+			options = {
+				source_filetype = "python",
+			},
+		})
+	end
+end
+
+dap.adapters.uv = function(cb, config)
+	cb({
+		type = "executable",
+		command = "/Users/ben/.cargo/bin/uv",
+		args = { "run", "python", "-m", "debugpy.adapter" },
+		options = {
+			source_filetype = "python",
+		},
+	})
 end
 
 dap.configurations.python = {
-  {
-    type = "python",
-    request = "launch",
-    name = "System",
-    program = "${file}",
-    -- Opens a terminal connected to the running python process so we can see output
-    console = "integratedTerminal",
-  },
-  {
-    type = "python",
-    request = "attach",
-    name = "Tests",
-    port = 5679,
-    justMyCode = false,
-  },
-  {
-    type = "python",
-    request = "attach",
-    name = "Rupa - Server",
-    port = 5678,
-    pathMappings = {
-      {
-        localRoot = "/Users/ben/dev/git/rupalabs/server",
-        remoteRoot = "/app",
-      },
-    },
-  },
-  {
-    type = "python",
-    request = "attach",
-    name = "Rupa - Tests",
-    port = 5679,
-    pathMappings = {
-      {
-        localRoot = "/Users/ben/dev/git/rupalabs/server",
-        remoteRoot = "/app",
-      },
-    },
-  },
-  {
-    type = "python",
-    request = "attach",
-    name = "Adventure Text",
-    pathMappings = {
-      {
-        localRoot = "/Users/ben/dev/git/adventure-text-api",
-        remoteRoot = "/code",
-      },
-    },
-  },
+	{
+		type = "python",
+		request = "launch",
+		name = "Run file",
+		program = "${file}",
+		-- Opens a terminal connected to the running python process so we can see output
+		console = "integratedTerminal",
+	},
+	{
+		type = "uv",
+		request = "launch",
+		name = "Run file with uv",
+		program = "${file}",
+		-- Opens a terminal connected to the running python process so we can see output
+		console = "integratedTerminal",
+	},
+	{
+		type = "python",
+		request = "attach",
+		name = "Tests",
+		port = 5679,
+		justMyCode = false,
+	},
+	{
+		type = "python",
+		request = "attach",
+		name = "Rupa - Server",
+		port = 5678,
+		pathMappings = {
+			{
+				localRoot = "/Users/ben/dev/git/rupalabs/server",
+				remoteRoot = "/app",
+			},
+		},
+	},
+	{
+		type = "python",
+		request = "attach",
+		name = "Rupa - Tests",
+		port = 5679,
+		pathMappings = {
+			{
+				localRoot = "/Users/ben/dev/git/rupalabs/server",
+				remoteRoot = "/app",
+			},
+		},
+	},
+	{
+		type = "python",
+		request = "attach",
+		name = "Adventure Text",
+		pathMappings = {
+			{
+				localRoot = "/Users/ben/dev/git/adventure-text-api",
+				remoteRoot = "/code",
+			},
+		},
+	},
 }
 
 -- Node
 
 dap.adapters.node2 = {
-  type = "executable",
-  command = "node",
-  args = { os.getenv("HOME") .. "/dev/git/vscode-node-debug2/out/src/nodeDebug.js" },
+	type = "executable",
+	command = "node",
+	args = { os.getenv("HOME") .. "/dev/git/vscode-node-debug2/out/src/nodeDebug.js" },
 }
 
 dap.configurations.typescript = {
-  {
-    name = "Launch",
-    type = "node2",
-    request = "launch",
-    program = "${file}",
-    cwd = vim.fn.getcwd(),
-    sourceMaps = true,
-    protocol = "inspector",
-    console = "integratedTerminal",
-  },
+	{
+		name = "Launch",
+		type = "node2",
+		request = "launch",
+		program = "${file}",
+		cwd = vim.fn.getcwd(),
+		sourceMaps = true,
+		protocol = "inspector",
+		console = "integratedTerminal",
+	},
 }
 
 dap.defaults.fallback.terminal_win_cmd = "10vsplit new | set winfixwidth"
@@ -117,7 +137,7 @@ require("nvim-dap-virtual-text").setup()
 
 -- Automatically open dapui when a debug session is connected
 dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
+	dapui.open()
 end
 
 vim.api.nvim_set_keymap("n", "<leader>D", "<cmd>lua require('dapui').toggle()<CR>", { silent = true })
@@ -140,17 +160,17 @@ vim.api.nvim_set_keymap("n", "<leader>dr", "<cmd>lua require('dap').run_last()<C
 
 vim.api.nvim_set_keymap("n", "<leader>dk", "<cmd>lua require('dap.ui.variables').visual_hover()<CR>", { silent = true })
 vim.api.nvim_set_keymap(
-  "n",
-  "<leader>dK",
-  "<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>",
-  { silent = true }
+	"n",
+	"<leader>dK",
+	"<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>",
+	{ silent = true }
 )
 
 vim.api.nvim_set_keymap(
-  "n",
-  "<leader>dx",
-  "<cmd>lua require'telescope'.extensions.dap.commands{}<CR>",
-  { silent = true }
+	"n",
+	"<leader>dx",
+	"<cmd>lua require'telescope'.extensions.dap.commands{}<CR>",
+	{ silent = true }
 )
 
 vim.api.nvim_set_keymap("n", "<leader>df", "<cmd>lua require'telescope'.extensions.dap.frames{}<CR>", { silent = true })
