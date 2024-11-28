@@ -40,3 +40,6 @@ windows:
   - shell:
       root: ~
       layout: main-vertical
+  - ledger:
+      root: ~/dev/git/ledger
+      layout: main-vertical
