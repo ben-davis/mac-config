@@ -123,3 +123,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -f "/Users/ben/.ghcup/env" ] && . "/Users/ben/.ghcup/env" # ghcup-env
 
 export LEDGER_FILE=/Users/ben/dev/git/ledger/all-years.journal
+
+# RUPA
+export AWS_PROFILE="PowerUserAndStsAssumeRole-590183878472"
