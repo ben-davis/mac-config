@@ -31,19 +31,6 @@ if ! grep -q "/opt/homebrew/bin/zsh" /etc/shells ; then
 fi
 chsh -s /opt/homebrew/bin/zsh
 
-if [ ! -d ~/.oh-my-zsh ]; then
-  echo "--------- Install oh-my-zsh"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
-
-if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
-  echo "--------- Install oh-my-zsh plugin: zsh-autosuggestions"
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-fi
-
-echo "--------- Symlinking bencd oh-my-zsh theme"
-ln -s -f ~/dev/git/mac-config/bencd.zsh-theme ~/.oh-my-zsh/themes/bencd.zsh-theme
-
 echo "--------- Symlinking zshrc"
 ln -s -f ~/dev/git/mac-config/zshrc ~/.zshrc
 

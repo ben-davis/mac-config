@@ -2,24 +2,6 @@
 # NOTE: This will only work once the mac-config/install.sh has been run
 # ----------------------------------------------------------------------------
 #
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/ben/.oh-my-zsh
-
-# My custom theme
-ZSH_THEME="bencd"
-
-# oh-my-zsh plugins
-plugins=(
-    git 
-    vi-mode 
-    encode64
-    autojump
-    zsh-autosuggestions
-    poetry
-)
-
-source $ZSH/oh-my-zsh.sh
-
 # Add brew to the path
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
