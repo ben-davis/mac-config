@@ -52,7 +52,7 @@ fi
 
 echo "--------- Symlinking alacritty"
 mkdir -p ~/.config/alacritty
-ln -s -f ~/dev/git/mac-config/alacritty.yml ~/.config/alacritty/alacritty.yml
+ln -s -f ~/dev/git/mac-config/alacritty.toml ~/.config/alacritty/alacritty.toml
 
 echo "--------- Symlinking yabai"
 ln -s -f ~/dev/git/mac-config/yabai ~/.config/yabai
