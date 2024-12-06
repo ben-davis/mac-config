@@ -40,10 +40,6 @@ ln -s -f ~/dev/git/mac-config/fish/fish_plugins ~/.config/fish/fish_plugins
 echo "--------- Install fisher"
 fish -c "fisher update"
 
-# TODO: Look into https://github.com/PatrickF1/fzf.fish?tab=readme-ov-file
-echo "--------- Install fzf key bindings and fuzzy completion"
-fzf --fish | source
-
 if [ ! -d ~/.config ]; then
   echo "--------- Making ~/.config"
   mkdir ~/.config
