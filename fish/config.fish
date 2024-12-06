@@ -85,6 +85,9 @@ if status is-interactive
 
     set -x LEDGER_FILE /Users/ben/dev/git/ledger/all-years.journal
 
+    # Install fzf completions
+    fzf_configure_bindings --directory=\cf
+
     # # Aliases
     abbr -a lg lazygit
     abbr -a vim nvim
