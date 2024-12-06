@@ -22,25 +22,26 @@ fi
 cd ~/dev/git/mac-config
 
 echo "--------- Installing brew packages"
+export HOMEBREW_NO_AUTO_UPDATE=1
 /opt/homebrew/bin/brew bundle install
 
-echo "--------- Setting default shell to zsh"
-if ! grep -q "/opt/homebrew/bin/zsh" /etc/shells ; then
+echo "--------- Setting default shell to fish"
+if ! grep -q "/opt/homebrew/bin/fish" /etc/shells ; then
    # APPEND TO /etc/shells
-   echo "/opt/homebrew/bin/zsh"  | sudo tee -a /etc/shells
+   echo "/opt/homebrew/bin/fish"  | sudo tee -a /etc/shells
 fi
-chsh -s /opt/homebrew/bin/zsh
+chsh -s /opt/homebrew/bin/fish
 
-echo "--------- Symlinking zshrc"
-ln -s -f ~/dev/git/mac-config/zshrc ~/.zshrc
+echo "--------- Symlinking config.fish"
+ln -s -f ~/dev/git/mac-config/fish/config.fish ~/.config/fish/config.fish
+ln -s -f ~/dev/git/mac-config/fish/fish_plugins ~/.config/fish/fish_plugins
 
-echo "--------- Source .zshrc"
-source ~/.zshrc
+echo "--------- Reload shell"
+exec fish -l
 
-if ! [ -f ~/.fzf.zsh ]; then
-  echo "--------- Install fzf key bindings and fuzzy completion"
-  $(brew --prefix)/opt/fzf/install
-fi
+# TODO: Look into https://github.com/PatrickF1/fzf.fish?tab=readme-ov-file
+echo "--------- Install fzf key bindings and fuzzy completion"
+fzf --fish | source
 
 if [ ! -d ~/.config ]; then
   echo "--------- Making ~/.config"
@@ -64,9 +65,6 @@ ln -s -f ~/dev/git/mac-config/sketchybar ~/.config/sketchybar
 
 echo "--------- Symlinking skhdrc"
 ln -s -f ~/dev/git/mac-config/skhd ~/.config/skhd
-
-echo "--------- Installing global Python packages"
-pip install -r ./requirements.txt
 
 echo "--------- Symlinking git config"
 ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
