@@ -23,7 +23,7 @@ cd ~/dev/git/mac-config
 
 echo "--------- Installing brew packages"
 export HOMEBREW_NO_AUTO_UPDATE=1
-/opt/homebrew/bin/brew bundle install
+/opt/homebrew/bin/brew bundle install || true
 
 echo "--------- Setting default shell to fish"
 if ! grep -q "/opt/homebrew/bin/fish" /etc/shells ; then
