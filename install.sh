@@ -38,7 +38,7 @@ ln -s -f ~/dev/git/mac-config/fish/config.fish ~/.config/fish/config.fish
 ln -s -f ~/dev/git/mac-config/fish/fish_plugins ~/.config/fish/fish_plugins
 
 echo "--------- Install fisher"
-fisher update
+fish -c "fisher update"
 
 echo "--------- Reload shell"
 exec fish -l
