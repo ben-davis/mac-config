@@ -40,9 +40,6 @@ ln -s -f ~/dev/git/mac-config/fish/fish_plugins ~/.config/fish/fish_plugins
 echo "--------- Install fisher"
 fish -c "fisher update"
 
-echo "--------- Reload shell"
-exec fish -l
-
 # TODO: Look into https://github.com/PatrickF1/fzf.fish?tab=readme-ov-file
 echo "--------- Install fzf key bindings and fuzzy completion"
 fzf --fish | source
@@ -125,3 +122,7 @@ defaults write com.apple.finder CreateDesktop -bool false
 for app in "Dock" "Finder"; do
   killall "${app}" > /dev/null 2>&1
 done
+
+echo "--------- Reload shell"
+exec fish -l
+
