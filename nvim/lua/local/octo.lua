@@ -17,6 +17,9 @@ require("octo").setup({
 			select_prev_entry = { lhs = "<S-tab>", desc = "move to next changed file" },
 		},
 	},
+	suppress_missing_scope = {
+		projects_v2 = true,
+	},
 })
 
 vim.keymap.set("n", "<space>go", ":Octo actions<CR>", { noremap = true })

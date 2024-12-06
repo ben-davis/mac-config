@@ -193,7 +193,7 @@ local servers = {
 		}
 		return config
 	end,
-	tsserver = function(config)
+	ts_ls = function(config)
 		return config
 	end,
 	ruff_lsp = function(config)
