@@ -67,7 +67,7 @@ echo "--------- Symlinking git config"
 ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
 
 echo "--------- Symlinking tmux.conf"
-ln -s ~/dev/git/mac-config/tmux.conf ~/.tmux.conf
+ln -s -f ~/dev/git/mac-config/tmux.conf ~/.tmux.conf
 
 echo "--------- Symlinking tmuxinator config"
 ln -s -f ~/dev/git/mac-config/tmuxinator ~/.tmuxinator
