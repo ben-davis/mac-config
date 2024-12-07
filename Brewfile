@@ -9,7 +9,7 @@ tap "koekeishiya/formulae"
 tap "FelixKratz/formulae"
 tap "koekeishiya/formulae"
 
-brew "python@3.12"
+brew "python"
 brew "autojump"
 brew "awscli"
 brew "bash"
@@ -93,13 +93,5 @@ cask "raycast"
 cask "slack"
 cask "vlc"
 cask "zoom"
-mas "Blackmagic RAW Speed Test", id: 1466185689
-mas "Infuse", id: 1136220934
-mas "Keynote", id: 409183694
-mas "Logic Pro", id: 634148309
-mas "Magnet", id: 441258766
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "Pixelmator Pro", id: 1289583905
 mas "Roadblock", id: 1051436753
 mas "The Unarchiver", id: 425424353
