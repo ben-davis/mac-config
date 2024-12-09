@@ -5,7 +5,7 @@ if status is-interactive
     # Add brew to the path
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    set brew_prefix = (brew --prefix)
+    set brew_prefix (brew --prefix)
 
     # Use homebrew installed bin
     fish_add_path \
@@ -31,24 +31,11 @@ if status is-interactive
         # Poetry globals (TODO: Check this is needed)
         "$HOME/.poetry/bin"
 
-    # Apple is deprecating SSL so homebrew doesn't add it to the library path by default, so manually patching here
-    set -x LDFLAGS "-L$brew_prefix/opt/openssl/lib"
-    set -x CPPFLAGS "-I$brew_prefix/opt/openssl/include"
-    set -x LIBRARY_PATH $brew_prefix/opt/openssl/lib/
-
-    # For:
-    # 1. pillow
-    # 2. nvui
-    # 3. openssl (so python postgres works)
-    set -x LDFLAGS "-L$brew_prefix/opt/zlib/lib -L$brew_prefix/opt/node@12/lib -L$brew_prefix/opt/openssl/lib"
-    set -x CPPFLAGS "-I$brew_prefix/opt/zlib/include -I$brew_prefix/opt/node@12/include -I$brew_prefix/opt/openssl/include"
-
     # Disable brew autoupdating every time you run install
     set -x HOMEBREW_NO_AUTO_UPDATE 1
 
     # Support neovim-remote to allow plugins to control neovim. Using it for lazygit inside neovim.
     # NOTE: Not working atm, assuming because nvim5 isn't respecting server name configuration
-
     # if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
     #     alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
     #     set -x VISUAL "nvr -cc split --remote-wait +'set bufhidden=wipe'"
@@ -66,9 +53,6 @@ if status is-interactive
         /opt/homebrew/opt/ruby/bin \
         /opt/homebrew/lib/ruby/gems/3.1.0/bin \
         /opt/homebrew/lib/ruby/gems/3.2.0/bin
-
-    set -x LDFLAGS "-L/opt/homebrew/opt/ruby/lib"
-    set -x CPPFLAGS "-I/opt/homebrew/opt/ruby/include"
 
     # Used by the spotify tmux plugin to make it use apple music
     set -x MUSIC_APP "Music"
