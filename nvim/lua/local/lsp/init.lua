@@ -127,7 +127,7 @@ local function on_init(client, result)
 		vim.notify(client.config.settings.python.pythonPath)
 
 		client.notify("workspace/didChangeConfiguration")
-	elseif client.name == "ruff_lsp" then
+	elseif client.name == "ruff" then
 		client.server_capabilities.hoverProvider = false
 	end
 
@@ -196,7 +196,10 @@ local servers = {
 	ts_ls = function(config)
 		return config
 	end,
-	ruff_lsp = function(config)
+	ruff = function(config)
+		return config
+	end,
+	ruby_lsp = function(config)
 		return config
 	end,
 	-- vtsls = function(config)
