@@ -87,3 +87,8 @@ vim.keymap.set({ "n" }, "<leader>H", ":DiffviewFileHistory %<CR>", { silent = tr
 vim.keymap.set({ "n" }, "<leader>G", ":DiffviewOpen<CR>", { silent = true, noremap = true })
 
 -- require("neorg").setup()
+
+require("neo-zoom").setup()
+vim.keymap.set("n", "<leader>Z", function()
+	vim.cmd("NeoZoomToggle")
+end, { silent = true, nowait = true })

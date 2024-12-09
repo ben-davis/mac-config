@@ -69,6 +69,7 @@ Plug 'scottmckendry/cyberdream.nvim'
 
 " " Git support
 Plug 'tpope/vim-fugitive'
+Plug 'NeogitOrg/neogit'
 " " Adds GBrowse command to fugitive
 " Plug 'tpope/vim-rhubarb'
 " " Show diffs
@@ -169,6 +170,9 @@ Plug 'folke/trouble.nvim'
 " Note taking
 " Plug 'lua-utils'
 Plug 'nvim-neorg/neorg'
+
+" Temporarily zoom window
+Plug 'nyngwang/NeoZoom.lua'
 
 call plug#end()
 

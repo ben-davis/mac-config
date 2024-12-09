@@ -14,6 +14,7 @@ brew "autojump"
 brew "awscli"
 brew "bash"
 brew "bat"
+brew "bat-extras"
 
 # Focus borders
 brew "borders"
