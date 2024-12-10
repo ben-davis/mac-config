@@ -54,6 +54,7 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'TC72/telescope-tele-tabby.nvim'
 Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug 'ahmedkhalf/project.nvim'
 
 " Explorer

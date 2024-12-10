@@ -16,6 +16,7 @@ require("telescope").setup({
 			-- horizontal = { width = 0.9999, height = 0.9999, preview_width = 0.5 },
 		},
 		layout_strategy = "vertical",
+		file_ignore_patterns = { "%.rbi" },
 	},
 	extensions = {
 		fzf = {
@@ -68,7 +69,12 @@ end
 
 -- VIM Lists
 vim.api.nvim_set_keymap("n", "<space>p", "<cmd>lua require('telescope.builtin').find_files()<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<space>f", "<cmd>lua require('telescope.builtin').live_grep()<CR>", { silent = true })
+vim.api.nvim_set_keymap(
+	"n",
+	"<space>f",
+	"<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+	{ silent = true }
+)
 vim.api.nvim_set_keymap("n", "<space>m", "<cmd>lua require('telescope.builtin').oldfiles()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<space>l", "<cmd>lua require('telescope.builtin').builtin()<CR>", { silent = true })
 vim.api.nvim_set_keymap(
