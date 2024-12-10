@@ -82,4 +82,9 @@ if status is-interactive
 
     # Auto start ssh agent
     fish_ssh_agent
+
+    # Work setup
+    if test -d "~/.rx"
+        source ~/.rx/shell_config_fish.config
+    end
 end
