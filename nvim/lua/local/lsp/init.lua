@@ -65,8 +65,7 @@ local on_attach = function(client, bufnr)
 		callback = function()
 			vim.lsp.buf.format({
 				filter = function(client)
-					-- Only support formatting from null-ls or elixirls
-					return client.name == "null-ls" or client.name == "elixirls"
+					return client.name == "null-ls" or client.name == "elixirls" or client.name == "ruby_lsp"
 				end,
 				bufnr = bufnr,
 				timeout_ms = 10000,
@@ -200,6 +199,9 @@ local servers = {
 		return config
 	end,
 	ruby_lsp = function(config)
+		return config
+	end,
+	sorbet = function(config)
 		return config
 	end,
 	-- vtsls = function(config)
