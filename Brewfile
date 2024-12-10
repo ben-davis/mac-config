@@ -28,6 +28,8 @@ brew "socat"
 brew "direnv"
 brew "dust"
 brew "elixir"
+# Better find
+brew "fd"
 brew "fish"
 brew "fisher"
 brew "fmt"
@@ -93,6 +95,7 @@ cask "proxyman"
 cask "raycast"
 cask "slack"
 cask "vlc"
+cask "zerotier-one"
 cask "zoom"
 mas "Roadblock", id: 1051436753
 mas "The Unarchiver", id: 425424353
