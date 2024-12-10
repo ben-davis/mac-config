@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-# NOTE: This will only work once the mac-config/install.sh has been run
+# NOTEruby_lsp: This will only work once the mac-config/install.sh has been run
 # ----------------------------------------------------------------------------
 if status is-interactive
     # Add brew to the path
@@ -79,4 +79,7 @@ if status is-interactive
     direnv hook fish | source
 
     set fish_greeting
+
+    # Auto start ssh agent
+    fish_ssh_agent
 end
