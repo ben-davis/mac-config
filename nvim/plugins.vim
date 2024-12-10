@@ -148,7 +148,7 @@ Plug 'folke/which-key.nvim'
 Plug 'rmagatti/goto-preview'
 
 " So vim window movements will move tmux panes
-Plug 'christoomey/vim-tmux-navigator'
+" Plug 'christoomey/vim-tmux-navigator'
 
 " CSV highlighting
 Plug 'mechatroner/rainbow_csv'
