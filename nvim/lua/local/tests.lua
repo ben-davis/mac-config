@@ -35,6 +35,24 @@ local function get_pytest_exec(project)
 	return executable .. command
 end
 
+local function get_rspec_exec(project)
+	local breakpoints = require("dap.breakpoints").get() or {}
+	local does_buffer_have_breakpoints = next(breakpoints) ~= nil
+
+	local command = "bin/rspec"
+
+	local executable = ""
+	if vim.fn.isdirectory(".rx") > 0 then
+		executable = "rx run task -- "
+	end
+
+	-- if does_buffer_have_breakpoints then
+	-- 	command = "python -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m pytest -vv"
+	-- end
+
+	return executable .. command
+end
+
 local function run_test_command(test_command)
 	local cwd = vim.fn.getcwd(0, 0)
 	local project = vim.fn.fnamemodify(cwd, ":t")
@@ -42,6 +60,7 @@ local function run_test_command(test_command)
 
 	-- Set the exec based on the env
 	vim.g["test#python#pytest#executable"] = get_pytest_exec(project)
+	vim.g["test#ruby#rspec#executable"] = get_rspec_exec(project)
 
 	if project == "rupalabs" and filetype == "python" then
 		vim.g["test#project_root"] = "/Users/ben/dev/git/rupalabs/server"
