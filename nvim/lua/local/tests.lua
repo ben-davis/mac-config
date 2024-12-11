@@ -43,7 +43,7 @@ local function get_rspec_exec(project)
 
 	local executable = ""
 	if vim.fn.isdirectory(".rx") > 0 then
-		executable = "rx run task -- "
+		executable = "rx dev task -- "
 	end
 
 	-- if does_buffer_have_breakpoints then
