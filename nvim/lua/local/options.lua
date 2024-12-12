@@ -106,6 +106,7 @@ vim.api.nvim_exec(
         autocmd Filetype swift setlocal ts=2 sw=2
         autocmd Filetype rules setlocal ts=2 sw=2
         autocmd Filetype fish setlocal ts=4 sw=4
+        autocmd Filetype gitcommit setlocal textwidth=0
     augroup END
   ]],
 	true
