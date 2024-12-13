@@ -71,6 +71,8 @@ Plug 'scottmckendry/cyberdream.nvim'
 " " Git support
 Plug 'tpope/vim-fugitive'
 Plug 'NeogitOrg/neogit'
+" For MRs, etc
+Plug 'harrisoncramer/gitlab.nvim'
 " " Adds GBrowse command to fugitive
 " Plug 'tpope/vim-rhubarb'
 " " Show diffs
