@@ -92,3 +92,5 @@ require("neo-zoom").setup()
 vim.keymap.set("n", "<leader>Z", function()
 	vim.cmd("NeoZoomToggle")
 end, { silent = true, nowait = true })
+
+require("gitlab").setup()
