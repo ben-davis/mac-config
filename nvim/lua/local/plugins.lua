@@ -93,4 +93,5 @@ vim.keymap.set("n", "<leader>Z", function()
 	vim.cmd("NeoZoomToggle")
 end, { silent = true, nowait = true })
 
+require("diffview")
 require("gitlab").setup()
