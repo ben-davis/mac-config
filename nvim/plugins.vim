@@ -24,8 +24,6 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'ray-x/lsp_signature.nvim'
 " LSP-icons in autocomplete
 Plug 'onsails/lspkind-nvim'
-" LSP diagnostics as floating lines
-Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
 
 " Formatting
 Plug 'jose-elias-alvarez/null-ls.nvim'
