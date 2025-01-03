@@ -17,10 +17,17 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 -- require("lsp_lines").setup()
 
 -- Use icons for LSP gutter diagnostics
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+local signs = {
+	[vim.diagnostic.severity.ERROR] = " ",
+	[vim.diagnostic.severity.WARN] = " ",
+	[vim.diagnostic.severity.HINT] = " ",
+	[vim.diagnostic.severity.INFO] = " ",
+}
+
+for severity, icon in pairs(signs) do
+	local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
+	name = "DiagnosticSign" .. name
+	vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
 end
 
 local formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -121,8 +128,6 @@ local function on_init(client, result)
 		else
 			client.config.settings.python.pythonPath = "/usr/local/opt/python@3.10/libexec/bin/python"
 		end
-
-		vim.notify(client.config.settings.python.pythonPath)
 
 		client.notify("workspace/didChangeConfiguration")
 	elseif client.name == "ruff" then
