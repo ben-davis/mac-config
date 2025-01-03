@@ -1,0 +1,52 @@
+{
+  "startDate": "2021",
+  "period": "yearly",
+  "reports": [
+    {
+      "name": "income statement",
+      "cmd": "hledger incomestatement  "
+    },
+    {
+      "name": "balance sheet",
+      "cmd": "hledger balancesheet  "
+    },
+    {
+      "name": "expenses",
+      "cmd": "hledger balance type:x "
+    },
+    {
+      "name": "expenses at cost",
+      "cmd": "hledger balance type:x  --value=end"
+    },
+    {
+      "name": "assets",
+      "cmd": "hledger balance type:a "
+    },
+    {
+      "name": "register",
+      "cmd": "hledger register "
+    },
+    {
+      "name": "revenue",
+      "cmd": "hledger balance type:r "
+    },
+    {
+      "name": "liabilities",
+      "cmd": "hledger balance type:l "
+    },
+    {
+      "name": "expenses(locked)",
+      "cmd": "hledger balance type:x ",
+      "locked": true
+    },
+    {
+      "name": "accounts",
+      "cmd": "hledger accounts --tree"
+    },
+    {
+      "name": "commodities",
+      "cmd": "hledger commodities",
+      "locked": true
+    }
+  ]
+}
