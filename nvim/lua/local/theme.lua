@@ -9,8 +9,10 @@ vim.g["tokyonight_transparent_sidebar"] = 1
 -- Makes colors appear correctly when within tmux
 vim.o.termguicolors = true
 
+require("rose-pine").setup({})
+
 require("tokyonight").setup({
-	transparent = true,
+	transparent = false,
 	hide_inactive_statusline = true,
 	dim_inactive = true,
 
@@ -51,4 +53,5 @@ require("tokyonight").setup({
 })
 
 -- Set after so that the transparent stuff is set properly
-vim.api.nvim_command("colorscheme tokyonight-night")
+vim.api.nvim_command("colorscheme tokyonight-moon")
+-- vim.api.nvim_command("colorscheme catppuccin")

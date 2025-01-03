@@ -65,6 +65,8 @@ Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'folke/tokyonight.nvim'
 Plug 'Shatur/neovim-ayu'
 Plug 'scottmckendry/cyberdream.nvim'
+Plug 'rose-pine/neovim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 " " Git support
 Plug 'tpope/vim-fugitive'
