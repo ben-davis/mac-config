@@ -88,6 +88,11 @@ Plug 'pwntester/octo.nvim'
 
 " Testing
 Plug 'janko/vim-test'
+" Neotest
+Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'nvim-neotest/nvim-nio'
+Plug 'nvim-neotest/neotest'
+Plug 'nvim-neotest/neotest-python'
 
 " For easy commenting out 
 Plug 'tpope/vim-commentary'
@@ -134,8 +139,8 @@ Plug 'stevearc/dressing.nvim'
 
 
 " DAP
-Plug 'nvim-neotest/nvim-nio'
 Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-dap-python'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'theHamsta/nvim-dap-virtual-text'
 

@@ -1,3 +1,4 @@
+-- NOTE: This has been disabled (by not importing it in init.lua)
 -- vim-test configuration
 vim.g["test#strategy"] = "neovim_sticky"
 vim.g["test#python#runner"] = "pytest"
@@ -5,7 +6,7 @@ vim.g["term#preserve_screen"] = 0
 
 vim.g["test#neovim#term_position"] = "botright 25"
 
-local function get_pytest_exec(project)
+local function get_pytest_exec(project, cwd)
 	local breakpoints = require("dap.breakpoints").get() or {}
 	local does_buffer_have_breakpoints = next(breakpoints) ~= nil
 
@@ -18,21 +19,24 @@ local function get_pytest_exec(project)
 		return "docker-compose run --rm test --reuse-db --disable-warnings -vv"
 	end
 
-	local executable = ""
+	local executable = "python"
+	local venv_python_path = cwd .. "/.venv/bin/python"
 
 	if vim.fn.filereadable("Pipfile") > 0 then
-		executable = "pipenv run "
+		executable = "pipenv run python"
 	elseif vim.fn.filereadable("poetry.lock") > 0 then
-		executable = "poetry run "
+		executable = "poetry run python"
+	elseif vim.fn.filereadable(venv_python_path) == 1 then
+		executable = venv_python_path
 	end
 
-	local command = "python -m pytest -vv"
+	local command = "-m pytest -vv"
 
 	if does_buffer_have_breakpoints then
-		command = "python -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m pytest -vv"
+		command = "-m debugpy --listen 0.0.0.0:5679 --wait-for-client -m pytest -vv"
 	end
 
-	return executable .. command
+	return executable .. " " .. command
 end
 
 local function get_rspec_exec(project)
@@ -59,7 +63,7 @@ local function run_test_command(test_command)
 	local filetype = vim.bo.filetype
 
 	-- Set the exec based on the env
-	vim.g["test#python#pytest#executable"] = get_pytest_exec(project)
+	vim.g["test#python#pytest#executable"] = get_pytest_exec(project, cwd)
 	vim.g["test#ruby#rspec#executable"] = get_rspec_exec(project)
 
 	if project == "rupalabs" and filetype == "python" then
