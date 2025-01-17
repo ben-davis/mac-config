@@ -33,7 +33,7 @@ size = 12
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
-style = "Extra Bold"
+style = "ExtraBold"
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"

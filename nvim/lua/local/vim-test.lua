@@ -80,16 +80,16 @@ local function run_test_command(test_command)
 end
 
 -- Keymap
-vim.keymap.set("n", "<Leader>tn", function()
+vim.keymap.set("n", "<Leader><Leader>tn", function()
 	run_test_command("TestNearest")
 end, { noremap = true, silent = true })
-vim.keymap.set("n", "<Leader>tf", function()
+vim.keymap.set("n", "<Leader><Leader>tf", function()
 	run_test_command("TestFile")
 end, { noremap = true, silent = true })
-vim.keymap.set("n", "<Leader>tl", function()
+vim.keymap.set("n", "<Leader><Leader>tl", function()
 	run_test_command("TestLast")
 end, { noremap = true, silent = true })
-vim.keymap.set("n", "<Leader>ts", function()
+vim.keymap.set("n", "<Leader><Leader>ts", function()
 	run_test_command("TestSuite")
 end, { noremap = true, silent = true })
 

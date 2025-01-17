@@ -25,6 +25,7 @@ vim.api.nvim_set_keymap("n", "<leader>dd", "<cmd>lua require('dap').down()<CR>",
 vim.api.nvim_set_keymap("n", "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<leader>dr", "<cmd>lua require('dap').run_last()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<leader>dk", "<cmd>lua require('dap.ui.variables').visual_hover()<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<leader>dx", "<cmd>lua require('dap').close()<CR>", { silent = true })
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>dK",
@@ -33,7 +34,7 @@ vim.api.nvim_set_keymap(
 )
 vim.api.nvim_set_keymap(
 	"n",
-	"<leader>dx",
+	"<leader>dl",
 	"<cmd>lua require'telescope'.extensions.dap.commands{}<CR>",
 	{ silent = true }
 )
