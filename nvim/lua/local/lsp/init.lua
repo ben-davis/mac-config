@@ -1,4 +1,3 @@
-require("local/lsp/null-ls")
 local navic = require("nvim-navic")
 
 -- Status bar components
@@ -61,23 +60,6 @@ local on_attach = function(client, bufnr)
 	-- Show diagnostics on hover
 	vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.diagnostic.open_float({focus = false, source = true })")
 
-	-- -- Sync format on save
-
-	vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
-
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		group = formatting_augroup,
-		buffer = bufnr,
-		callback = function()
-			vim.lsp.buf.format({
-				filter = function(client)
-					return client.name == "null-ls" or client.name == "elixirls" or client.name == "ruby_lsp"
-				end,
-				bufnr = bufnr,
-				timeout_ms = 10000,
-			})
-		end,
-	})
 
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)

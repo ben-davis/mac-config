@@ -26,7 +26,10 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'onsails/lspkind-nvim'
 
 " Formatting
-Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'stevearc/conform.nvim'
+
+" Linting
+Plug 'mfussenegger/nvim-lint'
 
 " Adds support for schemastore to yaml/json LSP
 Plug 'b0o/SchemaStore.nvim'
