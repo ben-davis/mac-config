@@ -1,5 +1,3 @@
--- Git signs
-require("gitsigns").setup()
 
 -- Setup autopairs
 require("nvim-autopairs").setup({
@@ -21,29 +19,6 @@ vim.g["himalaya_mailbox_picker"] = "telescope"
 vim.g["himalaya_telescope_preview_enabled"] = 1
 
 vim.keymap.set("n", "<leader>m", ":Himalaya<CR>", { silent = true, noremap = true })
-
--- Floaterm
-local function toggle_floaterm()
-	local cwd = vim.fn.getcwd(0, 0)
-	local project = vim.fn.fnamemodify(cwd, ":t")
-
-	local bufnr = vim.fn["floaterm#terminal#get_bufnr"](project)
-
-	if bufnr > -1 then
-		vim.api.nvim_command(bufnr .. "FloatermToggle")
-	else
-		vim.api.nvim_command(
-			"FloatermNew --height=0.8 --width=0.9 --wintype=float --name="
-				.. project
-				.. " --title="
-				.. project
-				.. " --position=center"
-		)
-	end
-end
-
-vim.keymap.set({ "n", "t" }, "<leader>a", toggle_floaterm, { silent = true, noremap = true })
-vim.keymap.set({ "n", "t" }, "<leader>f", ":FloatermToggle<CR>", { silent = true, noremap = true })
 
 -- Git blame popup
 -- The plugin doesn't need setup but I'm adding a comment so I have a reminder. The plugin sets <leader>gm as the map.
@@ -81,10 +56,6 @@ require("outline").setup({
 vim.keymap.set({ "n" }, "<leader>o", ":Outline<CR>", { silent = true, noremap = true })
 vim.keymap.set({ "n" }, "<leader>O", ":OutlineFocus<CR>", { silent = true, noremap = true })
 
--- Diffview
-vim.keymap.set({ "n" }, "<leader>h", ":DiffviewFileHistory<CR>", { silent = true, noremap = true })
-vim.keymap.set({ "n" }, "<leader>H", ":DiffviewFileHistory %<CR>", { silent = true, noremap = true })
-vim.keymap.set({ "n" }, "<leader>G", ":DiffviewOpen<CR>", { silent = true, noremap = true })
 
 -- require("neorg").setup()
 
@@ -92,6 +63,3 @@ require("neo-zoom").setup()
 vim.keymap.set("n", "<leader>Z", function()
 	vim.cmd("NeoZoomToggle")
 end, { silent = true, nowait = true })
-
-require("diffview")
-require("gitlab").setup()
