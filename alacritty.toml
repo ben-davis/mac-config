@@ -60,5 +60,4 @@ mods = "Alt|Shift"
 [window]
 blur = true
 decorations = "buttonless"
-opacity = 0.75
 option_as_alt = "OnlyLeft"
