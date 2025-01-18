@@ -38,7 +38,7 @@ ln -s -f ~/dev/git/mac-config/fish/config.fish ~/.config/fish/config.fish
 ln -s -f ~/dev/git/mac-config/fish/fish_plugins ~/.config/fish/fish_plugins
 
 echo "--------- Install fisher"
-fish -c "fisher update"
+/opt/homebrew/bin/fish -c "fisher update"
 
 if [ ! -d ~/.config ]; then
   echo "--------- Making ~/.config"
@@ -120,5 +120,5 @@ for app in "Dock" "Finder"; do
 done
 
 echo "--------- Reload shell"
-exec fish -l
+exec /opt/homebrew/bin/fish -l
 
