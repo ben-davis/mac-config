@@ -96,6 +96,7 @@ Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'nvim-neotest/neotest'
 Plug 'nvim-neotest/neotest-python'
+Plug 'nvim-neotest/neotest-rspec'
 
 " For easy commenting out 
 Plug 'tpope/vim-commentary'
