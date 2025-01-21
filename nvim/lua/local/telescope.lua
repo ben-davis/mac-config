@@ -104,3 +104,4 @@ vim.api.nvim_set_keymap("n", "<space>w", "<cmd>lua require('telescope.builtin').
 vim.api.nvim_set_keymap("n", "<space>gb", "<cmd>lua require('telescope.builtin').git_branches()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<space>gh", "<cmd>lua require('telescope.builtin').git_bcommits()<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<space>gc", "<cmd>lua require('telescope.builtin').git_commits()<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<space>gs", "<cmd>lua require('telescope.builtin').git_status()<CR>", { silent = true })
