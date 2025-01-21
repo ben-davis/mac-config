@@ -96,7 +96,7 @@ Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'nvim-neotest/neotest'
 Plug 'nvim-neotest/neotest-python'
-Plug 'nvim-neotest/neotest-rspec'
+Plug 'olimorris/neotest-rspec'
 
 " For easy commenting out 
 Plug 'tpope/vim-commentary'
@@ -180,7 +180,7 @@ Plug 'olimorris/codecompanion.nvim'
 Plug 'folke/trouble.nvim'
 
 " Note taking
-" Plug 'lua-utils'
+Plug 'lua-utils'
 Plug 'nvim-neorg/neorg'
 
 " Temporarily zoom window
