@@ -145,6 +145,7 @@ Plug 'stevearc/dressing.nvim'
 " DAP
 Plug 'mfussenegger/nvim-dap'
 Plug 'mfussenegger/nvim-dap-python'
+Plug 'suketa/nvim-dap-ruby'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'theHamsta/nvim-dap-virtual-text'
 
