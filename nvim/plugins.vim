@@ -60,6 +60,7 @@ Plug 'ahmedkhalf/project.nvim'
 
 " Explorer
 Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'stevearc/oil.nvim'
 
 " Dev icons
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
