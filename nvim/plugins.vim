@@ -182,7 +182,8 @@ Plug 'olimorris/codecompanion.nvim'
 Plug 'folke/trouble.nvim'
 
 " Note taking
-Plug 'lua-utils'
+Plug 'pysan3/pathlib.nvim'
+Plug 'nvim-neorg/lua-utils.nvim'
 Plug 'nvim-neorg/neorg'
 
 " Temporarily zoom window

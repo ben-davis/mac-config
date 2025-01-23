@@ -1,7 +1,6 @@
-
 -- Setup autopairs
 require("nvim-autopairs").setup({
-	enable_check_bracket_line = false,
+  enable_check_bracket_line = false,
 })
 
 -- Location lists
@@ -28,7 +27,7 @@ require("which-key").setup()
 
 -- Floating goto previews
 require("goto-preview").setup({
-	default_mappings = true,
+  default_mappings = true,
 })
 
 -- Leap
@@ -36,30 +35,43 @@ require("leap").add_default_mappings()
 
 -- Copy to cliupboardA
 require("osc52").setup({
-	max_length = 0, -- Maximum length of selection (0 for no limit)
-	silent = false, -- Disable message on successful copy
-	trim = false, -- Trim surrounding whitespaces before copy
-	tmux_passthrough = true, -- Use tmux passthrough (requires tmux: set -g allow-passthrough on)
+  max_length = 0,          -- Maximum length of selection (0 for no limit)
+  silent = false,          -- Disable message on successful copy
+  trim = false,            -- Trim surrounding whitespaces before copy
+  tmux_passthrough = true, -- Use tmux passthrough (requires tmux: set -g allow-passthrough on)
 })
 
 -- LSP outline
 require("outline").setup({
-	outline_window = {
-		position = "right",
-		auto_jump = false,
-		width = 14,
-	},
-	outline_items = {
-		show_symbol_lineno = true,
-	},
+  outline_window = {
+    position = "right",
+    auto_jump = false,
+    width = 14,
+  },
+  outline_items = {
+    show_symbol_lineno = true,
+  },
 })
 vim.keymap.set({ "n" }, "<leader>o", ":Outline<CR>", { silent = true, noremap = true })
 vim.keymap.set({ "n" }, "<leader>O", ":OutlineFocus<CR>", { silent = true, noremap = true })
 
 
--- require("neorg").setup()
+require("neorg").setup({
+  load = {
+    ["core.defaults"] = {},
+    ["core.concealer"] = {},
+    ["core.dirman"] = {
+      config = {
+        workspaces = {
+          notes = "~/Documents/notes",
+        },
+        default_workspace = "notes",
+      },
+    },
+  },
+})
 
 require("neo-zoom").setup()
 vim.keymap.set("n", "<leader>Z", function()
-	vim.cmd("NeoZoomToggle")
+  vim.cmd("NeoZoomToggle")
 end, { silent = true, nowait = true })
