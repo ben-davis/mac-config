@@ -58,6 +58,9 @@ Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug 'ahmedkhalf/project.nvim'
 
+" Fzf alternative
+Plug 'ibhagwan/fzf-lua'
+
 " Explorer
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'stevearc/oil.nvim'
