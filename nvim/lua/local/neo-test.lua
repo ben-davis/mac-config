@@ -40,6 +40,7 @@ require("neotest").setup({
 
 			formatter = "json",
 		}),
+		require("neotest-jest"),
 	},
 })
 

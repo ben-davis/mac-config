@@ -1,9 +1,10 @@
-vim.api.nvim_exec(
-  [[
-    augroup pencil
-      autocmd!
-      autocmd FileType markdown,mkd,text,fountain  call pencil#init({'wrap': 'soft'})
-    augroup END
-  ]],
-  true
-)
+-- NOTE: Disabling as it adds conceallevel 3 which breaks Obsidian
+-- vim.api.nvim_exec(
+--   [[
+--     augroup pencil
+--       autocmd!
+--       autocmd FileType markdown,mkd,text,fountain  call pencil#init({'wrap': 'soft'})
+--     augroup END
+--   ]],
+--   true
+-- )

@@ -15,7 +15,7 @@ require("codecompanion").setup({
 			return require("codecompanion.adapters").extend("ollama", {
 				schema = {
 					model = {
-						default = "deepseek-v2:16b",
+						default = "deepseek-r1:14b",
 					},
 				},
 			})

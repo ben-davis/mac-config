@@ -100,6 +100,7 @@ Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'nvim-neotest/neotest'
 Plug 'nvim-neotest/neotest-python'
+Plug 'nvim-neotest/neotest-jest'
 Plug 'olimorris/neotest-rspec'
 
 " For easy commenting out 
@@ -188,6 +189,7 @@ Plug 'folke/trouble.nvim'
 Plug 'pysan3/pathlib.nvim'
 Plug 'nvim-neorg/lua-utils.nvim'
 Plug 'nvim-neorg/neorg'
+Plug 'epwalsh/obsidian.nvim'
 
 " Temporarily zoom window
 Plug 'nyngwang/NeoZoom.lua'
