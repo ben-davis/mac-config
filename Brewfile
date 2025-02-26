@@ -32,7 +32,6 @@ brew "elixir"
 # Better find
 brew "fd"
 brew "fish"
-brew "fisher"
 brew "fmt"
 brew "ffmpeg"
 brew "findutils"

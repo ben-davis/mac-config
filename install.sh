@@ -30,6 +30,10 @@ if ! grep -q "/opt/homebrew/bin/fish" /etc/shells ; then
    # APPEND TO /etc/shells
    echo "/opt/homebrew/bin/fish"  | sudo tee -a /etc/shells
 fi
+
+echo "--------- Installing fish plugin manager"
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+
 chsh -s /opt/homebrew/bin/fish
 
 echo "--------- Symlinking config.fish"
