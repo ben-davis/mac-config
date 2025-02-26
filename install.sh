@@ -126,3 +126,5 @@ done
 echo "--------- Reload shell"
 exec /opt/homebrew/bin/fish -l
 
+echo "Restart your machine to have the keyboard preferences take effect"
+

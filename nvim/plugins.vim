@@ -129,9 +129,6 @@ let g:lazygit_floating_window_scaling_factor = 1
 " Neovim easymotion-like thing
 Plug 'ggandor/leap.nvim'
 
-" Dasht
-Plug 'mrjones2014/dash.nvim', { 'do': 'make install' }
-
 " Script writing
 Plug 'kblin/vim-fountain'
 
