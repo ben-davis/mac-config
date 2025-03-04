@@ -40,7 +40,7 @@ sudo mv ./nvim-linux-arm64 /opt/nvim
 rm -rf nvim-linux-arm64*
 
 # Install github CLI
-curl -L0 https://github.com/cli/cli/releases/download/v2.67.0/gh_2.67.0_linux_amd64.tar.gz
+curl -LO https://github.com/cli/cli/releases/download/v2.67.0/gh_2.67.0_linux_amd64.tar.gz
 tar -xzf ./gh_2.67.0_linux_amd64.tar.gz
 sudo mv ./gh_2.67.0_linux_amd64/bin/gh /usr/local/bin/gh
 rm -rf gh_2.67.0_linux_amd64*
