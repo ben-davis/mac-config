@@ -82,8 +82,10 @@ if status is-interactive
 
     set fish_greeting
 
-    # Auto start ssh agent
-    fish_ssh_agent
+    if test -d "~/.ssh"
+        # Auto start ssh agent
+        fish_ssh_agent
+    end
 
     # Work setup
     if test (hostname) = "st-bendavis1"
