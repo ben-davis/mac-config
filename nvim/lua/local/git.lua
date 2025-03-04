@@ -1,3 +1,5 @@
+require("diffview")
+
 -- Git signs
 require("gitsigns").setup()
 
@@ -35,4 +37,13 @@ vim.keymap.set({ "n" }, "<leader>gs", ":Neogit <CR>", { silent = true, noremap =
 vim.g["git_messenger_no_default_mappings"] = true
 vim.keymap.set({ "n" }, "<leader>gm", "<Plug>(git-messenger)", { silent = true, noremap = true, desc = "Git blame" })
 
-require("diffview")
+vim.keymap.set("n", "<leader>ga", function()
+  local file = vim.fn.expand("%:p")
+  local cmd = string.format('git add -N "%s"', file)
+  local output = vim.fn.system(cmd)
+  if vim.v.shell_error == 0 then
+    vim.notify("File added to Git tracking", vim.log.levels.INFO)
+  else
+    vim.notify("Failed to add file to Git tracking: " .. output, vim.log.levels.ERROR)
+  end
+end, { desc = "[G]it [A]dd Current File" })
