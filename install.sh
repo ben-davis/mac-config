@@ -35,7 +35,7 @@ if ! grep -q $FISH_BIN /etc/shells ; then
    echo $FISH_BIN  | sudo tee -a /etc/shells
 fi
 
-chsh -s $FISH_BIN
+sudo chsh -s $FISH_BIN
 
 echo "--------- Installing fish plugin manager"
 curl -sL https:/
