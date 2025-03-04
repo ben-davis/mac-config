@@ -36,6 +36,7 @@ if ! grep -q $FISH_BIN /etc/shells ; then
 fi
 
 sudo chsh -s $FISH_BIN
+exec $FISH_BIN -l
 
 echo "--------- Installing fish plugin manager"
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
