@@ -50,6 +50,9 @@ source ./lib/configure-symlinks.sh
 echo "--------- Install fisher"
 $FISH_BIN -c "fisher update"
 
+echo "--------- Install neovim plugins"
+nvim --headless +PlugInstall +qall
+
 echo "--------- Reload shell"
 exec $FISH_BIN -l
 

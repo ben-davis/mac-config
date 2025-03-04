@@ -28,7 +28,9 @@ sudo apt-get install -y \
     cloc \
     fish
 
-curl -sS https://starship.rs/install.sh | sh
+curl -sS -o install-starship.sh https://starship.rs/install.sh
+sh install-starship.sh --force
+rm install-starship.sh
 
 export FISH_BIN=/usr/bin/fish
 
