@@ -33,7 +33,7 @@ rm install-starship.sh
 
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-arm64.tar.gz
 sudo tar -xzf ./nvim-linux-arm64.tar.gz 
-mv ./nvim-linux-arm64/bin/nvim /usr/local/bin/nvim
+sudo mv ./nvim-linux-arm64/bin/nvim /usr/local/bin/nvim
 rm -rf nvim-linux-arm64*
 
 export FISH_BIN=/usr/bin/fish
