@@ -84,7 +84,20 @@ if status is-interactive
     fish_ssh_agent
 
     # Work setup
-    if test -d "~/.rx"
-        source ~/.rx/shell_config_fish.config
+    if test (hostname) = "st-bendavis1"
+        # The following comes from go/fish
+        source (rbenv init -|psub)
+        source ~/stripe/space-commander/bin/sc-env-activate.fish
+        functions -e fish_right_prompt
+
+        fish_add_path "$HOME/.rbenv/shims"
+        fish_add_path "$HOME/.rbenv/bin"
+        fish_add_path "$HOME/stripe/password-vault/bin"
+        fish_add_path "$HOME/stripe/space-commander/bin"
+        fish_add_path "$HOME/stripe/henson/bin"
+        fish_add_path /opt/homebrew/bin
+        fish_add_path /opt/homebrew/sbin
+
+        fish_add_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
     end
 end
