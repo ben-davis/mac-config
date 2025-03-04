@@ -59,7 +59,11 @@ require("obsidian").setup({
 	workspaces = {
 		{
 			name = "Notes",
-			path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes/",
+			path = "~/Google Drive/My Drive/Notes/",
+		},
+		{
+			name = "Stripe",
+			path = "~/Google Drive/My Drive/Stripe/",
 		},
 	},
 	picker = {
@@ -72,9 +76,30 @@ require("obsidian").setup({
 	-- see below for full list of options 👇
 })
 
-vim.keymap.set("n", "<leader>N", function()
+vim.keymap.set("n", "<leader>on", function()
 	vim.cmd("ObsidianNew")
-end, { silent = true, nowait = true })
+end, { silent = true, nowait = true, desc = "New" })
+
+vim.keymap.set("n", "<leader>op", function()
+	vim.cmd("ObsidianQuickSwitch")
+end, { silent = true, nowait = true, desc = "Find file" })
+
+vim.keymap.set("n", "<leader>of", function()
+	vim.cmd("ObsidianSearch")
+end, { silent = true, nowait = true , desc = "Grep"})
+
+vim.keymap.set("n", "<leader>ot", function()
+	vim.cmd("ObsidianToday")
+end, { silent = true, nowait = true, desc = "Today" })
+
+vim.keymap.set("n", "<leader>ow", function()
+	vim.cmd("ObsidianWorkspace")
+end, { silent = true, nowait = true, desc = "Workspace" })
+
+vim.keymap.set("n", "<leader>od", function()
+	vim.cmd("ObsidianDailies")
+end, { silent = true, nowait = true, desc = "List dailies" })
+
 
 -- require("neo-zoom").setup()
 -- vim.keymap.set("n", "<leader>Z", function()
