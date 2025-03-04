@@ -18,18 +18,19 @@ for _, dir in ipairs(note_dirs) do
   end
 end
 
-
-require("obsidian").setup({
-  workspaces = workspaces,
-  picker = {
-    name = "fzf-lua",
-  },
-  daily_notes = {
-    -- Optional, if you keep daily notes in a separate directory.
-    folder = "daily",
-  },
-  -- see below for full list of options 👇
-})
+if next(workspaces) ~= nil then
+  require("obsidian").setup({
+    workspaces = workspaces,
+    picker = {
+      name = "fzf-lua",
+    },
+    daily_notes = {
+      -- Optional, if you keep daily notes in a separate directory.
+      folder = "daily",
+    },
+    -- see below for full list of options 👇
+  })
+end
 
 vim.keymap.set("n", "<leader>on", function()
   vim.cmd("ObsidianNew")
