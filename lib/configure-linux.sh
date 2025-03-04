@@ -14,7 +14,6 @@ sudo apt-get install -y \
     htop \
     httpie \
     imagemagick \
-    neovim \
     nmap \
     ripgrep \
     rsync \
@@ -31,6 +30,11 @@ sudo apt-get install -y \
 curl -sS -o install-starship.sh https://starship.rs/install.sh
 sh install-starship.sh --force
 rm install-starship.sh
+
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-arm64.tar.gz
+sudo tar -xzf ./nvim-linux-arm64.tar.gz 
+mv ./nvim-linux-arm64/bin/nvim /usr/local/bin/nvim
+rm -rf nvim-linux-arm64*
 
 export FISH_BIN=/usr/bin/fish
 
