@@ -54,4 +54,5 @@ for app in "Dock" "Finder"; do
   killall "${app}" > /dev/null 2>&1
 done
 
-export FISH_BIN=/opt/homebrew/bin/fish/
+export FISH_BIN=/opt/homebrew/bin/fish
+export NVIM_BIN=/opt/homebrew/bin/nvim

@@ -1,3 +1,8 @@
+if [ ! -d ~/.config ]; then
+  echo "--------- Making ~/.config"
+  mkdir ~/.config
+fi
+
 echo "--------- Symlinking config.fish"
 mkdir -p ~/.config/fish
 ln -s -f ~/dev/git/mac-config/fish/config.fish ~/.config/fish/config.fish

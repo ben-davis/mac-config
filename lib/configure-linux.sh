@@ -38,5 +38,6 @@ sudo mv ./nvim-linux-arm64 /opt/nvim
 rm -rf nvim-linux-arm64*
 
 export FISH_BIN=/usr/bin/fish
+export NVIM_BIN=/opt/nvim/bin
 
 echo "Installation completed."

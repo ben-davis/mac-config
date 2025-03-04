@@ -40,18 +40,13 @@ sudo chsh -s $FISH_BIN
 echo "--------- Installing fish plugin manager"
 $FISH_BIN -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 
-if [ ! -d ~/.config ]; then
-  echo "--------- Making ~/.config"
-  mkdir ~/.config
-fi
-
 source ./lib/configure-symlinks.sh
 
 echo "--------- Install fisher"
 $FISH_BIN -c "fisher update"
 
 echo "--------- Install neovim plugins"
-nvim --headless +PlugInstall +qall
+$NVIM_BIN --headless +PlugInstall +qall
 
 echo "--------- Reload shell"
 exec $FISH_BIN -l
