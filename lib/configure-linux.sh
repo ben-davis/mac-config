@@ -26,9 +26,7 @@ sudo apt-get install -y \
 # Install additional utilities and tools if available
 sudo apt-get install -y \
     cloc \
-    dust \
-    fish \
-    starship
+    fish
 
 curl -sS https://starship.rs/install.sh | sh
 
