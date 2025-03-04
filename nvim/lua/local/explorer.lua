@@ -1,6 +1,6 @@
 -- Using telescope as all explorers suck with tabs
 -- Configured in `jelescope.lua`
-vim.api.nvim_set_keymap("n", "<Leader>e", ":Telescope file_browser path=%:p:h<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Leader>e", ":Oil %:h<CR>", { noremap = true })
 
 require("neo-tree").setup({
 	-- Enabling git creates tons of UI lag
