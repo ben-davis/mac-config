@@ -10,8 +10,8 @@ local note_dirs = {
 for _, dir in ipairs(note_dirs) do
   local name, path = dir[1], dir[2]
 
-  if vim.fn.isdirectory(path) > 0 then
-    workspaces.insert({
+  if vim.fn.isdirectory(vim.fn.expand(path)) > 0 then
+    table.insert(workspaces, {
       name = name,
       path = path,
     })
