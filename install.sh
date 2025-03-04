@@ -45,7 +45,7 @@ if [ ! -d ~/.config ]; then
   mkdir ~/.config
 fi
 
-./lib/configure-symlinks.sh
+source ./lib/configure-symlinks.sh
 
 echo "--------- Install fisher"
 $FISH_BIN -c "fisher update"
