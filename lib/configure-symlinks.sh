@@ -13,6 +13,9 @@ if [ ! -d ~/.config/nvim ]; then
   ln -s -f ~/dev/git/mac-config/nvim ~/.config
 fi
 
+echo "--------- Symlinking bashrc"
+ln -s -f ~/dev/git/mac-config/bashrc ~/.bashrc
+
 echo "--------- Symlinking alacritty"
 mkdir -p ~/.config/alacritty
 ln -s -f ~/dev/git/mac-config/alacritty.toml ~/.config/alacritty/alacritty.toml
