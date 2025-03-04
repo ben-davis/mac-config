@@ -38,7 +38,7 @@ fi
 sudo chsh -s $FISH_BIN
 
 echo "--------- Installing fish plugin manager"
-curl -sL https:/
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 
 if [ ! -d ~/.config ]; then
   echo "--------- Making ~/.config"
