@@ -14,11 +14,11 @@ if [ ! -d ~/dev/git/mac-config ]; then
   git clone "git@github.com:ben-davis/mac-config.git" ~/dev/git/mac-config
 fi
 
-case "$OS_NAME" in
-    Linux)
+case "$(uname -s)" in
+    "Linux")
       source ./lib/configure-linux.sh
       ;;
-    Darwin)
+    "Darwin")
       source ./lib/configure-mac.sh
       ;;
     *)
