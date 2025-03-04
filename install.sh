@@ -35,10 +35,10 @@ if ! grep -q $FISH_BIN /etc/shells ; then
    echo $FISH_BIN  | sudo tee -a /etc/shells
 fi
 
-echo "--------- Installing fish plugin manager"
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-
 chsh -s $FISH_BIN
+
+echo "--------- Installing fish plugin manager"
+curl -sL https:/
 
 if [ ! -d ~/.config ]; then
   echo "--------- Making ~/.config"
