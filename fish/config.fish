@@ -43,6 +43,8 @@ if status is-interactive
             /opt/homebrew/opt/ruby/bin \
             /opt/homebrew/lib/ruby/gems/3.1.0/bin \
             /opt/homebrew/lib/ruby/gems/3.2.0/bin
+    else
+        fish_add_path /opt/nvim/bin
     end
 
     # Support neovim-remote to allow plugins to control neovim. Using it for lazygit inside neovim.
