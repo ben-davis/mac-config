@@ -2,37 +2,48 @@
 # NOTEruby_lsp: This will only work once the mac-config/install.sh has been run
 # ----------------------------------------------------------------------------
 if status is-interactive
-    # Add brew to the path
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    if test (uname) = "Darwin"
+        # Add brew to the path
+        eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    set brew_prefix (brew --prefix)
+        set brew_prefix (brew --prefix)
 
-    # Use homebrew installed bin
-    fish_add_path \
-        $brew_prefix/bin:$brew_prefix/sbin:$HOME/local/bin \
-        # Rust bin
-        $HOME/.cargo/bin \
-        # Replaces BSD coreutils with GNU alternatives
-        $brew_prefix/opt/coreutils/libexec/gnubin \
-        # Make brew python default
-        "$brew_prefix/opt/python/libexec/bin" \
-        # Make brew clang default
-        "$brew_prefix/Cellar/llvm/17.0.6_1/bin" \
-        # Yarn
-        "$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin" \
-        # Open ssl
-        "$brew_prefix/opt/openssl/bin" \
-        # QT
-        "/opt/homebrew/opt/qt5/bin" \
-        # Go binaries
-        "~/dev/.go/bin" \
-        # Haskell binaries
-        "~/dev/.cabal/bin" \
-        # Poetry globals (TODO: Check this is needed)
-        "$HOME/.poetry/bin"
+        # Use homebrew installed bin
+        fish_add_path \
+            $brew_prefix/bin:$brew_prefix/sbin:$HOME/local/bin \
+            # Rust bin
+            $HOME/.cargo/bin \
+            # Replaces BSD coreutils with GNU alternatives
+            $brew_prefix/opt/coreutils/libexec/gnubin \
+            # Make brew python default
+            "$brew_prefix/opt/python/libexec/bin" \
+            # Make brew clang default
+            "$brew_prefix/Cellar/llvm/17.0.6_1/bin" \
+            # Yarn
+            "$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin" \
+            # Open ssl
+            "$brew_prefix/opt/openssl/bin" \
+            # QT
+            "/opt/homebrew/opt/qt5/bin" \
+            # Go binaries
+            "~/dev/.go/bin" \
+            # Haskell binaries
+            "~/dev/.cabal/bin" \
+            # Poetry globals (TODO: Check this is needed)
+            "$HOME/.poetry/bin"
 
-    # Disable brew autoupdating every time you run install
-    set -x HOMEBREW_NO_AUTO_UPDATE 1
+        # Disable brew autoupdating every time you run install
+        set -x HOMEBREW_NO_AUTO_UPDATE 1
+
+        # Used by the spotify tmux plugin to make it use apple music
+        set -x MUSIC_APP "Music"
+
+        # Use ruby homebrew by default (can be overridden with rebenv if necessary)
+        fish_add_path \
+            /opt/homebrew/opt/ruby/bin \
+            /opt/homebrew/lib/ruby/gems/3.1.0/bin \
+            /opt/homebrew/lib/ruby/gems/3.2.0/bin
+    end
 
     # Support neovim-remote to allow plugins to control neovim. Using it for lazygit inside neovim.
     # NOTE: Not working atm, assuming because nvim5 isn't respecting server name configuration
@@ -47,15 +58,6 @@ if status is-interactive
 
     # Enables the ruby version manager
     eval "$(rbenv init - fish)"
-
-    # Use ruby homebrew by default (can be overridden with rebenv if necessary)
-    fish_add_path \
-        /opt/homebrew/opt/ruby/bin \
-        /opt/homebrew/lib/ruby/gems/3.1.0/bin \
-        /opt/homebrew/lib/ruby/gems/3.2.0/bin
-
-    # Used by the spotify tmux plugin to make it use apple music
-    set -x MUSIC_APP "Music"
 
     # . "$HOME/.asdf/asdf.sh"
     # . "$HOME/.asdf/completions/asdf.fish"
@@ -90,13 +92,14 @@ if status is-interactive
         source ~/stripe/space-commander/bin/sc-env-activate.fish
         functions -e fish_right_prompt
 
-        fish_add_path "$HOME/.rbenv/shims"
-        fish_add_path "$HOME/.rbenv/bin"
-        fish_add_path "$HOME/stripe/password-vault/bin"
-        fish_add_path "$HOME/stripe/space-commander/bin"
-        fish_add_path "$HOME/stripe/henson/bin"
-        fish_add_path /opt/homebrew/bin
-        fish_add_path /opt/homebrew/sbin
+        fish_add_path \
+            "$HOME/.rbenv/shims" \
+            "$HOME/.rbenv/bin" \
+            "$HOME/stripe/password-vault/bin" \
+            "$HOME/stripe/space-commander/bin" \
+            "$HOME/stripe/henson/bin" \
+            "/opt/homebrew/bin" \
+            "/opt/homebrew/sbin"
 
         fish_add_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
     end
