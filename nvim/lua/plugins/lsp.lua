@@ -69,12 +69,12 @@ return {
         ruff = function(config)
           return config
         end,
-        ruby_lsp = function(config)
-          return config
-        end,
-        sorbet = function(config)
-          return config
-        end,
+        -- ruby_lsp = function(config)
+        --   return config
+        -- end,
+        -- sorbet = function(config)
+        --   return config
+        -- end,
         html = function(config)
           return config
         end,

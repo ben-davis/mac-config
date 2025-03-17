@@ -45,7 +45,6 @@ return {
       vim.api.nvim_set_keymap("n", "<space>t", "<cmd>lua require('fzf-lua').tabs()<CR>", opts("Tabs"))
       vim.api.nvim_set_keymap("n", "<space>w", "<cmd>lua require('fzf-lua').spell_suggest()<CR>",
         opts("Spell suggestions"))
-      vim.api.nvim_set_keymap("n", "<space>n", "<cmd>ObsidianQuickSwitch<CR>", opts("Spell suggestions"))
 
       -- Git lists
       vim.api.nvim_set_keymap("n", "<space>gb", "<cmd>lua require('fzf-lua').git_branches()<CR>", opts("Git branches"))

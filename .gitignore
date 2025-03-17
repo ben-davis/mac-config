@@ -3,3 +3,5 @@ nvim/plugged
 Brewfile.lock.json
 
 nvim/.DS_Store
+
+**/stripe-*.lua

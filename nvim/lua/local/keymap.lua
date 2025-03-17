@@ -12,12 +12,6 @@ vim.keymap.set("i", "<S-CR>", "<esc>O", { noremap = true })
 -- Change visual paste to not yank the deleted characters
 vim.keymap.set("v", "p", '"_dP', { noremap = true })
 
--- Paste from clipboard
-vim.keymap.set("n", "<leader>p", '"+p', { noremap = true })
-vim.keymap.set("n", "<leader>P", '"+P', { noremap = true })
-vim.keymap.set("v", "<leader>p", '"+p', { noremap = true })
-vim.keymap.set("v", "<leader>P", '"+P', { noremap = true })
-
 -- Normal/insert mode movement
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true })
