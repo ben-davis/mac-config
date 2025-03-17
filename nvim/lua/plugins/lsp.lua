@@ -138,7 +138,8 @@ return {
         end,
       }
 
-      local default_config = M.make_default_config()
+      local lsp_lib = require("lib/lsp_lib")
+      local default_config = lsp_lib.make_default_config()
 
       for name, update_config in pairs(servers) do
         local config = {
