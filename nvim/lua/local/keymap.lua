@@ -12,9 +12,6 @@ vim.keymap.set("i", "<S-CR>", "<esc>O", { noremap = true })
 -- Change visual paste to not yank the deleted characters
 vim.keymap.set("v", "p", '"_dP', { noremap = true })
 
--- Copy to clipboard
-vim.keymap.set("v", "<leader>y", require("osc52").copy_visual, { noremap = true })
-
 -- Paste from clipboard
 vim.keymap.set("n", "<leader>p", '"+p', { noremap = true })
 vim.keymap.set("n", "<leader>P", '"+P', { noremap = true })
@@ -39,17 +36,11 @@ vim.keymap.set("t", "<leader><Esc>", "<C-\\><C-n>", { noremap = true })
 -- Use gx to open URLs.
 vim.keymap.set("n", "gx", ":!open <cWORD><cr>", { noremap = true })
 
-vim.keymap.set("n", "<leader>l", ":LazyGit<CR>", { noremap = true, silent = true })
--- let g:lazygit_floating_window_use_plenary = 1
-
 -- Delete buffer
 vim.keymap.set("n", "<leader>q", ":Bdelete<CR>", { noremap = true, silent = true })
 
 -- Y yank until the end of line
 vim.keymap.set("n", "Y", "y$", { noremap = true, silent = true })
-
--- Search and replace
-vim.keymap.set("n", "<leader>S", ":lua require('spectre').open()<CR>", { noremap = true })
 
 -- Set movement to always go to visual lines, rather than real lines
 vim.keymap.set("n", "j", "gj")
