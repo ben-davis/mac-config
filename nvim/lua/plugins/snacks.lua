@@ -8,5 +8,8 @@ return { {
       notifier = { enabled = true },
       -- zen = {}
     },
+    keys = {
+      { "<space>h", function() require("snacks").notifier.show_history() end, desc = "Snacks | Notifier | Show History" },
+    }
   }
 } }
