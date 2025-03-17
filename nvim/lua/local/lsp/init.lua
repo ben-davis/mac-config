@@ -70,56 +70,27 @@ local on_attach = function(client, bufnr)
   -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 end
 
+
+local mason_installed = {
+  "pyright",
+  "ruff",
+  "ruby_lsp",
+  "html",
+  "jsonls",
+  "lua_ls",
+  "yamlls",
+}
+
+-- On mac, install ruby and sorbet and hls
+-- Install typescript-tools without path
+-- On Stripe, install sobert and typescript tools with path
+
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = {},
-  automatic_installation = true,
+  ensure_installed = mason_installed,
+  automatic_installation = false,
 })
 
-local function on_init(client, result)
-  if client.name == "pyright" then
-    local poetry_env =
-        vim.trim(vim.fn.system('cd "' .. client.config.root_dir .. '"; poetry env info -p 2>/dev/null'))
-
-    local venv_python_path = client.config.root_dir .. "/.venv/bin/python"
-
-    if vim.fn.filereadable(venv_python_path) == 1 then
-      client.config.settings.python.pythonPath = venv_python_path
-    elseif poetry_env then
-      client.config.settings.python.pythonPath = poetry_env .. "/bin/python"
-    else
-      client.config.settings.python.pythonPath = "/usr/local/opt/python@3.10/libexec/bin/python"
-    end
-
-    client.notify("workspace/didChangeConfiguration")
-  elseif client.name == "ruff" then
-    client.server_capabilities.hoverProvider = false
-  end
-
-  return true
-end
-
--- config that activates keymaps and enables snippet support
-local function make_default_config()
-  -- Start with lsp's default config
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-  -- Update it with cmp lsp
-  capabilities = vim.tbl_extend("keep", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-  -- Update it with lsp_status
-  capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
-
-  return {
-    -- enable snippet support
-    capabilities = capabilities,
-    -- map buffer local keybindings when the language server attaches
-    on_attach = on_attach,
-    on_init = on_init,
-  }
-end
-
-local default_config = make_default_config()
 
 -- Configure lua language server for neovim development
 local runtime_path = vim.split(package.path, ";")
@@ -158,9 +129,6 @@ local servers = {
     }
     return config
   end,
-  ts_ls = function(config)
-    return config
-  end,
   ruff = function(config)
     return config
   end,
@@ -173,7 +141,6 @@ local servers = {
   html = function(config)
     return config
   end,
-
   jsonls = function(config)
     config.settings = {
       json = {
@@ -211,6 +178,52 @@ local servers = {
   end,
 }
 
+local function on_init(client, result)
+  if client.name == "pyright" then
+    local poetry_env =
+        vim.trim(vim.fn.system('cd "' .. client.config.root_dir .. '"; poetry env info -p 2>/dev/null'))
+
+    local venv_python_path = client.config.root_dir .. "/.venv/bin/python"
+
+    if vim.fn.filereadable(venv_python_path) == 1 then
+      client.config.settings.python.pythonPath = venv_python_path
+    elseif poetry_env then
+      client.config.settings.python.pythonPath = poetry_env .. "/bin/python"
+    else
+      client.config.settings.python.pythonPath = "/usr/local/opt/python@3.10/libexec/bin/python"
+    end
+
+    client.notify("workspace/didChangeConfiguration")
+  elseif client.name == "ruff" then
+    client.server_capabilities.hoverProvider = false
+  end
+
+  return true
+end
+
+
+-- config that activates keymaps and enables snippet support
+local function make_default_config()
+  -- Start with lsp's default config
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+  -- Update it with cmp lsp
+  capabilities = vim.tbl_extend("keep", capabilities, require("cmp_nvim_lsp").default_capabilities())
+
+  -- Update it with lsp_status
+  capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
+
+  return {
+    -- enable snippet support
+    capabilities = capabilities,
+    -- map buffer local keybindings when the language server attaches
+    on_attach = on_attach,
+    on_init = on_init,
+  }
+end
+
+local default_config = make_default_config()
+
 for name, update_config in pairs(servers) do
   local config = {
     on_attach = default_config.on_attach,
@@ -224,3 +237,6 @@ for name, update_config in pairs(servers) do
 
   require("lspconfig")[name].setup(config)
 end
+
+-- Use typescript-tools
+require("typescript-tools").setup(default_config)

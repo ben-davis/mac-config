@@ -5,6 +5,7 @@ Plug 'neovim/nvim-lspconfig'
 " Handles automatically installing language servers locally
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'pmizio/typescript-tools.nvim'
 
 " Autocomplete
 Plug 'hrsh7th/cmp-nvim-lsp'

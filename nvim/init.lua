@@ -28,6 +28,6 @@ require("local/react-native")
 require("local/llm")
 
 local override_dir = os.getenv("HOME") .. ".config/nvim/lua/override"
-if vim.fn.isdirectory(override_dir) then
+if vim.fn.isdirectory(override_dir) > 0 then
   require(override_dir)
 end
