@@ -2,6 +2,8 @@
 # NOTEruby_lsp: This will only work once the mac-config/install.sh has been run
 # ----------------------------------------------------------------------------
 if status is-interactive
+    fish_add_path "/usr/local/bin"
+
     if test (uname) = "Darwin"
         # Add brew to the path
         eval "$(/opt/homebrew/bin/brew shellenv)"
