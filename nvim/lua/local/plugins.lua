@@ -61,3 +61,6 @@
 -- vim.keymap.set("n", "<leader>Z", function()
 -- 	vim.cmd("NeoZoomToggle")
 -- end, { silent = true, nowait = true })
+
+-- This didn't play nicely. E.g. bullet points were rendered weirdly
+-- require('render-markdown').setup({})

@@ -151,6 +151,7 @@ Plug 'theHamsta/nvim-dap-virtual-text'
 
 " Zenmode, mostly for markdown editing
 Plug 'folke/zen-mode.nvim'
+" Plug 'MeanderingProgrammer/render-markdown.nvim'
 
 Plug 'ojroques/nvim-osc52'
 

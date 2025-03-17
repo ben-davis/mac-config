@@ -2,7 +2,6 @@ local workspaces = {}
 
 local note_dirs = {
   { "Notes",  "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes/" },
-  { "Notes",  "~/Google Drive/My Drive/Notes/" },
   { "Stripe", "~/Google Drive/My Drive/Stripe/" },
 }
 
