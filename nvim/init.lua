@@ -1,4 +1,5 @@
 vim.api.nvim_command("source ~/.config/nvim/plugins.vim")
+require("plenary.scandir")
 
 require("local/completion")
 require("local/dap-config")
@@ -25,3 +26,8 @@ require("local/treesitter")
 require("local/theme")
 require("local/react-native")
 require("local/llm")
+
+local override_dir = os.getenv("HOME") .. ".config/nvim/lua/override"
+if vim.fn.isdirectory(override_dir) then
+  require(override_dir)
+end
