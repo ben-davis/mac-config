@@ -33,6 +33,7 @@ return {
         "bash",
         "c",
         "diff",
+        "fish",
         "html",
         "javascript",
         "jsdoc",
