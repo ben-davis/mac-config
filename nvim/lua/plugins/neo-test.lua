@@ -10,7 +10,7 @@ return { {
   config = function()
     require("neotest").setup({
       adapters = {
-        require("neotest-python")(),
+        require("neotest-python")({}),
         require("neotest-rspec")({
           transform_spec_path = function(path)
             -- Pass the spec file as a relative file, not absolute
