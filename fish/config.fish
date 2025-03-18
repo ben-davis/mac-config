@@ -10,6 +10,9 @@ if status is-interactive
 
         set brew_prefix (brew --prefix)
 
+        # Use homebrew lib
+        set -x DYLD_LIBRARY_PATH "/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
+
         # Use homebrew installed bin
         fish_add_path \
             $brew_prefix/bin:$brew_prefix/sbin:$HOME/local/bin \
