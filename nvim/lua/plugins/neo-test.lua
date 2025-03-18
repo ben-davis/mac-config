@@ -10,40 +10,10 @@ return { {
   config = function()
     require("neotest").setup({
       adapters = {
-        require("neotest-python")({
-          -- python = function()
-          -- 	local cwd = vim.fn.getcwd(0, 0)
-          -- 	local project = vim.fn.fnamemodify(cwd, ":t")
-
-          -- 	if project == "rupalabs" then
-          -- 		return "docker-compose run --rm test --reuse-db --disable-warnings -vv"
-          -- 	end
-          -- end,
-        }),
+        require("neotest-python")(),
         require("neotest-rspec")({
-          rspec_cmd = function()
-            if vim.fn.isdirectory(".rx") > 0 then
-              return vim.iter({
-                    "rx",
-                    "dev",
-                    "task",
-                    "--",
-                    "bin/rspec",
-                  })
-                  :flatten()
-                  :totable()
-            end
-
-            return vim.iter({
-                  "bundle",
-                  "exec",
-                  "rspec",
-                })
-                :flatten()
-                :totable()
-          end,
-
           transform_spec_path = function(path)
+            -- Pass the spec file as a relative file, not absolute
             local prefix = require("neotest-rspec").root(path)
             return string.sub(path, string.len(prefix) + 2, -1)
           end,
