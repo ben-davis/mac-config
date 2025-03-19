@@ -14,6 +14,7 @@ sudo apt-get install -y \
     htop \
     httpie \
     imagemagick \
+    lsd \
     nmap \
     ripgrep \
     rsync \
