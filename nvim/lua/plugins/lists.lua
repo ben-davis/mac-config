@@ -26,6 +26,8 @@ return {
       vim.api.nvim_set_keymap("n", "<space>P", "<cmd>lua require('fzf-lua').git_files()<CR>", opts("Non-git files"))
       vim.api.nvim_set_keymap("n", "<space>C", "<cmd>lua require('fzf-lua').commands()<CR>", opts("Neovim commands"))
       vim.api.nvim_set_keymap("n", "<space>f", "<cmd>lua require('fzf-lua').live_grep_glob()<CR>", opts("Grep cwd"))
+      vim.api.nvim_set_keymap("n", "<space>*", "<cmd>lua require('fzf-lua').grep_cword()<CR>",
+        opts("Grep word under cursor"))
       vim.api.nvim_set_keymap("n", "<space>m", "<cmd>lua require('fzf-lua').oldfiles()<CR>", opts("Recent files"))
       vim.api.nvim_set_keymap("n", "<space>l", "<cmd>lua require('fzf-lua').builtin()<CR>", opts("Builtins"))
       vim.api.nvim_set_keymap(
@@ -37,7 +39,7 @@ return {
       vim.api.nvim_set_keymap(
         "n",
         "<space>/",
-        "<cmd>lua require('fzf-lua').current_buffer_fuzzy_find()<CR>",
+        "<cmd>lua require('fzf-lua').grep_curbuf()<CR>",
         opts("Buffer search")
       )
       vim.api.nvim_set_keymap("n", "<space>q", "<cmd>lua require('fzf-lua').quickfix()<CR>", opts("Quickfix"))
