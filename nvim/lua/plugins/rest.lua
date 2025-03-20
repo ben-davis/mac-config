@@ -6,5 +6,6 @@ return { {
       opts.ensure_installed = opts.ensure_installed or {}
       table.insert(opts.ensure_installed, "http")
     end,
-  }
+  },
+  enabled = vim.loop.os_uname().sysname ~= "Linux"
 } }
