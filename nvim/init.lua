@@ -6,3 +6,7 @@ require("local/digraphs")
 require("local/keymap")
 require("local/options")
 require("local/react-native")
+
+if vim.fn.isdirectory("overrides") then
+  require("overrides")
+end
