@@ -46,7 +46,7 @@ echo "--------- Install fisher"
 $FISH_BIN -c "fisher update"
 
 echo "--------- Install neovim plugins"
-$NVIM_BIN --headless +PlugInstall +qall
+$NVIM_BIN --headless +qall
 
 echo "--------- Reload shell"
 exec $FISH_BIN -l
