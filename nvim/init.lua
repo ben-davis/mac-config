@@ -7,6 +7,6 @@ require("local/keymap")
 require("local/options")
 require("local/react-native")
 
-if vim.fn.isdirectory("overrides") then
+if vim.fn.isdirectory("overrides") > 0 then
   require("overrides")
 end
