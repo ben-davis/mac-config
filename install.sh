@@ -48,6 +48,9 @@ $FISH_BIN -c "fisher update"
 echo "--------- Install neovim plugins"
 $NVIM_BIN --headless +qall
 
+echo "--------- Installing tmux plugin manager"
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 echo "--------- Reload shell"
 exec $FISH_BIN -l
 
