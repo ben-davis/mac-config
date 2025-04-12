@@ -11,7 +11,9 @@ if status is-interactive
         set brew_prefix (brew --prefix)
 
         # Use homebrew lib
-        set -x DYLD_LIBRARY_PATH "/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
+        # This is causing issues with opengl when running ANY process. The dynamic libraries for opengl can't be found.
+        # Maybe this means I need to install opengl with brew? I dunno, it should be falling through.
+        # set -x DYLD_LIBRARY_PATH "/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
 
         # Use homebrew installed bin
         fish_add_path \
@@ -43,6 +45,7 @@ if status is-interactive
         # Used by the spotify tmux plugin to make it use apple music
         set -x MUSIC_APP "Music"
 
+
         # Use ruby homebrew by default (can be overridden with rebenv if necessary)
         fish_add_path \
             /opt/homebrew/opt/ruby/bin \
@@ -62,6 +65,8 @@ if status is-interactive
     #     set -x EDITOR nvim
     #     set -x VISUAL nvim
     # fi
+    set -x EDITOR "nvim"
+    set -x VISUAL "nvim"
 
     # Enables the ruby version manager
     eval "$(rbenv init - fish)"
