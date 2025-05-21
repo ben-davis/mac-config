@@ -30,7 +30,7 @@ echo "--------- Symlinking skhdrc"
 ln -s -f ~/dev/git/mac-config/skhd ~/.config/skhd
 
 echo "--------- Symlinking git config"
-ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
+# ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
 
 echo "--------- Symlinking tmux.conf"
 ln -s -f ~/dev/git/mac-config/tmux.conf ~/.tmux.conf
