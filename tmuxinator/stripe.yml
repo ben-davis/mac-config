@@ -45,11 +45,14 @@ root: ~/
 # attach: false
 
 windows:
-  - pay-server:
+  - notes:
       layout: main-vertical
-      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
-      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
-      # synchronize: after
-      root: ~/stripe/pay-server
+      root: ~/Library/CloudStorage/GoogleDrive-bendavis@stripe.com/My Drive/Stripe
       panes:
         - vim
+  - pay-server:
+      layout: main-vertical
+      root: ~/stripe/pay-server
+  - zoolander:
+      layout: main-vertical
+      root: ~/stripe/zoolander
