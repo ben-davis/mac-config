@@ -30,6 +30,3 @@
 	conflictStyle = diff3
 [http]
 	cookiefile = /Users/ben/.gitcookies
-
-[status]
-        showUntrackedFiles=no
