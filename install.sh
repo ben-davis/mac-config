@@ -65,7 +65,9 @@ echo "--------- Install neovim plugins"
 $NVIM_BIN --headless +qall
 
 echo "--------- Installing tmux plugin manager"
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+if [ ! -d ~/dev/git ]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
 
 echo "--------- Reload shell"
 exec $FISH_BIN -l
