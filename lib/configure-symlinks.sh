@@ -1,3 +1,18 @@
+SKIP_SYMLINK_GIT=""
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --skip-symlink-git)
+      SKIP_SYMLINK_GIT="--skip-symlink-git"
+      shift
+      ;;
+    *)
+      echo "Unknown option: $1"
+      echo "Usage: $0 [--skip-symlink-git]"
+      exit 1
+      ;;
+  esac
+done
+
 if [ ! -d ~/.config ]; then
   echo "--------- Making ~/.config"
   mkdir ~/.config
@@ -29,8 +44,10 @@ ln -s -f ~/dev/git/mac-config/sketchybar ~/.config/sketchybar
 echo "--------- Symlinking skhdrc"
 ln -s -f ~/dev/git/mac-config/skhd ~/.config/skhd
 
-echo "--------- Symlinking git config"
-# ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
+if [ -z "$SKIP_SYMLINK_GIT" ]; then
+  echo "--------- Symlinking git config"
+  ln -s -f ~/dev/git/mac-config/gitconfig ~/.gitconfig
+fi
 
 echo "--------- Symlinking tmux.conf"
 ln -s -f ~/dev/git/mac-config/tmux.conf ~/.tmux.conf

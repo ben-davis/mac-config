@@ -4,6 +4,22 @@
 
 set -e -o pipefail
 
+# Parse command line arguments
+SKIP_SYMLINK_GIT=""
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --skip-symlink-git)
+      SKIP_SYMLINK_GIT="--skip-symlink-git"
+      shift
+      ;;
+    *)
+      echo "Unknown option: $1"
+      echo "Usage: $0 [--skip-symlink-git]"
+      exit 1
+      ;;
+  esac
+done
+
 if [ ! -d ~/dev/git ]; then
   echo "--------- Making ~/dev/git"
   mkdir -p ~/dev/git
@@ -40,7 +56,7 @@ sudo chsh -s $FISH_BIN
 echo "--------- Installing fish plugin manager"
 $FISH_BIN -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 
-source ./lib/configure-symlinks.sh
+source ./lib/configure-symlinks.sh $SKIP_SYMLINK_GIT
 
 echo "--------- Install fisher"
 $FISH_BIN -c "fisher update"
