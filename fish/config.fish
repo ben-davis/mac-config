@@ -45,7 +45,6 @@ if status is-interactive
         # Used by the spotify tmux plugin to make it use apple music
         set -x MUSIC_APP "Music"
 
-
         # Use ruby homebrew by default (can be overridden with rebenv if necessary)
         fish_add_path \
             /opt/homebrew/opt/ruby/bin \
@@ -70,6 +69,9 @@ if status is-interactive
 
     # Enables the ruby version manager
     eval "$(rbenv init - fish)"
+
+    # Enable nodenv
+    nodenv init - | source
 
     # . "$HOME/.asdf/asdf.sh"
     # . "$HOME/.asdf/completions/asdf.fish"
