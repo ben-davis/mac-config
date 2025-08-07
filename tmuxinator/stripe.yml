@@ -56,3 +56,9 @@ windows:
   - zoolander:
       layout: main-vertical
       root: ~/stripe/zoolander
+  - mac-config:
+      layout: main-vertical
+      root: ~/dev/git/mac-config
+  - dotfiles:
+      layout: main-vertical
+      root: ~/dev/git/dotfiles
