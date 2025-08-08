@@ -30,8 +30,12 @@ M.on_attach = function(client, bufnr)
   require("lsp_signature").on_attach()
 
   -- Show diagnostics on hover
-  vim.api.nvim_command(
-    "autocmd CursorHold <buffer> lua vim.diagnostic.open_float({focus = false, source = true })")
+  vim.api.nvim_create_autocmd("CursorHold", {
+    buffer = bufnr,
+    callback = function()
+      vim.diagnostic.open_float({ focus = false, source = true })
+    end
+  })
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
