@@ -1,6 +1,9 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
     event = { "VeryLazy" },
@@ -65,6 +68,14 @@ return {
           scope_incremental = false,
           node_decremental = "<bs>",
         },
+      },
+      keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        ["ab"] = "@block.outer",
+        ["ib"] = "@block.inner",
       },
       textobjects = {
         move = {
