@@ -51,6 +51,15 @@ return {
           vim.notify("Failed to add file to Git tracking: " .. output, vim.log.levels.ERROR)
         end
       end, { desc = "[G]it [A]dd Current File" })
+
+      require('neogit').setup({
+        disable_hint = true,
+        filewatcher = {
+          enabled = false,
+        },
+        process_spinner = true,
+        auto_refresh = false,
+      })
     end
   },
   {
