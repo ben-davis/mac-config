@@ -28,8 +28,8 @@ return {
             vim.keymap.set("n", keys, func, { buffer = ev.buf, desc = "LSP: " .. desc })
           end
 
-          nmap("s", Snacks.picker.lsp_workspace_symbols, "LSP Workspace [S]ymbols")
-          nmap("o", Snacks.picker.lsp_symbols, "LSP Document [S]ymbols")
+          nmap("<space>s", Snacks.picker.lsp_workspace_symbols, "LSP Workspace [S]ymbols")
+          nmap("<space>o", Snacks.picker.lsp_symbols, "LSP Document [S]ymbols")
 
           nmap("gd", Snacks.picker.lsp_definitions, "[G]oto [D]efinition")
           nmap("gD", Snacks.picker.lsp_declarations, "[G]oto [D]eclarations")
