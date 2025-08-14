@@ -49,3 +49,7 @@ vim.keymap.set("n", "]q", ":cnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "[q", ":cprev<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "[Q", ":cfirst<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "]Q", ":clast<CR>", { noremap = true, silent = true })
+
+-- Diagnostic navigation
+vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", { noremap = true, silent = true })

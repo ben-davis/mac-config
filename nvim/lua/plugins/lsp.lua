@@ -28,14 +28,17 @@ return {
             vim.keymap.set("n", keys, func, { buffer = ev.buf, desc = "LSP: " .. desc })
           end
 
-          nmap("<space>s", Snacks.picker.lsp_workspace_symbols, "LSP Workspace [S]ymbols")
-          nmap("<space>o", Snacks.picker.lsp_symbols, "LSP Document [S]ymbols")
+          nmap("<space>s", Snacks.picker.lsp_workspace_symbols, "Workspace [S]ymbols")
+          nmap("<space>o", Snacks.picker.lsp_symbols, "Document [S]ymbols")
 
           nmap("gd", Snacks.picker.lsp_definitions, "[G]oto [D]efinition")
           nmap("gD", Snacks.picker.lsp_declarations, "[G]oto [D]eclarations")
           nmap("gi", Snacks.picker.lsp_implementations, "[G]oto [I]mplementation")
           nmap("gr", Snacks.picker.lsp_references, "[G]oto [R]eferences")
           nmap("gy", Snacks.picker.lsp_type_definitions, "[G]oto T[y]pe definition")
+
+          nmap("<space>R", vim.lsp.buf.rename, "[R]ename")
+          nmap("<space>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
           -- Add code nav status bar
           local navic = require("nvim-navic")
