@@ -56,28 +56,28 @@ vim.g["python3_host_prog"] = "/usr/local/bin/python3"
 -- NOTE: This is currently not working. Assuming because nvim 5 isn't setting
 -- server name correctly.
 vim.api.nvim_exec(
-  [[
+	[[
   if has('nvim') && executable('nvr')
     let $GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
   endif
   ]],
-  true
+	true
 )
 
 -- Highlight on yank
 vim.api.nvim_exec(
-  [[
+	[[
   augroup YankHighlight
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
   ]],
-  true
+	true
 )
 
 -- Set filetype options
 vim.api.nvim_exec(
-  [[
+	[[
     augroup filetypes
         autocmd!
         autocmd Filetype python setlocal ts=4 sw=4
@@ -106,11 +106,11 @@ vim.api.nvim_exec(
         autocmd Filetype gitcommit setlocal textwidth=0
     augroup END
   ]],
-  true
+	true
 )
 
 vim.api.nvim_exec(
-  [[
+	[[
   augroup terminallinenumbers
     autocmd!
     autocmd TermOpen * setlocal nonumber norelativenumber
@@ -119,7 +119,7 @@ vim.api.nvim_exec(
     " au BufLeave term://* stopinsert
   augroup END
   ]],
-  true
+	true
 )
 
 vim.o.foldmethod = "expr"
@@ -128,3 +128,5 @@ vim.api.nvim_exec("set nofoldenable", true)
 
 -- For Obsidian.nvim to show checkboxes. The default of 3 doesn't work.
 vim.opt.conceallevel = 1
+
+vim.o.winborder = "rounded"
