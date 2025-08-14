@@ -7,12 +7,54 @@ return {
       'pmizio/typescript-tools.nvim',
       'ray-x/lsp_signature.nvim',
       'b0o/SchemaStore.nvim',
-      'nvim-lua/lsp-status.nvim'
+      'nvim-lua/lsp-status.nvim',
+      {
+        "j-hui/fidget.nvim",
+        config = true,
+      },
     },
     config = function()
-      -- Status bar components
-      local lsp_status = require("lsp-status")
-      lsp_status.register_progress()
+      local lsp_group = vim.api.nvim_create_augroup("LSPKeymaps", {})
+      --  This gets run when a LSP client connects to a particular buffer
+      vim.api.nvim_create_autocmd("LspAttach", {
+        desc = "Set custom keymaps and create autocmds",
+        pattern = "*",
+        group = lsp_group,
+        callback = function(ev)
+          local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+          -- helper function for setting up buffer-local keymaps
+          local nmap = function(keys, func, desc)
+            vim.keymap.set("n", keys, func, { buffer = ev.buf, desc = "LSP: " .. desc })
+          end
+
+          nmap("s", Snacks.picker.lsp_workspace_symbols, "LSP Workspace [S]ymbols")
+          nmap("o", Snacks.picker.lsp_symbols, "LSP Document [S]ymbols")
+
+          nmap("gd", Snacks.picker.lsp_definitions, "[G]oto [D]efinition")
+          nmap("gD", Snacks.picker.lsp_declarations, "[G]oto [D]eclarations")
+          nmap("gi", Snacks.picker.lsp_implementations, "[G]oto [I]mplementation")
+          nmap("gr", Snacks.picker.lsp_references, "[G]oto [R]eferences")
+          nmap("gy", Snacks.picker.lsp_type_definitions, "[G]oto T[y]pe definition")
+
+          -- Add code nav status bar
+          local navic = require("nvim-navic")
+          if client.server_capabilities.documentSymbolProvider then
+            navic.attach(client, ev.buf)
+          end
+
+          -- Add signature help support
+          -- require("lsp_signature").on_attach()
+
+          -- Show diagnostics on hover
+          vim.api.nvim_create_autocmd("CursorHold", {
+            buffer = ev.buf,
+            callback = function()
+              vim.diagnostic.open_float({ focus = false, source = true })
+            end
+          })
+        end,
+      })
 
       -- Configure how diagnostics are published
       vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -143,7 +185,6 @@ return {
 
       for name, update_config in pairs(servers) do
         local config = {
-          on_attach = default_config.on_attach,
           on_init = default_config.on_init,
           capabilities = default_config.capabilities,
         }
