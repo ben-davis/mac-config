@@ -71,7 +71,7 @@ if status is-interactive
     eval "$(rbenv init - fish)"
 
     # Enable nodenv
-    nodenv init - | source
+    nodenv init - fish | source
 
     # . "$HOME/.asdf/asdf.sh"
     # . "$HOME/.asdf/completions/asdf.fish"
