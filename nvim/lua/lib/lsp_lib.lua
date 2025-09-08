@@ -2,8 +2,7 @@ local M = {}
 
 M.on_init = function(client, result)
   if client.name == "pyright" then
-    local poetry_env =
-        vim.trim(vim.fn.system('cd "' .. client.config.root_dir .. '"; poetry env info -p 2>/dev/null'))
+    local poetry_env = vim.trim(vim.fn.system('cd "' .. client.config.root_dir .. '"; poetry env info -p 2>/dev/null'))
 
     local venv_python_path = client.config.root_dir .. "/.venv/bin/python"
 

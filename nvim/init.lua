@@ -9,5 +9,5 @@ require("local/diagnostics")
 require("config.lazy")
 
 if vim.fn.isdirectory(vim.fn.expand("~/.config/nvim/lua/overrides")) > 0 then
-	require("overrides")
+  require("overrides")
 end

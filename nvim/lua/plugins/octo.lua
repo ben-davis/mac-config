@@ -1,38 +1,40 @@
-return { {
-  'pwntester/octo.nvim',
-  config = function()
-    require("octo").setup({
-      picker = "fzf-lua",
-      picker_config = {
-        use_emojis = true,
-      },
-      mappings = {
-        pull_request = {
-          reload = "gr",
-          open_in_browser = "gb",
-          checkout_pr = "<space>zsdasdjasdaazazazaz",
-          merge_pr = "<space>zazazazhasdasdasdasda",
-          list_commits = "<space>zaajasgiguhanjmd",
-          list_changed_files = "<space>zaasfaasdasd=isd",
+return {
+  {
+    "pwntester/octo.nvim",
+    config = function()
+      require("octo").setup({
+        picker = "fzf-lua",
+        picker_config = {
+          use_emojis = true,
         },
-        review_diff = {
-          select_next_entry = { lhs = "<tab>", desc = "move to previous changed file" },
-          select_prev_entry = { lhs = "<S-tab>", desc = "move to next changed file" },
+        mappings = {
+          pull_request = {
+            reload = "gr",
+            open_in_browser = "gb",
+            checkout_pr = "<space>zsdasdjasdaazazazaz",
+            merge_pr = "<space>zazazazhasdasdasdasda",
+            list_commits = "<space>zaajasgiguhanjmd",
+            list_changed_files = "<space>zaasfaasdasd=isd",
+          },
+          review_diff = {
+            select_next_entry = { lhs = "<tab>", desc = "move to previous changed file" },
+            select_prev_entry = { lhs = "<S-tab>", desc = "move to next changed file" },
+          },
+          file_panel = {
+            select_next_entry = { lhs = "<tab>", desc = "move to previous changed file" },
+            select_prev_entry = { lhs = "<S-tab>", desc = "move to next changed file" },
+          },
         },
-        file_panel = {
-          select_next_entry = { lhs = "<tab>", desc = "move to previous changed file" },
-          select_prev_entry = { lhs = "<S-tab>", desc = "move to next changed file" },
+        suppress_missing_scope = {
+          projects_v2 = true,
         },
-      },
-      suppress_missing_scope = {
-        projects_v2 = true,
-      },
-    })
+      })
 
-    vim.keymap.set("n", "<space>go", ":Octo actions<CR>", { noremap = true })
+      vim.keymap.set("n", "<space>go", ":Octo actions<CR>", { noremap = true })
 
-    -- I have no idea why, but OctoEditable is bright pink, even though it should default to NormalFloat.
-    -- So I just reset it here, which seems to work.
-    vim.api.nvim_exec("hi! link OctoEditable NormalFloat", true)
-  end
-} }
+      -- I have no idea why, but OctoEditable is bright pink, even though it should default to NormalFloat.
+      -- So I just reset it here, which seems to work.
+      vim.api.nvim_exec("hi! link OctoEditable NormalFloat", true)
+    end,
+  },
+}

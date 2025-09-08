@@ -1,5 +1,5 @@
 vim.api.nvim_exec(
-	[[
+  [[
   execute "digraphs as " . 0x2090
   execute "digraphs es " . 0x2091
   execute "digraphs hs " . 0x2095
@@ -64,5 +64,5 @@ vim.api.nvim_exec(
   execute "digraphs VS " . 0x2C7D
   execute "digraphs WS " . 0x1D42
   ]],
-	true
+  true
 )

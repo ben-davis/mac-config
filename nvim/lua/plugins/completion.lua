@@ -2,16 +2,16 @@ return {
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'ray-x/cmp-treesitter',
-      'hrsh7th/cmp-vsnip',
-      'windwp/nvim-autopairs',
-      'onsails/lspkind-nvim',
-      'hrsh7th/vim-vsnip',
-      'hrsh7th/vim-vsnip-integ',
-      'rafamadriz/friendly-snippets',
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "ray-x/cmp-treesitter",
+      "hrsh7th/cmp-vsnip",
+      "windwp/nvim-autopairs",
+      "onsails/lspkind-nvim",
+      "hrsh7th/vim-vsnip",
+      "hrsh7th/vim-vsnip-integ",
+      "rafamadriz/friendly-snippets",
     },
     config = function()
       -- Set completeopt to have a better completion experience
@@ -106,6 +106,6 @@ return {
         ]],
         true
       )
-    end
-  }
+    end,
+  },
 }

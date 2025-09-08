@@ -1,11 +1,11 @@
 return {
   {
-    'mfussenegger/nvim-dap',
+    "mfussenegger/nvim-dap",
     dependencies = {
-      'mfussenegger/nvim-dap-python',
-      'suketa/nvim-dap-ruby',
-      'rcarriga/nvim-dap-ui',
-      'theHamsta/nvim-dap-virtual-text',
+      "mfussenegger/nvim-dap-python",
+      "suketa/nvim-dap-ruby",
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
     },
     config = function()
       local dap = require("dap")
@@ -35,8 +35,12 @@ return {
       vim.api.nvim_set_keymap("n", "<leader>dd", "<cmd>lua require('dap').down()<CR>", { silent = true })
       vim.api.nvim_set_keymap("n", "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<CR>", { silent = true })
       vim.api.nvim_set_keymap("n", "<leader>dr", "<cmd>lua require('dap').run_last()<CR>", { silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>dk", "<cmd>lua require('dap.ui.variables').visual_hover()<CR>",
-        { silent = true })
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>dk",
+        "<cmd>lua require('dap.ui.variables').visual_hover()<CR>",
+        { silent = true }
+      )
       vim.api.nvim_set_keymap("n", "<leader>dx", "<cmd>lua require('dap').close()<CR>", { silent = true })
       vim.api.nvim_set_keymap(
         "n",
@@ -61,6 +65,6 @@ return {
           { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
         )
       end
-    end
-  }
+    end,
+  },
 }

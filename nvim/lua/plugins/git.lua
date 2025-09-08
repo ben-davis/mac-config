@@ -1,6 +1,6 @@
 return {
   {
-    'sindrets/diffview.nvim',
+    "sindrets/diffview.nvim",
     config = function()
       -- Diffview
       vim.keymap.set(
@@ -27,19 +27,22 @@ return {
         "<Cmd>.DiffviewFileHistory --follow<CR>",
         { silent = true, noremap = true, desc = "Line history" }
       )
-      vim.keymap.set({ "n" }, "<leader>gd", ":DiffviewOpen <CR>",
-        { silent = true, noremap = true, desc = "Diff worktree" })
-    end
+      vim.keymap.set(
+        { "n" },
+        "<leader>gd",
+        ":DiffviewOpen <CR>",
+        { silent = true, noremap = true, desc = "Diff worktree" }
+      )
+    end,
   },
   {
-    "lewis6991/gitsigns.nvim"
+    "lewis6991/gitsigns.nvim",
   },
   {
     "NeogitOrg/neogit",
     config = function()
       -- Neogit
       vim.keymap.set({ "n" }, "<leader>gs", ":Neogit <CR>", { silent = true, noremap = true, desc = "Git status" })
-
 
       vim.keymap.set("n", "<leader>ga", function()
         local file = vim.fn.expand("%:p")
@@ -52,7 +55,7 @@ return {
         end
       end, { desc = "[G]it [A]dd Current File" })
 
-      require('neogit').setup({
+      require("neogit").setup({
         disable_hint = true,
         filewatcher = {
           enabled = false,
@@ -60,15 +63,19 @@ return {
         process_spinner = true,
         auto_refresh = false,
       })
-    end
+    end,
   },
   {
-    'rhysd/git-messenger.vim',
+    "rhysd/git-messenger.vim",
     config = function()
       -- Git messenger (blame)
       vim.g["git_messenger_no_default_mappings"] = true
-      vim.keymap.set({ "n" }, "<leader>gm", "<Plug>(git-messenger)",
-        { silent = true, noremap = true, desc = "Git blame" })
-    end
-  }
+      vim.keymap.set(
+        { "n" },
+        "<leader>gm",
+        "<Plug>(git-messenger)",
+        { silent = true, noremap = true, desc = "Git blame" }
+      )
+    end,
+  },
 }

@@ -1,6 +1,6 @@
 return {
   {
-    'stevearc/oil.nvim',
+    "stevearc/oil.nvim",
     config = function()
       require("oil").setup({
         delete_to_trash = true,
@@ -26,10 +26,10 @@ return {
       })
 
       vim.api.nvim_set_keymap("n", "<Leader>e", ":Oil %:h<CR>", { noremap = true })
-    end
+    end,
   },
   {
-    'nvim-neo-tree/neo-tree.nvim',
+    "nvim-neo-tree/neo-tree.nvim",
     config = function()
       require("neo-tree").setup({
         -- Enabling git creates tons of UI lag
@@ -43,6 +43,6 @@ return {
       })
 
       vim.api.nvim_set_keymap("n", "<Leader>E", ":Neotree reveal<CR>", { noremap = true })
-    end
-  }
+    end,
+  },
 }
