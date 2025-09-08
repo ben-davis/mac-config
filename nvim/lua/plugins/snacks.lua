@@ -55,8 +55,8 @@ return {
           desc = "Workspace [D]iagnostics",
         },
 
-        { "<space>z", "<CMD>lua Snacks.zen.zen()<CR>", desc = "[z]en" },
-        { "<space>Z", "<CMD>lua Snacks.zen.zoom()<CR>", desc = "[Z]oom" },
+        { "<leader>z", "<CMD>lua Snacks.zen.zen()<CR>", desc = "[z]en" },
+        { "<leader>Z", "<CMD>lua Snacks.zen.zoom()<CR>", desc = "[Z]oom" },
       },
     },
   },
