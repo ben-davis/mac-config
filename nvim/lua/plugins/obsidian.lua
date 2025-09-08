@@ -33,6 +33,9 @@ return {
             -- Optional, if you keep daily notes in a separate directory.
             folder = "daily",
           },
+          follow_url_func = function(url)
+            vim.ui.open(url)
+          end,
           -- see below for full list of options 👇
         })
       end
