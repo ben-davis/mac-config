@@ -4,7 +4,6 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "pmizio/typescript-tools.nvim",
       "ray-x/lsp_signature.nvim",
       "b0o/SchemaStore.nvim",
       "nvim-lua/lsp-status.nvim",
@@ -191,9 +190,6 @@ return {
 
         require("lspconfig")[name].setup(config)
       end
-
-      -- Use typescript-tools
-      require("typescript-tools").setup(default_config)
     end,
   },
   {
