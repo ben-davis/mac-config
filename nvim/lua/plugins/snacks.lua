@@ -7,7 +7,7 @@ return {
       opts = {
         input = { enabled = true },
         notifier = { enabled = true },
-        -- zen = {}
+        zen = { enabled = true },
       },
       keys = {
         {
@@ -23,7 +23,11 @@ return {
         { "<space>P", "<CMD>lua Snacks.picker.git_files()<CR>", desc = "Git files" },
         { "<space>C", "<CMD>lua Snacks.picker.commands()<CR>", desc = "Neovim commands" },
         { "<space>f", "<CMD>lua Snacks.picker.grep()<CR>", desc = "Grep cwd" },
-        { "<space>*", "<CMD>lua Snacks.picker.grep_word()<CR>", desc = "Grep word under cursor" },
+        {
+          "<space>*",
+          "<CMD>lua Snacks.picker.grep_word()<CR>",
+          desc = "Grep word under cursor",
+        },
         { "<space>m", "<CMD>lua Snacks.picker.recent()<CR>", desc = "Recent files" },
         { "<space>l", "<CMD>lua Snacks.picker.pickers()<CR>", desc = "All pickers" },
         { "<space>b", "<CMD>lua Snacks.picker.buffers({current = false})<CR>", desc = "All pickers" },
@@ -40,8 +44,19 @@ return {
         { "<space>glf", "<CMD>lua Snacks.picker.log({current_file = true})<CR>", desc = "[G]it [L]og [F]ile" },
         { "<space>gll", "<CMD>lua Snacks.picker.log({current_line = true})<CR>", desc = "[G]it [L]og [L]ine" },
 
-        { "<space>d", "<CMD>lua Snacks.picker.diagnostics_buffer()<CR>", desc = "Buffer [D]iagnostics" },
-        { "<space>D", "<CMD>lua Snacks.picker.diagnostics()<CR>", desc = "Workspace [D]iagnostics" },
+        {
+          "<space>d",
+          "<CMD>lua Snacks.picker.diagnostics_buffer()<CR>",
+          desc = "Buffer [D]iagnostics",
+        },
+        {
+          "<space>D",
+          "<CMD>lua Snacks.picker.diagnostics()<CR>",
+          desc = "Workspace [D]iagnostics",
+        },
+
+        { "<space>z", "<CMD>lua Snacks.zen.zen()<CR>", desc = "[z]en" },
+        { "<space>Z", "<CMD>lua Snacks.zen.zoom()<CR>", desc = "[Z]oom" },
       },
     },
   },
