@@ -7,7 +7,15 @@ return {
       opts = {
         input = { enabled = true },
         notifier = { enabled = true },
-        zen = { enabled = true },
+        zen = { enabled = true, toggles = { dim = false }, show = { statusline = false } },
+        styles = {
+          zen = {
+            backdrop = {
+              transparent = true,
+              blend = 10,
+            },
+          },
+        },
       },
       keys = {
         {
