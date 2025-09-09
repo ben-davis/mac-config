@@ -84,6 +84,7 @@ return {
           "jsonls",
           "lua_ls",
           "yamlls",
+          "vtsls",
         },
         automatic_installation = false,
       })
