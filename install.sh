@@ -6,15 +6,25 @@ set -e -o pipefail
 
 # Parse command line arguments
 SKIP_SYMLINK_GIT=""
+SKIP_BREW=""
+SKIP_CHANGE_SHELL=""
 while [[ $# -gt 0 ]]; do
   case $1 in
     --skip-symlink-git)
       SKIP_SYMLINK_GIT="--skip-symlink-git"
       shift
       ;;
+    --skip-brew)
+      SKIP_BREW="--skip-brew"
+      shift
+      ;;
+    --skip-change-shell)
+      SKIP_CHANGE_SHELL=1
+      shift
+      ;;
     *)
       echo "Unknown option: $1"
-      echo "Usage: $0 [--skip-symlink-git]"
+      echo "Usage: $0 [--skip-symlink-git | --skip-brew]"
       exit 1
       ;;
   esac
@@ -35,7 +45,7 @@ case "$(uname -s)" in
       source ./lib/configure-linux.sh
       ;;
     "Darwin")
-      source ./lib/configure-mac.sh
+      SKIP_BREW=$SKIP_BREW source ./lib/configure-mac.sh
       ;;
     *)
       echo "Unknown operating system: $OS_NAME. Cannot install."
@@ -56,7 +66,7 @@ sudo chsh -s $FISH_BIN
 echo "--------- Installing fish plugin manager"
 $FISH_BIN -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 
-source ./lib/configure-symlinks.sh $SKIP_SYMLINK_GIT
+SKIP_SYMLINK_GIT=$SKIP_SYMLINK_GIT source ./lib/configure-symlinks.sh
 
 echo "--------- Install fisher"
 $FISH_BIN -c "fisher update"
@@ -69,8 +79,10 @@ if [ ! -d ~/dev/git ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-echo "--------- Reload shell"
-exec $FISH_BIN -l
+if [[ -z "$SKIP_CHANGE_SHELL" ]]; then
+  echo "--------- Reload shell"
+  exec $FISH_BIN -l
+fi
 
 echo "Restart your machine to have the keyboard preferences take effect"
 

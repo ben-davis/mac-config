@@ -1,18 +1,3 @@
-SKIP_SYMLINK_GIT=""
-while [[ $# -gt 0 ]]; do
-  case $1 in
-    --skip-symlink-git)
-      SKIP_SYMLINK_GIT="--skip-symlink-git"
-      shift
-      ;;
-    *)
-      echo "Unknown option: $1"
-      echo "Usage: $0 [--skip-symlink-git]"
-      exit 1
-      ;;
-  esac
-done
-
 if [ ! -d ~/.config ]; then
   echo "--------- Making ~/.config"
   mkdir ~/.config

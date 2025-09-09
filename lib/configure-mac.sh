@@ -3,9 +3,11 @@ if ! [ -x "$(command -v brew)" ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
-echo "--------- Installing brew packages"
-export HOMEBREW_NO_AUTO_UPDATE=1
-/opt/homebrew/bin/brew bundle install || true
+if [[ -z "$SKIP_BREW" ]]; then
+  echo "--------- Installing brew packages"
+  export HOMEBREW_NO_AUTO_UPDATE=1
+  /opt/homebrew/bin/brew bundle install || true
+fi
 
 echo "--------- Configuring macOS defaults"
 echo "System Preferences > Dock: autohide dock"
