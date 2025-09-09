@@ -85,6 +85,8 @@ return {
           "lua_ls",
           "yamlls",
           "vtsls",
+          "cssls",
+          "css_variables",
         },
         automatic_installation = false,
       })
@@ -174,6 +176,13 @@ return {
         hls = function(config)
           return config
         end,
+        cssls = function(config)
+          config.capabilities.textDocument.completion.completionItem.snippetSupport = true
+          return config
+        end,
+        css_variables = function(config)
+          return config
+        end,
       }
 
       local lsp_lib = require("lib/lsp_lib")
@@ -198,6 +207,7 @@ return {
     config = function()
       require("outline").setup({
         outline_window = {
+
           position = "right",
           auto_jump = false,
           width = 14,
