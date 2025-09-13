@@ -8,6 +8,7 @@ set -e -o pipefail
 SKIP_SYMLINK_GIT=""
 SKIP_BREW=""
 SKIP_CHANGE_SHELL=""
+INSTALL_RUST=0
 while [[ $# -gt 0 ]]; do
   case $1 in
     --skip-symlink-git)
@@ -20,6 +21,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --skip-change-shell)
       SKIP_CHANGE_SHELL=1
+      shift
+      ;;
+    --with-rust)
+      INSTALL_RUST=1
       shift
       ;;
     *)
@@ -62,6 +67,15 @@ if ! grep -q $FISH_BIN /etc/shells ; then
 fi
 
 sudo chsh -s $FISH_BIN
+
+if [ "$INSTALL_RUST" -eq 1 ]; then
+  echo "--------- Installing Rust"
+  if command -v rustc >/dev/null 2>&1; then
+    echo "Rust is already installed, skipping..."
+  else
+    curl https://sh.rustup.rs -sSf | sh
+  fi
+fi
 
 echo "--------- Installing fish plugin manager"
 $FISH_BIN -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
