@@ -1,3 +1,4 @@
+-- Note I also use Snacks explorer, configured in Snacks.lua
 return {
   {
     "stevearc/oil.nvim",
@@ -26,23 +27,6 @@ return {
       })
 
       vim.api.nvim_set_keymap("n", "<Leader>e", ":Oil %:h<CR>", { noremap = true })
-    end,
-  },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    config = function()
-      require("neo-tree").setup({
-        -- Enabling git creates tons of UI lag
-        enable_git_status = false,
-        enable_diagnostics = false,
-        buffers = {
-          follow_current_file = {
-            enabled = true,
-          },
-        },
-      })
-
-      vim.api.nvim_set_keymap("n", "<Leader>E", ":Neotree reveal<CR>", { noremap = true })
     end,
   },
 }

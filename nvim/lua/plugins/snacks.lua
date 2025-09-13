@@ -65,6 +65,8 @@ return {
 
         { "<leader>z", "<CMD>lua Snacks.zen.zen()<CR>", desc = "[z]en" },
         { "<leader>Z", "<CMD>lua Snacks.zen.zoom()<CR>", desc = "[Z]oom" },
+
+        { "<leader>E", "<CMD>lua Snacks.explorer()<CR>", desc = "Snacks [E]xplorer" },
       },
     },
   },
