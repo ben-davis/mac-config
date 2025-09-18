@@ -40,29 +40,29 @@ return {
         })
       end
 
-      vim.keymap.set("n", "<leader>on", function()
+      vim.keymap.set("n", "<leader>On", function()
         vim.cmd("ObsidianNew")
-      end, { silent = true, nowait = true, desc = "New" })
+      end, { silent = true, nowait = true, desc = "[O]bsidian [N]ew" })
 
-      vim.keymap.set("n", "<leader>op", function()
+      vim.keymap.set("n", "<leader>Op", function()
         vim.cmd("ObsidianQuickSwitch")
-      end, { silent = true, nowait = true, desc = "Find file" })
+      end, { silent = true, nowait = true, desc = "[O]bsidian find file" })
 
-      vim.keymap.set("n", "<leader>of", function()
+      vim.keymap.set("n", "<leader>Of", function()
         vim.cmd("ObsidianSearch")
-      end, { silent = true, nowait = true, desc = "Grep" })
+      end, { silent = true, nowait = true, desc = "[O]bsidian grep" })
 
-      vim.keymap.set("n", "<leader>ot", function()
+      vim.keymap.set("n", "<leader>Ot", function()
         vim.cmd("ObsidianToday")
-      end, { silent = true, nowait = true, desc = "Today" })
+      end, { silent = true, nowait = true, desc = "[O]bsidian [T]oday" })
 
-      vim.keymap.set("n", "<leader>ow", function()
+      vim.keymap.set("n", "<leader>Ow", function()
         vim.cmd("ObsidianWorkspace")
-      end, { silent = true, nowait = true, desc = "Workspace" })
+      end, { silent = true, nowait = true, desc = "[O]bsidian [W]orkspace" })
 
-      vim.keymap.set("n", "<leader>od", function()
+      vim.keymap.set("n", "<leader>Od", function()
         vim.cmd("ObsidianDailies")
-      end, { silent = true, nowait = true, desc = "List dailies" })
+      end, { silent = true, nowait = true, desc = "[O]bsidian list [D]ailies" })
     end,
   },
 }
