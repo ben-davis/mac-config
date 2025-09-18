@@ -14,7 +14,11 @@ return {
               transparent = true,
               blend = 10,
             },
+            width = 160,
           },
+        },
+        picker = {
+          ui_select = true,
         },
       },
       keys = {
