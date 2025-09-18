@@ -87,8 +87,10 @@ return {
           "vtsls",
           "cssls",
           "css_variables",
+          "eslint",
         },
         automatic_installation = false,
+        automatic_enable = false,
       })
 
       local servers = {
@@ -183,6 +185,9 @@ return {
         css_variables = function(config)
           return config
         end,
+        eslint = function(config)
+          return config
+        end,
       }
 
       local lsp_lib = require("lib/lsp_lib")
@@ -216,8 +221,7 @@ return {
           show_symbol_lineno = true,
         },
       })
-      vim.keymap.set({ "n" }, "<leader>o", ":Outline<CR>", { silent = true, noremap = true })
-      vim.keymap.set({ "n" }, "<leader>O", ":OutlineFocus<CR>", { silent = true, noremap = true })
+      vim.keymap.set({ "n" }, "<leader>S", ":Outline<CR>", { silent = true, noremap = true })
     end,
   },
   {
