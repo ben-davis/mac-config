@@ -86,7 +86,7 @@ echo "--------- Install fisher"
 $FISH_BIN -c "fisher update"
 
 echo "--------- Install neovim plugins"
-$NVIM_BIN --headless +qall
+$NVIM_BIN --headless -c "MasonInstall prettierd"  +qall
 
 echo "--------- Installing tmux plugin manager"
 if [ ! -d ~/dev/git ]; then
