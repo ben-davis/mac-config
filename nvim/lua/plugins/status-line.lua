@@ -24,14 +24,11 @@ return {
         return project
       end
 
-      local function file_path()
-        return vim.fn.expand("%:p:.")
-      end
-
       -- The lualine colors provided by tokyonight
       local config = require("tokyonight.config")
       local colors = require("tokyonight.colors").setup(config)
       local theme = require("lualine.themes.tokyonight")
+      local file_path_color = { bg = colors.bg_statusline, fg = colors.comment }
 
       theme.inactive.a = { bg = colors.fg_gutter, fg = colors.blue }
 
@@ -56,13 +53,13 @@ return {
         inactive_sections = {
           lualine_a = {},
           lualine_b = {},
-          lualine_c = { "filename" },
+          lualine_c = { { "filename", path = 2, color = file_path_color, padding = 3 } },
           lualine_x = { "location" },
           lualine_y = {},
           lualine_z = {},
         },
         tabline = {
-          lualine_a = { { file_path, color = { bg = colors.bg_statusline, fg = colors.comment }, padding = 3 } },
+          lualine_a = { { "filename", path = 1, color = file_path_color, padding = 3 } },
           lualine_b = {},
           lualine_c = { {} },
           lualine_x = { "diff" },
