@@ -1,6 +1,30 @@
 return {
   {
     {
+      "folke/trouble.nvim",
+      optional = true,
+      specs = {
+        "folke/snacks.nvim",
+        opts = function(_, opts)
+          return vim.tbl_deep_extend("force", opts or {}, {
+            picker = {
+              actions = require("trouble.sources.snacks").actions,
+              win = {
+                input = {
+                  keys = {
+                    ["<c-t>"] = {
+                      "trouble_open",
+                      mode = { "n", "i" },
+                    },
+                  },
+                },
+              },
+            },
+          })
+        end,
+      },
+    },
+    {
       "folke/snacks.nvim",
       priority = 1000,
       lazy = false,
@@ -20,6 +44,19 @@ return {
         picker = {
           ui_select = true,
         },
+        formatters = {
+          file = {
+            truncate = 120,
+          },
+        },
+        win = {
+          -- wo = {
+          --   conceallevel = 0,
+          -- },
+          -- input = { keys = {
+          --   ["<Esc>"] = { "close", mode = { "n", "i" } },
+          -- } },
+        },
       },
       keys = {
         {
@@ -31,8 +68,12 @@ return {
         },
 
         { "<space>:", "<CMD>lua Snacks.picker.command_history()<CR>", desc = "Command History" },
+
         { "<space>p", "<CMD>lua Snacks.picker.smart()<CR>", desc = "Files" },
-        { "<space>P", "<CMD>lua Snacks.picker.git_files()<CR>", desc = "Git files" },
+
+        { "<space>P", nil, desc = "Scoped files" },
+        { "<space>Pg", "<CMD>lua Snacks.picker.git_files()<CR>", desc = "Git files" },
+
         { "<space>C", "<CMD>lua Snacks.picker.commands()<CR>", desc = "Neovim commands" },
         { "<space>f", "<CMD>lua Snacks.picker.grep()<CR>", desc = "Grep cwd" },
         {
