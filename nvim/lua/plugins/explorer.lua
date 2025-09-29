@@ -26,7 +26,7 @@ return {
         },
       })
 
-      vim.api.nvim_set_keymap("n", "<Leader>e", ":Oil %:h<CR>", { noremap = true })
+      vim.api.nvim_set_keymap("n", "<Leader>e", ":Oil<CR>", { noremap = true })
     end,
   },
 }
