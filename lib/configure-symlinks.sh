@@ -20,6 +20,10 @@ echo "--------- Symlinking alacritty"
 mkdir -p ~/.config/alacritty
 ln -s -f ~/dev/git/mac-config/alacritty.toml ~/.config/alacritty/alacritty.toml
 
+echo "--------- Symlinking ghostty"
+mkdir -p ~/.config/ghostty
+ln -s -f ~/dev/git/mac-config/ghostty.config ~/.config/ghostty/config
+
 echo "--------- Symlinking yabai"
 ln -s -f ~/dev/git/mac-config/yabai ~/.config/yabai
 
