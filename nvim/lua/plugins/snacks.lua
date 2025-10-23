@@ -40,6 +40,9 @@ return {
             },
             width = 160,
           },
+          terminal = {
+            stack = true,
+          },
         },
         picker = {
           ui_select = true,
@@ -112,6 +115,8 @@ return {
         { "<leader>Z", "<CMD>lua Snacks.zen.zoom()<CR>", desc = "[Z]oom" },
 
         { "<leader>E", "<CMD>lua Snacks.explorer()<CR>", desc = "Snacks [E]xplorer" },
+
+        { "<leader>T", "<CMD>lua Snacks.terminal.toggle()<CR>", desc = "Toggle [T]erminal" },
       },
     },
   },
