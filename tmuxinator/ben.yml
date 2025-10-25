@@ -5,38 +5,21 @@ windows:
   - cool-stuff-api:
       root: ~/dev/git/cool-stuff-api
       layout: main-vertical
-      panes:
-        - nvim
   - cool-stuff-app:
       root: ~/dev/git/cool-stuff-app
       layout: main-vertical
-      panes:
-        - nvim -c ":terminal" -c ":call feedkeys(\"inpm run web:serve\<CR>\<ESC>\", \"t\")" -c ":file web-serve" -c ":terminal" -c ":call feedkeys(\"inpx expo start\<CR>\", \"t\")" -c ":file app-serve"
   - cool-stuff-ai:
       root: ~/dev/git/cool-stuff-ai
       layout: main-vertical
-      panes:
-        - nvim
   - fastapi-resources:
       root: ~/dev/git/fastapi-resources
       layout: main-vertical
-      panes:
-        - nvim
   - mac-config:
       root: ~/dev/git/mac-config
       layout: main-vertical
-      panes:
-        - nvim
-  - rupa:
-      root: ~/dev/git/rupalabs
-      layout: main-vertical
-      panes:
-        - nvim
   - notes:
       root: ~/Documents/Notes
       layout: main-vertical
-      panes:
-        - nvim
   - shell:
       root: ~
       layout: main-vertical
