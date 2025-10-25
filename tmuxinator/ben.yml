@@ -26,3 +26,6 @@ windows:
   - ledger:
       root: ~/dev/git/ledger
       layout: main-vertical
+  - flip:
+      root: ~/dev/git/flip
+      layout: main-vertical

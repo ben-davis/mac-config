@@ -2,7 +2,8 @@ return {
   { -- Task runner
     "stevearc/overseer.nvim",
     opts = {
-      templates = { "builtin" },
+      -- Godot is defined in lua/overseer/template/godot (in case you forget)
+      templates = { "builtin", "godot" },
       template_dirs = { "overseer.template" },
       default_neotest = {
         { "on_complete_notify", on_change = true },

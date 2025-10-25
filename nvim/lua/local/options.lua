@@ -81,6 +81,7 @@ vim.api.nvim_exec(
     augroup filetypes
         autocmd!
         autocmd Filetype python setlocal ts=4 sw=4
+        autocmd Filetype gdscript setlocal ts=4 sw=4
         autocmd Filetype javascript setlocal ts=2 sw=2
         autocmd Filetype typescript setlocal ts=2 sw=2
         autocmd Filetype typescriptreact setlocal ts=2 sw=2

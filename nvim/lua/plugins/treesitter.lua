@@ -30,7 +30,7 @@ return {
       indent = {
         enable = true,
         -- Treesitter Python indentation gets a lot wrong. I'm using Vimjas/vim-python-pep8-indent to correct.
-        disable = { "python", "ledger" },
+        disable = { "python", "ledger", "gdscript" },
       },
       ensure_installed = {
         "bash",
