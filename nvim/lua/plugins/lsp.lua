@@ -188,6 +188,9 @@ return {
         eslint = function(config)
           return config
         end,
+        gdscript = function(config)
+          return config
+        end,
       }
 
       local lsp_lib = require("lib/lsp_lib")
