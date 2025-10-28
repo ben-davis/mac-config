@@ -1,13 +1,18 @@
-vim.api.nvim_command("source ~/.config/nvim/plugins.vim")
-
 require("local/options")
 require("local/digraphs")
 require("local/keymap")
 require("local/react-native")
 require("local/diagnostics")
 
-require("config.lazy")
+-- Any dirs in ~/.config/nvim.d must be a config dir that could be
+-- mounted in `~/.config/nvim`
+local overlay = require("overlay")
+local overlay_names = overlay.add_overlays_from_dir("~/.config/nvim.d")
 
-if vim.fn.filereadable(vim.fn.expand("~/.config/nvim/lua/overrides/init.lua")) > 0 then
-  require("overrides")
+local overlay_plugin_names = {}
+for _, overlay_name in ipairs(overlay_names) do
+  table.insert(overlay_plugin_names, overlay_name .. "_plugins")
 end
+
+local lazy = require("config.lazy")
+lazy.setup(overlay_plugin_names)

@@ -4,5 +4,4 @@ Brewfile.lock.json
 
 nvim/.DS_Store
 
-**/stripe-*.lua
 **/lazy-lock.json
