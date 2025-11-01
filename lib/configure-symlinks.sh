@@ -8,10 +8,8 @@ mkdir -p ~/.config/fish
 ln -s -f ~/dev/git/mac-config/fish/config.fish ~/.config/fish/config.fish
 ln -s -f ~/dev/git/mac-config/fish/fish_plugins ~/.config/fish/fish_plugins
 
-if [ ! -d ~/.config/nvim ]; then
-  echo "--------- Symlinking nvim config"
-  ln -s -f ~/dev/git/mac-config/nvim ~/.config
-fi
+echo "--------- Symlinking nvim config"
+ln -s -f -n ~/dev/git/mac-config/nvim ~/.config
 
 echo "--------- Symlinking bashrc"
 ln -s -f ~/dev/git/mac-config/bashrc ~/.bashrc
@@ -25,13 +23,13 @@ mkdir -p ~/.config/ghostty
 ln -s -f ~/dev/git/mac-config/ghostty.config ~/.config/ghostty/config
 
 echo "--------- Symlinking yabai"
-ln -s -f ~/dev/git/mac-config/yabai ~/.config/yabai
+ln -s -f -n ~/dev/git/mac-config/yabai ~/.config/yabai
 
 echo "--------- Symlinking sketchybar"
-ln -s -f ~/dev/git/mac-config/sketchybar ~/.config/sketchybar
+ln -s -f -n ~/dev/git/mac-config/sketchybar ~/.config/sketchybar
 
 echo "--------- Symlinking skhdrc"
-ln -s -f ~/dev/git/mac-config/skhd ~/.config/skhd
+ln -s -f -n ~/dev/git/mac-config/skhd ~/.config/skhd
 
 if [ -z "$SKIP_SYMLINK_GIT" ]; then
   echo "--------- Symlinking git config"
@@ -42,4 +40,4 @@ echo "--------- Symlinking tmux.conf"
 ln -s -f ~/dev/git/mac-config/tmux.conf ~/.tmux.conf
 
 echo "--------- Symlinking tmuxinator config"
-ln -s -f ~/dev/git/mac-config/tmuxinator ~/.tmuxinator
+ln -s -f -n ~/dev/git/mac-config/tmuxinator ~/.tmuxinator
