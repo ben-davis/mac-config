@@ -1,5 +1,5 @@
 -- Support mouse
-vim.o.mouse = "a"
+vim.o.mouse = ""
 
 -- System clipboard support
 vim.g["oscyank_term"] = "default"
