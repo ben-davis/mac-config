@@ -46,6 +46,10 @@ return {
         },
         picker = {
           ui_select = true,
+          main = {
+            -- Allows pickers to open in the right buffer even if the originating buffer is not a file
+            file = false,
+          },
         },
         formatters = {
           file = {
