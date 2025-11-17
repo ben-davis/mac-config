@@ -38,6 +38,7 @@ return {
         "diff",
         "fish",
         "html",
+        "java",
         "javascript",
         "jsdoc",
         "json",

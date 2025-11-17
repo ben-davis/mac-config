@@ -6,6 +6,12 @@ return {
       "suketa/nvim-dap-ruby",
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
+      -- lazy spec to build "microsoft/vscode-js-debug" from source
+      {
+        "microsoft/vscode-js-debug",
+        version = "1.x",
+        build = "npm i && npm run compile vsDebugServerBundle && mv dist out",
+      },
     },
     config = function()
       local dap = require("dap")
@@ -14,7 +20,40 @@ return {
       -- This causes DAP to use `uv` to find `debugpy`. The python file being executed will be ran with the python executable
       -- based on the project (dap-python has this logic, as does neo-test/python)
       require("dap-python").setup("uv")
+      -- Setups up a ruby adapter
       require("dap-ruby").setup()
+
+      require("dap-vscode-js").setup({
+        debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
+        adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
+      })
+
+      -- dap.adapters.chrome = {
+      --   type = "server",
+      --   host = "localhost",
+      --   port = "8128", -- chosen randomly by dap
+      --   -- executable = {
+      --   --   command = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug-adapter",
+      --   --   args = {
+      --   --     "8128",
+      --   --   },
+      --   -- },
+      -- }
+
+      local ts_config = {
+        type = "pwa-chrome",
+        request = "launch",
+        name = "Attach to Chrome",
+        url = "http://localhost:1234",
+        port = 9222,
+        webRoot = "${workspaceFolder}/lib/consumer/link_app/frontend/src",
+        sourceMaps = true,
+        protocol = "inspector",
+      }
+
+      dap.configurations.typescriptreact = { ts_config }
+      dap.configurations.typescript = { ts_config }
+
       require("dapui").setup()
       require("nvim-dap-virtual-text").setup({})
 

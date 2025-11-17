@@ -88,6 +88,7 @@ return {
           "cssls",
           "css_variables",
           "eslint",
+          "js-debug-adapter",
         },
         automatic_installation = false,
         automatic_enable = false,
