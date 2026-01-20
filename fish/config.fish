@@ -66,6 +66,7 @@ if status is-interactive
     # fi
     set -x EDITOR "nvim"
     set -x VISUAL "nvim"
+    set -x XDG_CONFIG_HOME ~/.config
 
     # Enables the ruby version manager
     eval "$(rbenv init - fish)"
