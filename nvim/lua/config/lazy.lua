@@ -40,7 +40,7 @@ M.setup = function(import_dirs)
     --
     install = { colorscheme = { "tokyonight" } },
     -- automatically check for plugin updates
-    checker = { enabled = true },
+    checker = { enabled = false },
   })
 end
 
