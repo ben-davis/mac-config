@@ -46,6 +46,9 @@ tar -xzf ./gh_2.67.0_linux_amd64.tar.gz
 sudo mv ./gh_2.67.0_linux_amd64/bin/gh /usr/local/bin/gh
 rm -rf gh_2.67.0_linux_amd64*
 
+# Install treesitter
+yarn global add tree-sitter-cli
+sudo ln -s ~/.config/yarn/global/node_modules/.bin/tree-sitter /usr/local/bin/tree-sitter
 
 export FISH_BIN=/usr/bin/fish
 export NVIM_BIN=/opt/nvim/bin/nvim
