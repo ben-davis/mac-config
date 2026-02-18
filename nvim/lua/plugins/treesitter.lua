@@ -5,6 +5,7 @@ return {
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     lazy = false,
+    branch = "main",
     build = ':TSUpdate',
     keys = {
       { "<c-space>", desc = "Increment Selection" },
