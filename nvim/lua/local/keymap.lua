@@ -36,6 +36,10 @@ vim.keymap.set("n", "<leader>q", ":Bdelete<CR>", { noremap = true, silent = true
 -- Y yank until the end of line
 vim.keymap.set("n", "Y", "y$", { noremap = true, silent = true })
 
+-- Yank relative path
+vim.keymap.set("n", "<leader>yp", ":let @+ = expand('%:p')<CR>", { desc = "Copy full path to clipboard" })
+vim.keymap.set("n", "<leader>yr", ":let @+ = expand('%')<CR>", { desc = "Copy relative path to clipboard" })
+
 -- Set movement to always go to visual lines, rather than real lines
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
