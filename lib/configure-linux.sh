@@ -21,7 +21,8 @@ sudo apt-get install -y \
     tmux \
     fd-find \
     fzf \
-    fish
+    fish \
+    gh
 
 # Install additional utilities and tools if available
 sudo apt-get install -y \
@@ -39,12 +40,6 @@ tar -xzf ./nvim-linux-arm64.tar.gz
 sudo rm -rf /opt/nvim
 sudo mv ./nvim-linux-arm64 /opt/nvim
 rm -rf nvim-linux-arm64*
-
-# Install github CLI
-curl -LO https://github.com/cli/cli/releases/download/v2.67.0/gh_2.67.0_linux_amd64.tar.gz
-tar -xzf ./gh_2.67.0_linux_amd64.tar.gz
-sudo mv ./gh_2.67.0_linux_amd64/bin/gh /usr/local/bin/gh
-rm -rf gh_2.67.0_linux_amd64*
 
 # Install treesitter
 yarn global add tree-sitter-cli
