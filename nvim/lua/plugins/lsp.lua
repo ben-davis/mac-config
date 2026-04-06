@@ -39,21 +39,11 @@ return {
           nmap("<space>R", vim.lsp.buf.rename, "[R]ename")
           nmap("<space>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
-          -- -- Rebind the defaultso it uses border
-          -- vim.keymap.set("n", "K", function()
-          -- 	vim.lsp.buf.hover({
-          -- 		border = "rounded",
-          -- 	})
-          -- end)
-
           -- Add code nav status bar
           local navic = require("nvim-navic")
           if client.server_capabilities.documentSymbolProvider then
             navic.attach(client, ev.buf)
           end
-
-          -- Add signature help support
-          -- require("lsp_signature").on_attach()
 
           -- Show diagnostics on hover
           vim.api.nvim_create_autocmd("CursorHold", {
@@ -93,121 +83,113 @@ return {
         automatic_enable = false,
       })
 
-      local servers = {
-        pyright = function(config)
-          config.settings = {
-            python = {
-              analysis = {
-                autoSearchPaths = true,
-                diagnosticMode = "workspace",
-                useLibraryCodeForTypes = true,
-                autoImportCompletions = true,
-              },
-            },
-          }
-          return config
-        end,
-        ruff = function(config)
-          return config
-        end,
-        -- ruby_lsp = function(config)
-        --   return config
-        -- end,
-        -- sorbet = function(config)
-        --   return config
-        -- end,
-        html = function(config)
-          return config
-        end,
-        jsonls = function(config)
-          config.settings = {
-            json = {
-              schemas = require("schemastore").json.schemas(),
-            },
-          }
-          return config
-        end,
-        lua_ls = function(config)
-          -- Configure lua language server for neovim development
-          local runtime_path = vim.split(package.path, ";")
-          table.insert(runtime_path, "lua/?.lua")
-          table.insert(runtime_path, "lua/?/init.lua")
-
-          local lua_settings = {
-            Lua = {
-              runtime = {
-                -- LuaJIT in the case of Neovim
-                version = "LuaJIT",
-                path = runtime_path,
-              },
-              diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { "vim" },
-              },
-              workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
-              },
-            },
-          }
-
-          config.settings = lua_settings
-          return config
-        end,
-        yamlls = function(config)
-          config.filetypes = {
-            "yaml",
-            "yaml.docker-compose",
-          }
-          config.settings = {
-            yaml = {
-              schemas = require("schemastore").json.schemas(),
-            },
-          }
-          return config
-        end,
-        ccls = function(config)
-          return config
-        end,
-        sourcekit = function(config)
-          config.cmd = {
-            "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
-          }
-          return config
-        end,
-        hls = function(config)
-          return config
-        end,
-        cssls = function(config)
-          config.capabilities.textDocument.completion.completionItem.snippetSupport = true
-          return config
-        end,
-        css_variables = function(config)
-          return config
-        end,
-        eslint = function(config)
-          return config
-        end,
-        gdscript = function(config)
-          return config
-        end,
-      }
-
-      local lsp_lib = require("lib/lsp_lib")
-      local default_config = lsp_lib.make_default_config()
-
-      for name, update_config in pairs(servers) do
-        local config = {
-          on_init = default_config.on_init,
-          capabilities = default_config.capabilities,
-        }
-
-        if update_config then
-          config = update_config(config)
-        end
-
-        require("lspconfig")[name].setup(config)
+      -- Global capabilities (cmp_nvim_lsp snippet/completion support)
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+      if ok then
+        capabilities = vim.tbl_extend("keep", capabilities, cmp_nvim_lsp.default_capabilities())
       end
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
+
+      -- Per-server configurations
+      vim.lsp.config("pyright", {
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              diagnosticMode = "workspace",
+              useLibraryCodeForTypes = true,
+              autoImportCompletions = true,
+            },
+          },
+        },
+        on_init = function(client)
+          local poetry_env = vim.trim(
+            vim.fn.system('cd "' .. client.config.root_dir .. '"; poetry env info -p 2>/dev/null')
+          )
+          local venv_python_path = client.config.root_dir .. "/.venv/bin/python"
+
+          if vim.fn.filereadable(venv_python_path) == 1 then
+            client.config.settings.python.pythonPath = venv_python_path
+          elseif poetry_env ~= "" then
+            client.config.settings.python.pythonPath = poetry_env .. "/bin/python"
+          else
+            client.config.settings.python.pythonPath = "/usr/local/opt/python@3.10/libexec/bin/python"
+          end
+
+          client.notify("workspace/didChangeConfiguration")
+          return true
+        end,
+      })
+
+      vim.lsp.config("ruff", {
+        on_init = function(client)
+          client.server_capabilities.hoverProvider = false
+          return true
+        end,
+      })
+
+      vim.lsp.config("jsonls", {
+        settings = {
+          json = {
+            schemas = require("schemastore").json.schemas(),
+          },
+        },
+      })
+
+      vim.lsp.config("lua_ls", {
+        settings = {
+          Lua = {
+            runtime = {
+              version = "LuaJIT",
+              path = vim.split(package.path, ";"),
+            },
+            diagnostics = {
+              globals = { "vim" },
+            },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+          },
+        },
+      })
+
+      vim.lsp.config("yamlls", {
+        filetypes = {
+          "yaml",
+          "yaml.docker-compose",
+        },
+        settings = {
+          yaml = {
+            schemas = require("schemastore").json.schemas(),
+          },
+        },
+      })
+
+      vim.lsp.config("sourcekit", {
+        cmd = {
+          "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
+        },
+      })
+
+      vim.lsp.enable({
+        "pyright",
+        "ruff",
+        "html",
+        "jsonls",
+        "lua_ls",
+        "yamlls",
+        "vtsls",
+        "cssls",
+        "css_variables",
+        "eslint",
+        "ccls",
+        "sourcekit",
+        "hls",
+        "gdscript",
+      })
     end,
   },
   {
