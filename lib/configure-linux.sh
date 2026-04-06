@@ -21,13 +21,28 @@ sudo apt-get install -y \
     tmux \
     fd-find \
     fzf \
-    fish \
     gh
 
 # Install additional utilities and tools if available
 sudo apt-get install -y \
-    cloc \
-    fish
+    cloc
+
+# Install fish from source (apt version is typically outdated; fish 4.x requires Rust)
+sudo apt-get install -y cmake libpcre2-dev gettext
+if ! command -v cargo &> /dev/null; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source "$HOME/.cargo/env"
+fi
+FISH_VERSION="4.6.0"
+curl -LO "https://github.com/fish-shell/fish-shell/releases/download/${FISH_VERSION}/fish-${FISH_VERSION}.tar.xz"
+tar -xf "fish-${FISH_VERSION}.tar.xz"
+cd "fish-${FISH_VERSION}"
+mkdir build && cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local
+cmake --build . -j"$(nproc)"
+sudo cmake --install .
+cd ../..
+rm -rf "fish-${FISH_VERSION}" "fish-${FISH_VERSION}.tar.xz"
 
 # Install starship prompt
 curl -sS -o install-starship.sh https://starship.rs/install.sh
@@ -45,7 +60,7 @@ rm -rf nvim-linux-arm64*
 yarn global add tree-sitter-cli
 sudo ln -s ~/.config/yarn/global/node_modules/.bin/tree-sitter /usr/local/bin/tree-sitter
 
-export FISH_BIN=/usr/bin/fish
+export FISH_BIN=/usr/local/bin/fish
 export NVIM_BIN=/opt/nvim/bin/nvim
 
 echo "Installation completed."
