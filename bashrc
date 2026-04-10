@@ -1,2 +1,2 @@
 # Use on devboxes to set the shell
-# export SHELL=/usr/bin/local/fish
+export SHELL=/usr/bin/local/fish
