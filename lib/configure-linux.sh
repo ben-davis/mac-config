@@ -43,6 +43,10 @@ cmake --build . -j"$(nproc)"
 sudo cmake --install .
 cd ../..
 rm -rf "fish-${FISH_VERSION}" "fish-${FISH_VERSION}.tar.xz"
+if [ ! -f /usr/local/bin/fish ]; then
+    echo "Error: fish was not installed successfully at /usr/local/bin/fish"
+    exit 1
+fi
 
 # Install starship prompt
 curl -sS -o install-starship.sh https://starship.rs/install.sh
