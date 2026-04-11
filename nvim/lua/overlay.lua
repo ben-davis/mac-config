@@ -14,22 +14,23 @@ end
 M.add_overlays_from_dir = function(dir)
   local d = vim.fn.expand(dir)
   if vim.fn.isdirectory(d) ~= 1 then
-    return {}
+    return {}, {}
   end
 
   local names = {}
+  local dirs = {}
 
   -- Iterate directory entries
   for _, name in ipairs(vim.fn.readdir(d)) do
     local p = d .. "/" .. name
     if vim.fn.isdirectory(p) == 1 then
       M.add_runtime_dir(p)
+      table.insert(names, name)
+      table.insert(dirs, p)
     end
-
-    table.insert(names, name)
   end
 
-  return names
+  return names, dirs
 end
 
 return M

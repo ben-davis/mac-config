@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(import_dirs)
+M.setup = function(import_dirs, overlay_dirs)
   -- Bootstrap lazy.nvim
   local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
   if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -41,6 +41,12 @@ M.setup = function(import_dirs)
     install = { colorscheme = { "tokyonight" } },
     -- automatically check for plugin updates
     checker = { enabled = false },
+    -- Preserve overlay directories when lazy resets rtp
+    performance = {
+      rtp = {
+        paths = overlay_dirs or {},
+      },
+    },
   })
 end
 

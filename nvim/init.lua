@@ -7,7 +7,7 @@ require("local/diagnostics")
 -- Any dirs in ~/.config/nvim.d must be a config dir that could be
 -- mounted in `~/.config/nvim`
 local overlay = require("overlay")
-local overlay_names = overlay.add_overlays_from_dir("~/.config/nvim.d")
+local overlay_names, overlay_dirs = overlay.add_overlays_from_dir("~/.config/nvim.d")
 
 local overlay_plugin_names = {}
 for _, overlay_name in ipairs(overlay_names) do
@@ -15,4 +15,4 @@ for _, overlay_name in ipairs(overlay_names) do
 end
 
 local lazy = require("config.lazy")
-lazy.setup(overlay_plugin_names)
+lazy.setup(overlay_plugin_names, overlay_dirs)
