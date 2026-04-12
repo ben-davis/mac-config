@@ -58,12 +58,19 @@ return {
         callback = function(args)
           local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
           if require("nvim-treesitter.parsers")[lang] ~= nil then
-            require("nvim-treesitter").install(lang):await(function()
-              local ts_supported = pcall(vim.treesitter.start, args.buf)
-              if ts_supported then
-                vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-              end
-            end)
+            -- Try immediately (parser is already installed)
+            local ts_supported = pcall(vim.treesitter.start, args.buf)
+            if ts_supported then
+              vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            else
+              -- Parser not yet installed; install then start
+              require("nvim-treesitter").install(lang):await(function()
+                local ok = pcall(vim.treesitter.start, args.buf)
+                if ok then
+                  vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end
+              end)
+            end
           end
         end,
       })

@@ -124,7 +124,7 @@ vim.api.nvim_exec(
 )
 
 vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.api.nvim_exec("set nofoldenable", true)
 
 -- For Obsidian.nvim to show checkboxes. The default of 3 doesn't work.
